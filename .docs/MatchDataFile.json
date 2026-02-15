@@ -1,0 +1,2767 @@
+{
+   "myTeam": {
+      "name": "Sarezzo",
+      "dati": {
+         "pPerse": 0,
+         "pRecuperate": 0,
+         "rimbDifesa": 0,
+         "rimbAttacco": 0
+      },
+      "timeouts": {
+         "primoTempo": [
+            false,
+            false
+         ],
+         "secondoTempo": [
+            true,
+            true,
+            true
+         ],
+         "extraTime": [
+            false,
+            false,
+            false,
+            false
+         ]
+      },
+      "quintettoQuarto": [
+         true,
+         true,
+         true,
+         true,
+         false,
+         false,
+         false,
+         false
+      ],
+      "players": [
+         {
+            "id": 2065,
+            "name": "Baccaglioni L.",
+            "playNumber": "0",
+            "captain": false,
+            "tempoGioco": 219,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": 2,
+            "inQuintetto": false,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 0,
+            "realizzazioni": []
+         },
+         {
+            "id": 2066,
+            "name": "Zanoletti F.",
+            "playNumber": "2",
+            "captain": false,
+            "tempoGioco": 1551,
+            "pallePerse": 2,
+            "palleRecuperate": 1,
+            "stoppateSubite": 1,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": -6,
+            "inQuintetto": true,
+            "falliSubiti": 5,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 1,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 2,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 3,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 4,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 15,
+            "realizzazioni": [
+               {
+                  "Quarto": 1,
+                  "Tempo": 552,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 278,
+                  "PosY": 250
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 443,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 390,
+                  "PosY": 120
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 395,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 305,
+                  "PosY": 354
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 374,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 244,
+                  "PosY": 76
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 336,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 21,
+                  "PosY": 50
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 280,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 306,
+                  "PosY": 134
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 280,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 197,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 556,
+                  "PosY": 54
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 228,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 259,
+                  "PosY": 87
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 178,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 409,
+                  "PosY": 81
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 531,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 531,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 458,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 343,
+                  "PosY": 91
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 394,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 341,
+                  "PosY": 64
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 575,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 270,
+                  "PosY": 358
+               }
+            ]
+         },
+         {
+            "id": 2067,
+            "name": "Bazoli D.",
+            "playNumber": "3",
+            "captain": false,
+            "tempoGioco": 0,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": 0,
+            "inQuintetto": false,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 0,
+            "realizzazioni": []
+         },
+         {
+            "id": 2068,
+            "name": "Gonzini D.",
+            "playNumber": "9",
+            "captain": false,
+            "tempoGioco": 2062,
+            "pallePerse": 3,
+            "palleRecuperate": 4,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": -4,
+            "inQuintetto": true,
+            "falliSubiti": 5,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 3,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 4,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 4,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 25,
+            "realizzazioni": [
+               {
+                  "Quarto": 1,
+                  "Tempo": 504,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 412,
+                  "PosY": 334
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 399,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 231,
+                  "PosY": 156
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 309,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 394,
+                  "PosY": 92
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 100,
+                  "Tipo": 3,
+                  "Punti": 3,
+                  "PosX": 470,
+                  "PosY": 301
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 48,
+                  "Tipo": 3,
+                  "Punti": 3,
+                  "PosX": 526,
+                  "PosY": 223
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 526,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 303,
+                  "PosY": 348
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 505,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 186,
+                  "PosY": 125
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 436,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 475,
+                  "PosY": 60
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 405,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 335,
+                  "PosY": 70
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 361,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 361,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 305,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 356,
+                  "PosY": 67
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 245,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 247,
+                  "PosY": 344
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 144,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 144,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 359,
+                  "Tipo": 3,
+                  "Punti": 3,
+                  "PosX": 60,
+                  "PosY": 203
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 229,
+                  "Tipo": 3,
+                  "Punti": 3,
+                  "PosX": 158,
+                  "PosY": 313
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 537,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 537,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 507,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 104,
+                  "PosY": 103
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 407,
+                  "Tipo": 3,
+                  "Punti": 3,
+                  "PosX": 96,
+                  "PosY": 284
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 365,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 359,
+                  "PosY": 371
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 318,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 318,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 202,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 61,
+                  "PosY": 226
+               }
+            ]
+         },
+         {
+            "id": 2079,
+            "name": "Singh K.",
+            "playNumber": "10",
+            "captain": false,
+            "tempoGioco": 1291,
+            "pallePerse": 0,
+            "palleRecuperate": 1,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": -8,
+            "inQuintetto": false,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 2,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 2,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 3,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 3,
+                  "NumLiberi": 1,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 3,
+            "realizzazioni": [
+               {
+                  "Quarto": 2,
+                  "Tempo": 592,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 303,
+                  "PosY": 126
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 266,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 360,
+                  "PosY": 75
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 520,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 316,
+                  "PosY": 204
+               }
+            ]
+         },
+         {
+            "id": 2070,
+            "name": "Younes M.",
+            "playNumber": "14",
+            "captain": true,
+            "tempoGioco": 1244,
+            "pallePerse": 1,
+            "palleRecuperate": 2,
+            "stoppateSubite": 1,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": 6,
+            "inQuintetto": false,
+            "falliSubiti": 1,
+            "falliFatti": [
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 8,
+            "realizzazioni": [
+               {
+                  "Quarto": 1,
+                  "Tempo": 242,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 369,
+                  "PosY": 166
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 157,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 157,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 116,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 385,
+                  "PosY": 72
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 70,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 199,
+                  "PosY": 341
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 7,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 562,
+                  "PosY": 78
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 116,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 496,
+                  "PosY": 77
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 22,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 362,
+                  "PosY": 103
+               }
+            ]
+         },
+         {
+            "id": 2071,
+            "name": "Rezzola D.",
+            "playNumber": "15",
+            "captain": false,
+            "tempoGioco": 367,
+            "pallePerse": 0,
+            "palleRecuperate": 1,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": -2,
+            "inQuintetto": false,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 1,
+            "realizzazioni": [
+               {
+                  "Quarto": 2,
+                  "Tempo": 330,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 33,
+                  "PosY": 86
+               }
+            ]
+         },
+         {
+            "id": 2073,
+            "name": "Dema K.",
+            "playNumber": "24",
+            "captain": false,
+            "tempoGioco": 1027,
+            "pallePerse": 1,
+            "palleRecuperate": 2,
+            "stoppateSubite": 1,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": 5,
+            "inQuintetto": true,
+            "falliSubiti": 2,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 3,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 4,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 4,
+            "realizzazioni": [
+               {
+                  "Quarto": 2,
+                  "Tempo": 122,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 245,
+                  "PosY": 78
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 56,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 56,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 72,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 254,
+                  "PosY": 62
+               }
+            ]
+         },
+         {
+            "id": 2074,
+            "name": "Ratto S.",
+            "playNumber": "25",
+            "captain": false,
+            "tempoGioco": 0,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": 0,
+            "inQuintetto": false,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 0,
+            "realizzazioni": []
+         },
+         {
+            "id": 2075,
+            "name": "Corti M.",
+            "playNumber": "26",
+            "captain": false,
+            "tempoGioco": 1826,
+            "pallePerse": 2,
+            "palleRecuperate": 4,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": -4,
+            "inQuintetto": true,
+            "falliSubiti": 5,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 1,
+                  "NumLiberi": 1,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 17,
+            "realizzazioni": [
+               {
+                  "Quarto": 1,
+                  "Tempo": 397,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 255,
+                  "PosY": 48
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 396,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 292,
+                  "PosY": 65
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 222,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 212,
+                  "PosY": 343
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 175,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 217,
+                  "PosY": 95
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 19,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 363,
+                  "PosY": 67
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 475,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 470,
+                  "PosY": 306
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 427,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 340,
+                  "PosY": 75
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 270,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 258,
+                  "PosY": 141
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 124,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 124,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 20,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 20,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 445,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 558,
+                  "PosY": 98
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 414,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 464,
+                  "PosY": 331
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 164,
+                  "Tipo": 3,
+                  "Punti": 3,
+                  "PosX": 326,
+                  "PosY": 358
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 91,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 91,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               }
+            ]
+         },
+         {
+            "id": 2076,
+            "name": "Pè S.",
+            "playNumber": "27",
+            "captain": false,
+            "tempoGioco": 1063,
+            "pallePerse": 2,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 1,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": 4,
+            "inQuintetto": false,
+            "falliSubiti": 2,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 1,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 4,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 11,
+            "realizzazioni": [
+               {
+                  "Quarto": 2,
+                  "Tempo": 555,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 93,
+                  "PosY": 65
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 462,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 256,
+                  "PosY": 76
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 412,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 76,
+                  "PosY": 76
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 76,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 544,
+                  "PosY": 188
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 200,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 329,
+                  "PosY": 89
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 74,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 350,
+                  "PosY": 87
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 35,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 216,
+                  "PosY": 347
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 0,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 253,
+                  "PosY": 68
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 270,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 270,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 229,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 197,
+                  "PosY": 183
+               }
+            ]
+         },
+         {
+            "id": 2077,
+            "name": "Mosca S.",
+            "playNumber": "30",
+            "captain": false,
+            "tempoGioco": 1350,
+            "pallePerse": 1,
+            "palleRecuperate": 2,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": -3,
+            "inQuintetto": true,
+            "falliSubiti": 2,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 1,
+                  "NumLiberi": 1,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 2,
+                  "NumLiberi": 1,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 7,
+            "realizzazioni": [
+               {
+                  "Quarto": 1,
+                  "Tempo": 476,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": 391,
+                  "PosY": 244
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 101,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 516,
+                  "PosY": 231
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 580,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 459,
+                  "PosY": 300
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 328,
+                  "Tipo": 3,
+                  "Punti": 0,
+                  "PosX": 558,
+                  "PosY": 91
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 68,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 213,
+                  "PosY": 223
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 63,
+                  "Tipo": 3,
+                  "Punti": 3,
+                  "PosX": 316,
+                  "PosY": 356
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 0,
+                  "Tipo": 2,
+                  "Punti": 0,
+                  "PosX": 452,
+                  "PosY": 88
+               }
+            ]
+         }
+      ]
+   },
+   "oppoTeam": {
+      "name": "Pall.Brescia",
+      "dati": {
+         "pPerse": 0,
+         "pRecuperate": 0,
+         "rimbDifesa": 0,
+         "rimbAttacco": 16
+      },
+      "timeouts": {
+         "primoTempo": [
+            true,
+            false
+         ],
+         "secondoTempo": [
+            true,
+            true,
+            true
+         ],
+         "extraTime": [
+            false,
+            false,
+            false,
+            false
+         ]
+      },
+      "quintettoQuarto": [
+         true,
+         true,
+         true,
+         true,
+         false,
+         false,
+         false,
+         false
+      ],
+      "players": [
+         {
+            "id": 2330,
+            "name": "Seghessi J.",
+            "playNumber": "0",
+            "captain": false,
+            "tempoGioco": 784,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": 8,
+            "inQuintetto": false,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 2,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 3,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 3,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 2,
+            "realizzazioni": [
+               {
+                  "Quarto": 1,
+                  "Tempo": 167,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 575,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               }
+            ]
+         },
+         {
+            "id": 2128,
+            "name": "Guizzardi G.",
+            "playNumber": "5",
+            "captain": false,
+            "tempoGioco": 1235,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": -2,
+            "inQuintetto": true,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 2,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 2,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 4,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 4,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 7,
+            "realizzazioni": [
+               {
+                  "Quarto": 1,
+                  "Tempo": 361,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 300,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 299,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 388,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 357,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 357,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 327,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               }
+            ]
+         },
+         {
+            "id": 2130,
+            "name": "Mensi F.",
+            "playNumber": "9",
+            "captain": false,
+            "tempoGioco": 1461,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": 3,
+            "inQuintetto": true,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 1,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 2,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 3,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 5,
+            "realizzazioni": [
+               {
+                  "Quarto": 1,
+                  "Tempo": 562,
+                  "Tipo": 3,
+                  "Punti": 3,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 456,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 456,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 308,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 308,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               }
+            ]
+         },
+         {
+            "id": 2131,
+            "name": "Bonassi P.",
+            "playNumber": "23",
+            "captain": true,
+            "tempoGioco": 1632,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": -10,
+            "inQuintetto": true,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 1,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 4,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 2,
+            "realizzazioni": [
+               {
+                  "Quarto": 2,
+                  "Tempo": 348,
+                  "Tipo": 3,
+                  "Punti": 3,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 147,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               }
+            ]
+         },
+         {
+            "id": 2132,
+            "name": "Fraccalini F.",
+            "playNumber": "28",
+            "captain": false,
+            "tempoGioco": 1644,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": -4,
+            "inQuintetto": true,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 3,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 4,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 10,
+            "realizzazioni": [
+               {
+                  "Quarto": 1,
+                  "Tempo": 423,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 324,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 324,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 257,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 61,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 491,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 292,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 219,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 219,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 210,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               }
+            ]
+         },
+         {
+            "id": 2133,
+            "name": "Stan S.",
+            "playNumber": "32",
+            "captain": false,
+            "tempoGioco": 527,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": 11,
+            "inQuintetto": false,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 4,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 0,
+            "realizzazioni": []
+         },
+         {
+            "id": 2134,
+            "name": "Tanfoglio M.",
+            "playNumber": "39",
+            "captain": false,
+            "tempoGioco": 1873,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": -9,
+            "inQuintetto": true,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 2,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 15,
+            "realizzazioni": [
+               {
+                  "Quarto": 1,
+                  "Tempo": 520,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 294,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 1,
+                  "Tempo": 294,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 374,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 297,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 2,
+                  "Tempo": 160,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 551,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 409,
+                  "Tipo": 1,
+                  "Punti": 0,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 409,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 373,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 343,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 3,
+                  "Tempo": 242,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 186,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 107,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 6,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               }
+            ]
+         },
+         {
+            "id": 2331,
+            "name": "Galeazzi S.",
+            "playNumber": "40",
+            "captain": false,
+            "tempoGioco": 143,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": 1,
+            "inQuintetto": false,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 2,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 0,
+            "realizzazioni": []
+         },
+         {
+            "id": 2135,
+            "name": "Nervi E.",
+            "playNumber": "42",
+            "captain": false,
+            "tempoGioco": 447,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": 2,
+            "inQuintetto": false,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 0,
+            "realizzazioni": []
+         },
+         {
+            "id": 2136,
+            "name": "Ghirlanda J.",
+            "playNumber": "60",
+            "captain": false,
+            "tempoGioco": 695,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": -5,
+            "inQuintetto": false,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 1,
+                  "NumLiberi": 1,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 1,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 0,
+            "realizzazioni": []
+         },
+         {
+            "id": 2138,
+            "name": "Corradini L.",
+            "playNumber": "67",
+            "captain": false,
+            "tempoGioco": 768,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": 12,
+            "inQuintetto": false,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 4,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": true,
+                  "Quarto": 4,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 3,
+            "realizzazioni": [
+               {
+                  "Quarto": 3,
+                  "Tempo": 95,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 523,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               },
+               {
+                  "Quarto": 4,
+                  "Tempo": 523,
+                  "Tipo": 1,
+                  "Punti": 1,
+                  "PosX": -1,
+                  "PosY": -1
+               }
+            ]
+         },
+         {
+            "id": 2332,
+            "name": "Sall K.",
+            "playNumber": "82",
+            "captain": false,
+            "tempoGioco": 791,
+            "pallePerse": 0,
+            "palleRecuperate": 0,
+            "stoppateSubite": 0,
+            "stoppateFatte": 0,
+            "assist": 0,
+            "outTime": 0,
+            "inGioco": false,
+            "plusMinus": 3,
+            "inQuintetto": false,
+            "falliSubiti": 0,
+            "falliFatti": [
+               {
+                  "Commesso": true,
+                  "Quarto": 1,
+                  "NumLiberi": 2,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               },
+               {
+                  "Commesso": false,
+                  "Quarto": 0,
+                  "NumLiberi": 0,
+                  "Tecnico": false,
+                  "Intenzionale": false,
+                  "Antisportivo": false,
+                  "Espulsione": false
+               }
+            ],
+            "totRealizzazioni": 1,
+            "realizzazioni": [
+               {
+                  "Quarto": 3,
+                  "Tempo": 51,
+                  "Tipo": 2,
+                  "Punti": 2,
+                  "PosX": -1,
+                  "PosY": -1
+               }
+            ]
+         }
+      ]
+   }
+}

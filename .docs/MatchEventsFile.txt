@@ -1,0 +1,530 @@
+Q1|10:00|Quintet   |MyTeam  |24|Dema K.|24;
+Q1|10:00|Quintet   |MyTeam  | 2|Zanoletti F.|24;2;
+Q1|10:00|Quintet   |MyTeam  |26|Corti M.|24;2;26;
+Q1|10:00|Quintet   |MyTeam  | 9|Gonzini D.|24;2;26;9;
+Q1|10:00|Quintet   |MyTeam  |30|Mosca S.|24;2;26;9;30;
+Q1|10:00|Quintet   |OppoTeam|39|Tanfoglio M.|39;
+Q1|10:00|Quintet   |OppoTeam| 5|Guizzardi G.|39;5;
+Q1|10:00|Quintet   |OppoTeam| 9|Mensi F.|39;5;9;
+Q1|10:00|Quintet   |OppoTeam|23|Bonassi P.|39;5;9;23;
+Q1|10:00|Quintet   |OppoTeam|28|Fraccalini F.|39;5;9;23;28;
+Q1|10:00|TimeStart |QrtStart
+Q1|09:52|P Recup   |MyTeam  |26|(Corti M.)
+Q1|09:38|P Persa   |MyTeam  |26|(Corti M.)|
+Q1|09:28|Rimb Att  |OppoTeam||()
+Q1|09:22|T3 Ok     |OppoTeam| 9|(Mensi F.)|[]|SAR-PBS: 0-3|-1;-1
+Q1|09:12|T2 Ok     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 2-3|278;250
+Q1|08:53|Rimb Att  |OppoTeam||()
+Q1|08:40|T2 Ok     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 2-5|-1;-1
+Q1|08:24|T3 No     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 2-5|412;334
+Q1|08:21|TimeStop  |TimStop
+Q1|08:21|TimeStart |TimStart
+Q1|08:06|P Recup   |MyTeam  |24|(Dema K.)
+Q1|07:56|T2 Ok     |MyTeam  |30|(Mosca S.)|[]|SAR-PBS: 4-5|391;244
+Q1|07:46|Rimb Att  |OppoTeam||()
+Q1|07:40|TimeStop  |TimStop
+Q1|07:40|TimeStart |TimStart
+Q1|07:23|T2 Ok     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 6-5|390;120
+Q1|07:03|T2 Ok     |OppoTeam|28|(Fraccalini F.)|[]|SAR-PBS: 6-7|-1;-1
+Q1|06:58|TimeStop  |TimStop
+Q1|06:58|FFatto    |OppoTeam| 9|(Mensi F.)|
+Q1|06:58|FSubito   |MyTeam  | 2|(Zanoletti F.)
+Q1|06:58|TimeStart |TimStart
+Q1|06:39|T2 no     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 6-7|231;156
+Q1|06:37|Rimb Att  |MyTeam  |26|(Corti M.)
+Q1|06:37|T2 no     |MyTeam  |26|(Corti M.)|[]|Tap OUT|255;48
+Q1|06:36|Rimb Att  |MyTeam  |26|(Corti M.)
+Q1|06:36|T2 no     |MyTeam  |26|(Corti M.)|[]|Tap OUT|292;65
+Q1|06:36|Rimb Att  |MyTeam  |26|(Corti M.)
+Q1|06:35|TimeStop  |TimStop
+Q1|06:35|T3 No     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 6-7|305;354
+Q1|06:35|TimeStart |TimStart
+Q1|06:23|Rimb Dif  |MyTeam  | 9|(Gonzini D.)
+Q1|06:14|T2 Ok     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 8-7|244;76
+Q1|06:06|TimeStop  |TimStop
+Q1|06:06|Sostit    |OppoTeam|Out 9|In60
+Q1|06:06|TimeStart |TimStart
+Q1|06:01|T2 Ok     |OppoTeam| 5|(Guizzardi G.)|[]|SAR-PBS: 8-9|-1;-1
+Q1|05:54|TimeStop  |TimStop
+Q1|05:54|TimeStart |TimStart
+Q1|05:44|TimeStop  |TimStop
+Q1|05:44|FFatto    |OppoTeam|23|(Bonassi P.)|
+Q1|05:44|FSubito   |MyTeam  |30|(Mosca S.)
+Q1|05:44|TimeStart |TimStart
+Q1|05:36|T3 No     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 8-9|21;50
+Q1|05:24|TimeStop  |TimStop
+Q1|05:24|FFatto    |MyTeam  |26|(Corti M.)|
+Q1|05:24|Sostit    |MyTeam  |Out24|In10
+Q1|05:24|T2 Ok     |OppoTeam|28|(Fraccalini F.)|[]|SAR-PBS: 8-11|-1;-1
+Q1|05:24|TL Ok     |OppoTeam|28|(Fraccalini F.)|[]|SAR-PBS: 8-12
+Q1|05:24|TimeStart |TimStart
+Q1|05:09|T2 Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 10-12|394;92
+Q1|04:54|TimeStop  |TimStop
+Q1|04:54|FFatto    |MyTeam  |30|(Mosca S.)|
+Q1|04:54|T2 Ok     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 10-14|-1;-1
+Q1|04:54|TL Ok     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 10-15
+Q1|04:54|TimeStart |TimStart
+Q1|04:40|TimeStop  |TimStop
+Q1|04:40|FFatto    |OppoTeam|60|(Ghirlanda J.)|
+Q1|04:40|Sostit    |MyTeam  |Out30|In14
+Q1|04:40|Sostit    |OppoTeam|Out 5|In67
+Q1|04:40|Sostit    |OppoTeam|Out23|In82
+Q1|04:40|FSubito   |MyTeam  | 2|(Zanoletti F.)
+Q1|04:40|T2 Ok     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 12-15|306;134
+Q1|04:40|TL Ok     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 13-15
+Q1|04:40|TimeStart |TimStart
+Q1|04:30|P Recup   |MyTeam  | 9|(Gonzini D.)
+Q1|04:29|P Persa   |MyTeam  | 9|(Gonzini D.)|
+Q1|04:17|T2 Ok     |OppoTeam|28|(Fraccalini F.)|[]|SAR-PBS: 13-17|-1;-1
+Q1|04:02|T2 no     |MyTeam  |14|(Younes M.)|[]|SAR-PBS: 13-17|369;166
+Q1|03:54|P Recup   |MyTeam  | 2|(Zanoletti F.)
+Q1|03:53|TimeStop  |TimStop
+Q1|03:53|Sostit    |MyTeam  |Out 9|In27
+Q1|03:53|TimeStart |TimStart
+Q1|03:42|T3 No     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 13-17|212;343
+Q1|03:30|Rimb Dif  |MyTeam  |14|(Younes M.)
+Q1|03:23|TimeStop  |TimStop
+Q1|03:23|Sostit    |OppoTeam|Out39|In32
+Q1|03:23|TimeStart |TimStart
+Q1|03:17|TimeStop  |TimStop
+Q1|03:17|T3 No     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 13-17|556;54
+Q1|03:17|TimeStart |TimStart
+Q1|03:03|P Recup   |MyTeam  |26|(Corti M.)
+Q1|03:02|TimeStop  |TimStop
+Q1|03:02|FFatto    |OppoTeam|60|(Ghirlanda J.)|
+Q1|03:02|FSubito   |MyTeam  |26|(Corti M.)
+Q1|03:02|Sostit    |OppoTeam|Out60|In 0
+Q1|03:02|TimeStart |TimStart
+Q1|02:55|T2 no     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 13-17|217;95
+Q1|02:47|T2 Ok     |OppoTeam| 0|(Seghessi J.)|[]|SAR-PBS: 13-19|-1;-1
+Q1|02:37|TimeStop  |TimStop
+Q1|02:37|FFatto    |OppoTeam|82|(Sall K.)|
+Q1|02:37|FSubito   |MyTeam  |14|(Younes M.)
+Q1|02:37|TL Ok     |MyTeam  |14|(Younes M.)|[]|SAR-PBS: 14-19
+Q1|02:37|TL Ok     |MyTeam  |14|(Younes M.)|[]|SAR-PBS: 15-19
+Q1|02:37|TimeStart |TimStart
+Q1|02:07|Rimb Dif  |MyTeam  | 2|(Zanoletti F.)
+Q1|01:58|Stop Sub  |MyTeam  |14|(Younes M.)
+Q1|01:56|T2 no     |MyTeam  |14|(Younes M.)|[]|SAR-PBS: 15-19|385;72
+Q1|01:54|TimeStop  |TimStop
+Q1|01:54|FFatto    |MyTeam  | 2|(Zanoletti F.)|
+Q1|01:54|Sostit    |MyTeam  |Out 2|In 9
+Q1|01:54|TimeStart |TimStart
+Q1|01:51|P Recup   |MyTeam  |10|(Singh K.)
+Q1|01:40|T3 Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 18-19|470;301
+Q1|01:38|Assist    |MyTeam  |27|(P� S.)
+Q1|01:25|TimeStop  |TimStop
+Q1|01:25|FFatto    |MyTeam  |27|(P� S.)|
+Q1|01:25|TimeStart |TimStart
+Q1|01:24|P Recup   |MyTeam  |14|(Younes M.)
+Q1|01:10|T3 No     |MyTeam  |14|(Younes M.)|[]|SAR-PBS: 18-19|199;341
+Q1|01:01|T2 Ok     |OppoTeam|28|(Fraccalini F.)|[]|SAR-PBS: 18-21|-1;-1
+Q1|00:48|T3 Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 21-21|526;223
+Q1|00:25|Rimb Dif  |MyTeam  |10|(Singh K.)
+Q1|00:19|T2 Ok     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 23-21|363;67
+Q1|00:00|TimeStop  |QrtStop
+Q2|10:00|Quintet   |OppoTeam| 0|Seghessi J.|0;
+Q2|10:00|Quintet   |OppoTeam| 5|Guizzardi G.|0;5;
+Q2|10:00|Quintet   |OppoTeam|32|Stan S.|0;5;32;
+Q2|10:00|Quintet   |OppoTeam|67|Corradini L.|0;5;32;67;
+Q2|10:00|Quintet   |OppoTeam| 9|Mensi F.|0;5;32;67;9;
+Q2|10:00|Quintet   |MyTeam  | 9|Gonzini D.|9;
+Q2|10:00|Quintet   |MyTeam  |10|Singh K.|9;10;
+Q2|10:00|Quintet   |MyTeam  |14|Younes M.|9;10;14;
+Q2|10:00|Quintet   |MyTeam  |30|Mosca S.|9;10;14;30;
+Q2|10:00|Quintet   |MyTeam  |27|P� S.|9;10;14;30;27;
+Q2|10:00|TimeStart |QrtStart
+Q2|09:52|T2 Ok     |MyTeam  |10|(Singh K.)|[]|SAR-PBS: 25-21|303;126
+Q2|09:35|T2 Ok     |OppoTeam| 0|(Seghessi J.)|[]|SAR-PBS: 25-23|-1;-1
+Q2|09:15|T2 no     |MyTeam  |27|(P� S.)|[]|SAR-PBS: 25-23|93;65
+Q2|09:03|Rimb Dif  |MyTeam  |27|(P� S.)
+Q2|08:46|T3 No     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 25-23|303;348
+Q2|08:40|P Recup   |MyTeam  |14|(Younes M.)
+Q2|08:39|TimeStop  |TimStop
+Q2|08:39|FFatto    |OppoTeam| 0|(Seghessi J.)|
+Q2|08:39|Sostit    |OppoTeam|Out32|In39
+Q2|08:39|FSubito   |MyTeam  |27|(P� S.)
+Q2|08:39|TimeStart |TimStart
+Q2|08:25|T2 Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 27-23|186;125
+Q2|08:04|TimeStop  |TimStop
+Q2|08:04|FFatto    |OppoTeam| 5|(Guizzardi G.)|
+Q2|08:04|Rimb Dif  |MyTeam  | 9|(Gonzini D.)
+Q2|08:04|FSubito   |MyTeam  | 9|(Gonzini D.)
+Q2|08:04|Sostit    |OppoTeam|Out 0|In23
+Q2|08:04|Sostit    |OppoTeam|Out67|In42
+Q2|08:04|TimeStart |TimStart
+Q2|07:42|T2 no     |MyTeam  |27|(P� S.)|[]|SAR-PBS: 27-23|256;76
+Q2|07:36|TimeStop  |TimStop
+Q2|07:36|FFatto    |MyTeam  |30|(Mosca S.)|
+Q2|07:36|Sostit    |MyTeam  |Out30|In 2
+Q2|07:36|T2 Ok     |OppoTeam| 9|(Mensi F.)|[]|SAR-PBS: 27-25|-1;-1
+Q2|07:36|TimeStart |TimStart
+Q2|07:36|TL no     |OppoTeam| 9|(Mensi F.)|[]|SAR-PBS: 27-25
+Q2|07:34|Rimb Dif  |MyTeam  | 2|(Zanoletti F.)
+Q2|07:16|T2 Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 29-25|475;60
+Q2|07:02|TimeStop  |TimStop
+Q2|07:02|TimeStart |TimStart
+Q2|06:52|T2 no     |MyTeam  |27|(P� S.)|[]|SAR-PBS: 29-25|76;76
+Q2|06:46|P Recup   |MyTeam  | 9|(Gonzini D.)
+Q2|06:45|T2 Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 31-25|335;70
+Q2|06:30|Rimb Dif  |MyTeam  |27|(P� S.)
+Q2|06:20|P Persa   |MyTeam  |27|(P� S.)|
+Q2|06:14|T2 Ok     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 31-27|-1;-1
+Q2|06:01|TimeStop  |TimStop
+Q2|06:01|FFatto    |OppoTeam| 5|(Guizzardi G.)|
+Q2|06:01|Sostit    |MyTeam  |Out14|In15
+Q2|06:01|Sostit    |MyTeam  |Out27|In26
+Q2|06:01|FSubito   |MyTeam  | 9|(Gonzini D.)
+Q2|06:01|TL Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 32-27
+Q2|06:01|TimeStart |TimStart
+Q2|06:01|TL no     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 32-27
+Q2|05:48|T3 Ok     |OppoTeam|23|(Bonassi P.)|[]|SAR-PBS: 32-30|-1;-1
+Q2|05:30|T3 No     |MyTeam  |15|(Rezzola D.)|[]|SAR-PBS: 32-30|33;86
+Q2|05:20|Rimb Dif  |MyTeam  |10|(Singh K.)
+Q2|05:19|TimeStop  |TimStop
+Q2|05:19|FFatto    |OppoTeam| 9|(Mensi F.)|
+Q2|05:19|FSubito   |MyTeam  | 2|(Zanoletti F.)
+Q2|05:15|Sostit    |OppoTeam|Out 9|In28
+Q2|05:15|Sostit    |MyTeam  |Out26|In14
+Q2|05:15|TimeStart |TimStart
+Q2|05:05|T2 no     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 32-30|356;67
+Q2|05:00|TimeStop  |TimStop
+Q2|05:00|FFatto    |MyTeam  |10|(Singh K.)|
+Q2|05:00|TL no     |OppoTeam| 5|(Guizzardi G.)|[]|SAR-PBS: 32-30
+Q2|05:00|TimeStart |TimStart
+Q2|04:59|TL no     |OppoTeam| 5|(Guizzardi G.)|[]|SAR-PBS: 32-30
+Q2|04:59|Rimb Att  |OppoTeam||()
+Q2|04:57|T2 Ok     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 32-32|-1;-1
+Q2|04:51|P Persa   |MyTeam  | 2|(Zanoletti F.)|
+Q2|04:42|Rimb Att  |OppoTeam||()
+Q2|04:41|Rimb Att  |OppoTeam||()
+Q2|04:36|P Recup   |MyTeam  | 9|(Gonzini D.)
+Q2|04:26|T2 no     |MyTeam  |10|(Singh K.)|[]|SAR-PBS: 32-32|360;75
+Q2|04:26|TimeStop  |TimStop
+Q2|04:26|FFatto    |MyTeam  |10|(Singh K.)|
+Q2|04:26|Sostit    |MyTeam  |Out10|In24
+Q2|04:26|TimeStart |TimStart
+Q2|04:17|TimeStop  |TimStop
+Q2|04:17|Sostit    |OppoTeam|Out 5|In40
+Q2|04:17|Sostit    |OppoTeam|Out42|In82
+Q2|04:17|TimeStart |TimStart
+Q2|04:05|TimeStop  |TimStop
+Q2|04:05|T3 No     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 32-32|247;344
+Q2|04:05|P Recup   |MyTeam  |15|(Rezzola D.)
+Q2|04:05|TimeStart |TimStart
+Q2|03:48|T2 Ok     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 34-32|259;87
+Q2|03:21|Rimb Att  |OppoTeam||()
+Q2|03:20|Rimb Dif  |MyTeam  |14|(Younes M.)
+Q2|03:18|P Persa   |MyTeam  |14|(Younes M.)|
+Q2|03:12|TimeStop  |TimStop
+Q2|03:12|TimeStart |TimStart
+Q2|02:58|TimeStop  |TimStop
+Q2|02:58|T2 no     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 34-32|409;81
+Q2|02:58|FFatto    |MyTeam  | 2|(Zanoletti F.)|
+Q2|02:58|TimeStart |TimStart
+Q2|02:40|T2 Ok     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 34-34|-1;-1
+Q2|02:30|TimeStop  |TimStop
+Q2|02:30|Sostit    |MyTeam  |Out 2|In27
+Q2|02:30|Sostit    |MyTeam  |Out14|In30
+Q2|02:30|TimeStart |TimStart
+Q2|02:24|TimeStop  |TimStop
+Q2|02:24|FFatto    |OppoTeam|40|(Galeazzi S.)|
+Q2|02:24|FSubito   |MyTeam  | 9|(Gonzini D.)
+Q2|02:24|TL Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 35-34
+Q2|02:24|TimeStart |TimStart
+Q2|02:24|TL no     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 35-34
+Q2|02:16|TimeStop  |TimStop
+Q2|02:16|TimeStart |TimStart
+Q2|02:07|P Recup   |MyTeam  | 9|(Gonzini D.)
+Q2|02:02|T2 no     |MyTeam  |24|(Dema K.)|[]|SAR-PBS: 35-34|245;78
+Q2|01:54|TimeStop  |TimStop
+Q2|01:54|Sostit    |OppoTeam|Out28|In 0
+Q2|01:54|Sostit    |OppoTeam|Out40|In 9
+Q2|01:54|TimeStart |TimStart
+Q2|01:41|TimeStop  |TimStop
+Q2|01:41|T3 No     |MyTeam  |30|(Mosca S.)|[]|SAR-PBS: 35-34|516;231
+Q2|01:41|TimeStart |TimStart
+Q2|01:23|Rimb Dif  |MyTeam  |15|(Rezzola D.)
+Q2|01:16|TimeStop  |TimStop
+Q2|01:16|T3 No     |MyTeam  |27|(P� S.)|[]|SAR-PBS: 35-34|544;188
+Q2|01:16|TimeStart |TimStart
+Q2|00:56|TimeStop  |TimStop
+Q2|00:56|FFatto    |OppoTeam|39|(Tanfoglio M.)|
+Q2|00:56|Sostit    |MyTeam  |Out30|In14
+Q2|00:56|FSubito   |MyTeam  |24|(Dema K.)
+Q2|00:56|TL Ok     |MyTeam  |24|(Dema K.)|[]|SAR-PBS: 36-34
+Q2|00:56|TimeStart |TimStart
+Q2|00:56|TL no     |MyTeam  |24|(Dema K.)|[]|SAR-PBS: 36-34
+Q2|00:35|Rimb Att  |OppoTeam||()
+Q2|00:28|Rimb Dif  |MyTeam  |27|(P� S.)
+Q2|00:07|T3 No     |MyTeam  |14|(Younes M.)|[]|SAR-PBS: 36-34|562;78
+Q2|00:00|TimeStop  |QrtStop
+Q3|10:00|Quintet   |MyTeam  | 9|Gonzini D.|9;
+Q3|10:00|Quintet   |MyTeam  |14|Younes M.|9;14;
+Q3|10:00|Quintet   |MyTeam  | 2|Zanoletti F.|9;14;2;
+Q3|10:00|Quintet   |MyTeam  |10|Singh K.|9;14;2;10;
+Q3|10:00|Quintet   |MyTeam  |30|Mosca S.|9;14;2;10;30;
+Q3|10:00|Quintet   |MyTeam  | 2|Zanoletti F.|2;
+Q3|10:00|Quintet   |MyTeam  | 9|Gonzini D.|2;9;
+Q3|10:00|Quintet   |MyTeam  |10|Singh K.|2;9;10;
+Q3|10:00|Quintet   |MyTeam  |26|Corti M.|2;9;10;26;
+Q3|10:00|Quintet   |MyTeam  |30|Mosca S.|2;9;10;26;30;
+Q3|10:00|Quintet   |OppoTeam| 5|Guizzardi G.|5;
+Q3|10:00|Quintet   |OppoTeam| 9|Mensi F.|5;9;
+Q3|10:00|Quintet   |OppoTeam|23|Bonassi P.|5;9;23;
+Q3|10:00|Quintet   |OppoTeam|39|Tanfoglio M.|5;9;23;39;
+Q3|10:00|Quintet   |OppoTeam|28|Fraccalini F.|5;9;23;39;28;
+Q3|10:00|TimeStart |QrtStart
+Q3|09:45|Rimb Dif  |MyTeam  |30|(Mosca S.)
+Q3|09:40|T3 No     |MyTeam  |30|(Mosca S.)|[]|SAR-PBS: 36-34|459;300
+Q3|09:18|TimeStop  |TimStop
+Q3|09:18|FFatto    |MyTeam  | 2|(Zanoletti F.)|
+Q3|09:18|TimeStart |TimStart
+Q3|09:11|T2 Ok     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 36-36|-1;-1
+Q3|08:51|TimeStop  |TimStop
+Q3|08:51|FFatto    |OppoTeam| 9|(Mensi F.)|
+Q3|08:51|FSubito   |MyTeam  | 2|(Zanoletti F.)
+Q3|08:51|Sostit    |OppoTeam|Out 5|In60
+Q3|08:51|TL no     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 36-36
+Q3|08:51|TimeStart |TimStart
+Q3|08:51|TL no     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 36-36
+Q3|08:50|Rimb Att  |MyTeam  |30|(Mosca S.)
+Q3|08:40|T2 no     |MyTeam  |10|(Singh K.)|[]|SAR-PBS: 36-36|316;204
+Q3|08:36|Rimb Att  |MyTeam  |26|(Corti M.)
+Q3|08:34|TimeStop  |TimStop
+Q3|08:34|TimeStart |TimStart
+Q3|08:22|P Persa   |MyTeam  | 9|(Gonzini D.)|
+Q3|08:16|Rimb Att  |OppoTeam||()
+Q3|08:11|T2 Ok     |OppoTeam|28|(Fraccalini F.)|[]|SAR-PBS: 36-38|-1;-1
+Q3|07:55|T3 No     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 36-38|470;306
+Q3|07:44|Rimb Dif  |MyTeam  | 2|(Zanoletti F.)
+Q3|07:38|T2 Ok     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 38-38|343;91
+Q3|07:24|TimeStop  |TimStop
+Q3|07:24|FFatto    |MyTeam  |10|(Singh K.)|
+Q3|07:24|TimeStart |TimStart
+Q3|07:14|P Recup   |MyTeam  |30|(Mosca S.)
+Q3|07:07|T2 Ok     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 40-38|340;75
+Q3|06:49|TimeStop  |TimStop
+Q3|06:49|FFatto    |MyTeam  | 9|(Gonzini D.)|
+Q3|06:49|TL no     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 40-38
+Q3|06:49|TL Ok     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 40-39
+Q3|06:49|TimeStart |TimStart
+Q3|06:40|TimeStop  |TimStop
+Q3|06:40|FFatto    |OppoTeam|28|(Fraccalini F.)|
+Q3|06:40|FSubito   |MyTeam  | 2|(Zanoletti F.)
+Q3|06:40|TimeStart |TimStart
+Q3|06:34|T2 no     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 40-39|341;64
+Q3|06:22|Rimb Dif  |MyTeam  | 2|(Zanoletti F.)
+Q3|06:15|TimeStop  |TimStop
+Q3|06:15|TimeStart |TimStart
+Q3|06:15|P Persa   |MyTeam  | 2|(Zanoletti F.)|
+Q3|06:13|T2 Ok     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 40-41|-1;-1
+Q3|05:59|T3 Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 43-41|60;203
+Q3|05:43|T2 Ok     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 43-43|-1;-1
+Q3|05:28|T3 No     |MyTeam  |30|(Mosca S.)|[]|SAR-PBS: 43-43|558;91
+Q3|05:15|Rimb Att  |OppoTeam||()
+Q3|05:07|TimeStop  |TimStop
+Q3|05:07|TimeStart |TimStart
+Q3|04:52|T2 Ok     |OppoTeam|28|(Fraccalini F.)|[]|SAR-PBS: 43-45|-1;-1
+Q3|04:30|T2 Ok     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 45-45|258;141
+Q3|04:11|Rimb Att  |OppoTeam||()
+Q3|04:02|TimeStop  |TimStop
+Q3|04:02|FFatto    |MyTeam  |10|(Singh K.)|
+Q3|04:02|Sostit    |MyTeam  |Out 2|In14
+Q3|04:02|Sostit    |MyTeam  |Out10|In24
+Q3|04:02|Sostit    |MyTeam  |Out30|In27
+Q3|04:02|Sostit    |OppoTeam|Out 9|In 0
+Q3|04:02|Sostit    |OppoTeam|Out23|In67
+Q3|04:02|T2 Ok     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 45-47|-1;-1
+Q3|04:02|TimeStart |TimStart
+Q3|03:49|T3 Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 48-47|158;313
+Q3|03:39|TimeStop  |TimStop
+Q3|03:39|FFatto    |MyTeam  |24|(Dema K.)|
+Q3|03:39|TL Ok     |OppoTeam|28|(Fraccalini F.)|[]|SAR-PBS: 48-48
+Q3|03:39|TL Ok     |OppoTeam|28|(Fraccalini F.)|[]|SAR-PBS: 48-49
+Q3|03:39|Sostit    |MyTeam  |Out 9|In 0
+Q3|03:39|TimeStart |TimStart
+Q3|03:20|T2 Ok     |MyTeam  |27|(P� S.)|[]|SAR-PBS: 50-49|329;89
+Q3|02:55|Rimb Att  |OppoTeam||()
+Q3|02:40|Rimb Dif  |MyTeam  |26|(Corti M.)
+Q3|02:37|TimeStop  |TimStop
+Q3|02:37|P Persa   |MyTeam  |24|(Dema K.)|
+Q3|02:37|Sostit    |OppoTeam|Out28|In82
+Q3|02:37|TimeStart |TimStart
+Q3|02:27|TimeStop  |TimStop
+Q3|02:27|TimeStart |TimStart
+Q3|02:19|TimeStop  |TimStop
+Q3|02:14|TimeStart |TimStart
+Q3|02:04|TimeStop  |TimStop
+Q3|02:04|FFatto    |OppoTeam| 0|(Seghessi J.)|
+Q3|02:04|FSubito   |MyTeam  |26|(Corti M.)
+Q3|02:04|TL Ok     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 51-49
+Q3|02:04|TimeStart |TimStart
+Q3|02:04|TL no     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 51-49
+Q3|02:01|Rimb Att  |MyTeam  |14|(Younes M.)
+Q3|01:56|T2 no     |MyTeam  |14|(Younes M.)|[]|SAR-PBS: 51-49|496;77
+Q3|01:44|TimeStop  |TimStop
+Q3|01:44|TimeStart |TimStart
+Q3|01:35|T2 Ok     |OppoTeam|67|(Corradini L.)|[]|SAR-PBS: 51-51|-1;-1
+Q3|01:14|T2 no     |MyTeam  |27|(P� S.)|[]|SAR-PBS: 51-51|350;87
+Q3|01:12|Rimb Att  |MyTeam  |24|(Dema K.)
+Q3|01:12|T2 Ok     |MyTeam  |24|(Dema K.)|[]|Tap IN|254;62
+Q3|00:51|T2 Ok     |OppoTeam|82|(Sall K.)|[]|SAR-PBS: 53-53|-1;-1
+Q3|00:35|T3 No     |MyTeam  |27|(P� S.)|[]|SAR-PBS: 53-53|216;347
+Q3|00:23|P Recup   |MyTeam  |26|(Corti M.)
+Q3|00:20|TimeStop  |TimStop
+Q3|00:20|FFatto    |OppoTeam| 0|(Seghessi J.)|
+Q3|00:20|Sostit    |OppoTeam|Out60|In42
+Q3|00:20|FSubito   |MyTeam  |26|(Corti M.)
+Q3|00:20|TL no     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 53-53
+Q3|00:20|TL Ok     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 54-53
+Q3|00:20|Sostit    |MyTeam  |Out26|In30
+Q3|00:20|TimeStart |TimStart
+Q3|00:00|TimeStop  |QrtStop
+Q3|00:00|T2 no     |MyTeam  |27|(P� S.)|[]|SAR-PBS: 54-53|253;68
+Q4|10:00|Quintet   |MyTeam  | 2|Zanoletti F.|2;
+Q4|10:00|Quintet   |MyTeam  | 9|Gonzini D.|2;9;
+Q4|10:00|Quintet   |MyTeam  |24|Dema K.|2;9;24;
+Q4|10:00|Quintet   |MyTeam  |26|Corti M.|2;9;24;26;
+Q4|10:00|Quintet   |MyTeam  |30|Mosca S.|2;9;24;26;30;
+Q4|10:00|Quintet   |OppoTeam| 0|Seghessi J.|0;
+Q4|10:00|Quintet   |OppoTeam|32|Stan S.|0;32;
+Q4|10:00|Quintet   |OppoTeam|42|Nervi E.|0;32;42;
+Q4|10:00|Quintet   |OppoTeam|67|Corradini L.|0;32;42;67;
+Q4|10:00|Quintet   |OppoTeam|82|Sall K.|0;32;42;67;82;
+Q4|10:00|TimeStart |QrtStart
+Q4|09:45|Stop Sub  |MyTeam  |24|(Dema K.)
+Q4|09:35|T3 No     |MyTeam  | 2|(Zanoletti F.)|[]|SAR-PBS: 54-53|270;358
+Q4|09:25|Rimb Att  |OppoTeam||()
+Q4|09:21|TimeStop  |TimStop
+Q4|09:21|FFatto    |OppoTeam|67|(Corradini L.)|
+Q4|09:21|FSubito   |MyTeam  |24|(Dema K.)
+Q4|09:21|TimeStart |TimStart
+Q4|09:02|TimeStop  |TimStop
+Q4|09:02|Stop Sub  |MyTeam  | 2|(Zanoletti F.)
+Q4|09:02|TimeStart |TimStart
+Q4|08:57|TimeStop  |TimStop
+Q4|08:57|FFatto    |OppoTeam|32|(Stan S.)|
+Q4|08:57|FSubito   |MyTeam  | 9|(Gonzini D.)
+Q4|08:57|TL Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 55-53
+Q4|08:57|TL Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 56-53
+Q4|08:57|TimeStart |TimStart
+Q4|08:43|TimeStop  |TimStop
+Q4|08:43|FFatto    |MyTeam  |24|(Dema K.)|
+Q4|08:43|TL Ok     |OppoTeam|67|(Corradini L.)|[]|SAR-PBS: 56-54
+Q4|08:43|TL Ok     |OppoTeam|67|(Corradini L.)|[]|SAR-PBS: 56-55
+Q4|08:43|TimeStart |TimStart
+Q4|08:27|T2 Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 58-55|104;103
+Q4|08:23|TimeStop  |TimStop
+Q4|08:23|Sostit    |OppoTeam|Out82|In 5
+Q4|08:23|TimeStart |TimStart
+Q4|08:11|TimeStop  |TimStop
+Q4|08:11|P Persa   |MyTeam  |26|(Corti M.)|
+Q4|08:11|TimeStart |TimStart
+Q4|07:50|TimeStop  |TimStop
+Q4|07:50|FFatto    |OppoTeam|67|(Corradini L.)|
+Q4|07:50|P Recup   |MyTeam  |26|(Corti M.)
+Q4|07:50|FSubito   |MyTeam  |26|(Corti M.)
+Q4|07:50|Sostit    |OppoTeam|Out 0|In 9
+Q4|07:50|Sostit    |OppoTeam|Out67|In23
+Q4|07:50|TimeStart |TimStart
+Q4|07:40|TimeStop  |TimStop
+Q4|07:40|FFatto    |OppoTeam|23|(Bonassi P.)|
+Q4|07:40|FSubito   |MyTeam  |30|(Mosca S.)
+Q4|07:40|TimeStart |TimStart
+Q4|07:31|TimeStop  |TimStop
+Q4|07:31|TimeStart |TimStart
+Q4|07:25|TimeStop  |TimStop
+Q4|07:25|T3 No     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 58-55|558;98
+Q4|07:25|FFatto    |MyTeam  | 9|(Gonzini D.)|
+Q4|07:25|TimeStart |TimStart
+Q4|07:11|Rimb Att  |OppoTeam||()
+Q4|07:07|P Recup   |MyTeam  |24|(Dema K.)
+Q4|06:54|T3 No     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 58-55|464;331
+Q4|06:47|T3 Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 61-55|96;284
+Q4|06:46|P Recup   |MyTeam  |30|(Mosca S.)
+Q4|06:40|TimeStop  |TimStop
+Q4|06:40|FFatto    |MyTeam  | 2|(Zanoletti F.)|
+Q4|06:40|Sostit    |OppoTeam|Out42|In28
+Q4|06:40|Sostit    |MyTeam  |Out 2|In27
+Q4|06:40|TimeStart |TimStart
+Q4|06:28|T2 Ok     |OppoTeam| 5|(Guizzardi G.)|[]|SAR-PBS: 61-57|-1;-1
+Q4|06:05|T3 No     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 61-57|359;371
+Q4|06:04|Rimb Att  |MyTeam  |26|(Corti M.)
+Q4|05:59|P Persa   |MyTeam  | 9|(Gonzini D.)|
+Q4|05:57|TimeStop  |TimStop
+Q4|05:57|FFatto    |MyTeam  |27|(P� S.)|
+Q4|05:57|Sostit    |OppoTeam|Out32|In39
+Q4|05:57|Sostit    |MyTeam  |Out24|In10
+Q4|05:57|TL Ok     |OppoTeam| 5|(Guizzardi G.)|[]|SAR-PBS: 61-58
+Q4|05:57|TL Ok     |OppoTeam| 5|(Guizzardi G.)|[]|SAR-PBS: 61-59
+Q4|05:57|TimeStart |TimStart
+Q4|05:41|TimeStop  |TimStop
+Q4|05:41|P Persa   |MyTeam  |27|(P� S.)|
+Q4|05:41|TimeStart |TimStart
+Q4|05:27|T2 Ok     |OppoTeam| 5|(Guizzardi G.)|[]|SAR-PBS: 61-61|-1;-1
+Q4|05:18|TimeStop  |TimStop
+Q4|05:18|FFatto    |OppoTeam|28|(Fraccalini F.)|
+Q4|05:18|FSubito   |MyTeam  | 9|(Gonzini D.)
+Q4|05:18|TL no     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 61-61
+Q4|05:18|TL Ok     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 62-61
+Q4|05:18|TimeStart |TimStart
+Q4|05:08|TimeStop  |TimStop
+Q4|05:08|FFatto    |MyTeam  | 9|(Gonzini D.)|
+Q4|05:08|TL no     |OppoTeam| 9|(Mensi F.)|[]|SAR-PBS: 62-61
+Q4|05:08|TL Ok     |OppoTeam| 9|(Mensi F.)|[]|SAR-PBS: 62-62
+Q4|05:08|TimeStart |TimStart
+Q4|04:50|TimeStop  |TimStop
+Q4|04:50|Sostit    |MyTeam  |Out30|In14
+Q4|04:50|TimeStart |TimStart
+Q4|04:30|TimeStop  |TimStop
+Q4|04:30|Rimb Dif  |MyTeam  |26|(Corti M.)
+Q4|04:30|FSubito   |MyTeam  |27|(P� S.)
+Q4|04:30|FFatto    |OppoTeam| 5|(Guizzardi G.)|
+Q4|04:30|TL no     |MyTeam  |27|(P� S.)|[]|SAR-PBS: 62-62
+Q4|04:30|TL Ok     |MyTeam  |27|(P� S.)|[]|SAR-PBS: 63-62
+Q4|04:30|TimeStart |TimStart
+Q4|04:12|TimeStop  |TimStop
+Q4|04:12|TimeStart |TimStart
+Q4|04:05|Rimb Dif  |MyTeam  |10|(Singh K.)
+Q4|03:49|T2 no     |MyTeam  |27|(P� S.)|[]|SAR-PBS: 63-62|197;183
+Q4|03:30|T2 Ok     |OppoTeam|28|(Fraccalini F.)|[]|SAR-PBS: 63-64|-1;-1
+Q4|03:22|T3 No     |MyTeam  | 9|(Gonzini D.)|[]|SAR-PBS: 63-64|61;226
+Q4|03:21|TimeStop  |TimStop
+Q4|03:21|Sostit    |MyTeam  |Out27|In 2
+Q4|03:21|TimeStart |TimStart
+Q4|03:12|Rimb Att  |OppoTeam||()
+Q4|03:06|T2 Ok     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 63-66|-1;-1
+Q4|02:44|TimeStop  |TimStop
+Q4|02:44|T3 Ok     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 66-66|326;358
+Q4|02:44|TimeStart |TimStart
+Q4|02:27|T2 Ok     |OppoTeam|23|(Bonassi P.)|[]|SAR-PBS: 66-68|-1;-1
+Q4|02:09|P Persa   |MyTeam  |30|(Mosca S.)|
+Q4|01:54|Rimb Att  |OppoTeam||()
+Q4|01:47|T2 Ok     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 66-70|-1;-1
+Q4|01:44|TimeStop  |TimStop
+Q4|01:44|Sostit    |MyTeam  |Out14|In30
+Q4|01:44|TimeStart |TimStart
+Q4|01:37|TimeStop  |TimStop
+Q4|01:37|FFatto    |OppoTeam| 5|(Guizzardi G.)|
+Q4|01:37|FSubito   |MyTeam  |26|(Corti M.)
+Q4|01:31|TL no     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 66-70
+Q4|01:31|TL Ok     |MyTeam  |26|(Corti M.)|[]|SAR-PBS: 67-70
+Q4|01:31|TimeStart |TimStart
+Q4|01:22|TimeStop  |TimStop
+Q4|01:22|Sostit    |MyTeam  |Out10|In14
+Q4|01:22|TimeStart |TimStart
+Q4|01:08|T2 no     |MyTeam  |30|(Mosca S.)|[]|SAR-PBS: 67-70|213;223
+Q4|01:06|Rimb Att  |MyTeam  |26|(Corti M.)
+Q4|01:03|TimeStop  |TimStop
+Q4|01:03|T3 Ok     |MyTeam  |30|(Mosca S.)|[]|SAR-PBS: 70-70|316;356
+Q4|00:59|TimeStart |TimStart
+Q4|00:45|TimeStop  |TimStop
+Q4|00:45|TimeStart |TimStart
+Q4|00:22|T2 no     |MyTeam  |14|(Younes M.)|[]|SAR-PBS: 70-70|362;103
+Q4|00:06|TimeStop  |TimStop
+Q4|00:06|T2 Ok     |OppoTeam|39|(Tanfoglio M.)|[]|SAR-PBS: 70-72|-1;-1
+Q4|00:06|Sostit    |MyTeam  |Out14|In15
+Q4|00:06|TimeStart |TimStart
+Q4|00:00|TimeStop  |QrtStop
+Q4|00:00|T2 no     |MyTeam  |30|(Mosca S.)|[]|SAR-PBS: 70-72|452;88

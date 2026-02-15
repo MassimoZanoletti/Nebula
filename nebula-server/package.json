@@ -1,0 +1,26 @@
+{
+  "name": "nebula-server",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "clean": ".bin\\clean.bat",
+    "clean-all": ".bin\\clean-all.bat",
+    "build": ".bin\\build.bat",
+    "compile": ".bin\\compile.bat",
+    "start": ".bin\\start.bat",
+    "production": ".bin\\production.bat"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1",
+    "node-adodb": "^5.0.3"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.3"
+  }
+}

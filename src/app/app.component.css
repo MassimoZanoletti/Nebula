@@ -1,0 +1,14 @@
+
+
+
+:host ::ng-deep .custom-table .p-datatable-tbody > tr > td,
+:host ::ng-deep .custom-table .p-datatable-thead > tr > th,
+:host ::ng-deep .custom-table .p-datatable-tfoot > tr > td{
+   padding: 0.3rem 0.3rem !important;
+}
+
+
+.percentuale-piccola {
+   font-size: 0.7rem !important;
+   display: block; /* Opzionale: assicura che prenda bene lo stile */
+}
