@@ -25,6 +25,11 @@ import { FormsModule } from '@angular/forms';
 import { XMLParser } from 'fast-xml-parser';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { globs } from "./common/globals";
+//
+import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { ChartModule } from 'primeng/chart';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
+//
 
 
 
@@ -43,13 +48,45 @@ import { globs } from "./common/globals";
       ProgressSpinnerModule,
       BlockUIModule,
       InputTextareaModule,
-      FormsModule
+      FormsModule,
+      ChartModule,
+      BaseChartDirective
    ],
+  providers: [provideCharts(withDefaultRegisterables())],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit
 {
+
+   public lineChartData: ChartConfiguration<'line'>['data'] = {
+      labels: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio'],
+      datasets: [
+         {
+            data: [65, 59, 80, 81, 56],
+            label: 'Vendite Verticali',
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+         }
+      ]
+   };
+
+   public lineChartOptions: ChartOptions<'line'> = {
+      responsive: true,
+      indexAxis: 'y', // <--- Questo sposta l'asse delle categorie sulla verticale
+      scales: {
+         x: {
+            beginAtZero: true,
+            title: { display: true, text: 'Valore' }
+         },
+         y: {
+            title: { display: true, text: 'Mese' }
+         }
+      }
+   };
+
+
    title = 'nebula';
 
    tooltip_Pir_Title: string  = globs.tooltip_Pir_Title;
@@ -145,20 +182,72 @@ export class AppComponent implements OnInit
          this.dbJson = await this.xmlToJsonStr(this.xmlData);
          this.jsonData = {
             myTeam: {
-               name: this.dbJson.BasketScoutDreamEVODataFile.Match.MyTeam.Name,
-               dati: {
-                  pPerse: this.dbJson.BasketScoutDreamEVODataFile.Match.MyTeam.Dati.PPerse,
+               name:            this.dbJson.BasketScoutDreamEVODataFile.Match.MyTeam.Name,
+               dati:            {
+                  pPerse:      this.dbJson.BasketScoutDreamEVODataFile.Match.MyTeam.Dati.PPerse,
                   pRecuperate: this.dbJson.BasketScoutDreamEVODataFile.Match.MyTeam.Dati.Precuperate,
-                  rimbDifesa: this.dbJson.BasketScoutDreamEVODataFile.Match.MyTeam.Dati.RimbDifesa,
+                  rimbDifesa:  this.dbJson.BasketScoutDreamEVODataFile.Match.MyTeam.Dati.RimbDifesa,
                   rimbAttacco: this.dbJson.BasketScoutDreamEVODataFile.Match.MyTeam.Dati.RimbAttacco
                },
-               timeouts: {
-                  primoTempo: [],
+               timeouts:        {
+                  primoTempo:   [],
                   secondoTempo: [],
-                  extraTime: []
+                  extraTime:    []
                },
                quintettoQuarto: [],
-               players: []
+               players:         [],
+               totali:          {
+                  punti:       0,
+                  tempoGioco:  0,
+                  min:         "n.e.",
+                  tl:          "",
+                  t2:          "",
+                  t3:          "",
+                  tdc:         "",
+                  fFatti:      0,
+                  fSubiti:     0,
+                  rDif:        0,
+                  rAtt:        0,
+                  rTot:        0,
+                  pPerse:      0,
+                  pRecuperate: 0,
+                  assist:      0,
+                  stopFatte:   0,
+                  stopSubite:  0,
+                  plusMinus:   0,
+                  pir:         0,
+                  oer:         0,
+                  oerStr:      "",
+                  eFGp:        0,
+                  eFGpStr:     "",
+                  TSp:         0,
+                  TSpStr:      "",
+                  q1:          {
+                     punti: 0,
+                     min:   0,
+                     dato:  ""
+                  },
+                  q2:          {
+                     punti: 0,
+                     min:   0,
+                     dato:  ""
+                  },
+                  q3:          {
+                     punti: 0,
+                     min:   0,
+                     dato:  ""
+                  },
+                  q4:          {
+                     punti: 0,
+                     min:   0,
+                     dato:  ""
+                  },
+                  et:          {
+                     punti: 0,
+                     min:   0,
+                     dato:  ""
+                  }
+               }
             },
             oppoTeam: {
                name: this.dbJson.BasketScoutDreamEVODataFile.Match.OpponentTeam.Name,
@@ -174,7 +263,59 @@ export class AppComponent implements OnInit
                   extraTime: []
                },
                quintettoQuarto: [],
-               players: []
+               players: [],
+               totali: {
+                  punti:       0,
+                  tempoGioco:  0,
+                  min:         "n.e.",
+                  tl:          "",
+                  t2:          "",
+                  t3:          "",
+                  tdc:         "",
+                  fFatti:      0,
+                  fSubiti:     0,
+                  rDif:        0,
+                  rAtt:        0,
+                  rTot:        0,
+                  pPerse:      0,
+                  pRecuperate: 0,
+                  assist:      0,
+                  stopFatte:   0,
+                  stopSubite:  0,
+                  plusMinus:   0,
+                  pir:         0,
+                  oer:         0,
+                  oerStr:      "",
+                  eFGp:        0,
+                  eFGpStr:     "",
+                  TSp:         0,
+                  TSpStr:      "",
+                  q1:          {
+                     punti: 0,
+                     min:   0,
+                     dato:  ""
+                  },
+                  q2:          {
+                     punti: 0,
+                     min:   0,
+                     dato:  ""
+                  },
+                  q3:          {
+                     punti: 0,
+                     min:   0,
+                     dato:  ""
+                  },
+                  q4:          {
+                     punti: 0,
+                     min:   0,
+                     dato:  ""
+                  },
+                  et:          {
+                     punti: 0,
+                     min:   0,
+                     dato:  ""
+                  }
+               }
             }
          }
          //
@@ -275,6 +416,160 @@ export class AppComponent implements OnInit
                await this.aaaa (true, i+1);
          }
          //
+         // Totali MyTeam
+         let totGioc: number = 0;
+         for (let i=0;   i<this.jsonData.myTeam.players.length;   i++)
+         {
+            if ((this.jsonData.myTeam.players[i].totali.min != "") && (this.jsonData.myTeam.players[i].totali.min != "n.e."))
+               totGioc++;
+         }
+         let tlF: number = 0;
+         let tlR: number = 0;
+         let t2F: number = 0;
+         let t2R: number = 0;
+         let t3F: number = 0;
+         let t3R: number = 0;
+         let tcF: number = 0;
+         let tcR: number = 0;
+         for (let i=0;   i<this.jsonData.myTeam.players.length;   i++)
+         {
+            if ((this.jsonData.myTeam.players[i].totali.min != "") && (this.jsonData.myTeam.players[i].totali.min != "n.e."))
+            {
+               this.jsonData.myTeam.totali.punti += this.jsonData.myTeam.players[i].totali.punti;
+               this.jsonData.myTeam.totali.tempoGioco += this.jsonData.myTeam.players[i].tempoGioco;
+               this.jsonData.myTeam.totali.fFatti += this.jsonData.myTeam.players[i].totali.fFatti;
+               this.jsonData.myTeam.totali.fSubiti += this.jsonData.myTeam.players[i].totali.fSubiti;
+               this.jsonData.myTeam.totali.rDif += this.jsonData.myTeam.players[i].totali.rDif;
+               this.jsonData.myTeam.totali.rAtt += this.jsonData.myTeam.players[i].totali.rAtt;
+               this.jsonData.myTeam.totali.rTot += this.jsonData.myTeam.players[i].totali.rTot;
+               this.jsonData.myTeam.totali.pPerse += this.jsonData.myTeam.players[i].totali.pPerse;
+               this.jsonData.myTeam.totali.pRecuperate += this.jsonData.myTeam.players[i].totali.pRecuperate;
+               this.jsonData.myTeam.totali.assist += this.jsonData.myTeam.players[i].totali.assist;
+               this.jsonData.myTeam.totali.stopFatte += this.jsonData.myTeam.players[i].totali.stopFatte;
+               this.jsonData.myTeam.totali.stopSubite += this.jsonData.myTeam.players[i].totali.stopSubite;
+               this.jsonData.myTeam.totali.pir += this.jsonData.myTeam.players[i].totali.pir;
+               this.jsonData.myTeam.totali.oer += this.jsonData.myTeam.players[i].totali.oer;
+               this.jsonData.myTeam.totali.eFGp += this.jsonData.myTeam.players[i].totali.eFGp;
+               this.jsonData.myTeam.totali.TSp += this.jsonData.myTeam.players[i].totali.TSp;
+               tlF += this.jsonData.myTeam.players[i].totali.tlF;
+               tlR += this.jsonData.myTeam.players[i].totali.tlR;
+               t2F += this.jsonData.myTeam.players[i].totali.t2F;
+               t2R += this.jsonData.myTeam.players[i].totali.t2R;
+               t3F += this.jsonData.myTeam.players[i].totali.t3F;
+               t3R += this.jsonData.myTeam.players[i].totali.t3R;
+               tcF += this.jsonData.myTeam.players[i].totali.tcF;
+               tcR += this.jsonData.myTeam.players[i].totali.tcR;
+               this.jsonData.myTeam.totali.q1.punti += this.jsonData.myTeam.players[i].totali.q1.punti;
+               this.jsonData.myTeam.totali.q1.min += this.jsonData.myTeam.players[i].totali.q1.min;
+               this.jsonData.myTeam.totali.q2.punti += this.jsonData.myTeam.players[i].totali.q2.punti;
+               this.jsonData.myTeam.totali.q2.min += this.jsonData.myTeam.players[i].totali.q2.min;
+               this.jsonData.myTeam.totali.q3.punti += this.jsonData.myTeam.players[i].totali.q3.punti;
+               this.jsonData.myTeam.totali.q3.min += this.jsonData.myTeam.players[i].totali.q3.min;
+               this.jsonData.myTeam.totali.q4.punti += this.jsonData.myTeam.players[i].totali.q4.punti;
+               this.jsonData.myTeam.totali.q4.min += this.jsonData.myTeam.players[i].totali.q4.min;
+               this.jsonData.myTeam.totali.et.punti += this.jsonData.myTeam.players[i].totali.et.punti;
+               this.jsonData.myTeam.totali.et.min += this.jsonData.myTeam.players[i].totali.et.min;
+            }
+         }
+         this.jsonData.myTeam.totali.oerStr = this.jsonData.myTeam.totali.oer/totGioc;
+         this.jsonData.myTeam.totali.eFGpStr = Math.round(this.jsonData.myTeam.totali.eFGp/totGioc).toString();
+         this.jsonData.myTeam.totali.TSpStr = Math.round(this.jsonData.myTeam.totali.TSp/totGioc).toString();
+         if (tlF > 0)
+            this.jsonData.myTeam.totali.tl = `<b>${tlR}/${tlF}</b><br><span style="font-size: 0.90rem;">(${Math.trunc(100*tlR/tlF)}%)</span>`;
+         if (t2F > 0)
+            this.jsonData.myTeam.totali.t2 = `<b>${t2R}/${t2F}</b><br><span style="font-size: 0.90rem;">(${Math.trunc(100*t2R/t2F)}%)</span>`;
+         if (t3F > 0)
+            this.jsonData.myTeam.totali.t3 = `<b>${t3R}/${t3F}</b><br><span style="font-size: 0.90rem;">(${Math.trunc(100*t3R/t3F)}%)</span>`;
+         if (tcF > 0)
+            this.jsonData.myTeam.totali.tc = `<b>${tcR}/${tcF}</b><br><span style="font-size: 0.90rem;">(${Math.trunc(100*tcR/tcF)}%)</span>`;
+         if (this.jsonData.myTeam.totali.q1.min > 0)
+            this.jsonData.myTeam.totali.q1.dato = `${this.jsonData.myTeam.totali.q1.punti}`;
+         if (this.jsonData.myTeam.totali.q2.min > 0)
+            this.jsonData.myTeam.totali.q2.dato = `${this.jsonData.myTeam.totali.q2.punti}`;
+         if (this.jsonData.myTeam.totali.q3.min > 0)
+            this.jsonData.myTeam.totali.q3.dato = `${this.jsonData.myTeam.totali.q3.punti}`;
+         if (this.jsonData.myTeam.totali.q4.min > 0)
+            this.jsonData.myTeam.totali.q4.dato = `${this.jsonData.myTeam.totali.q4.punti}`;
+         if (this.jsonData.myTeam.totali.et.min > 0)
+            this.jsonData.myTeam.totali.et.dato = `${this.jsonData.myTeam.totali.et.punti}`;
+         //
+         // Totali OpponentTeam
+         totGioc = 0;
+         for (let i=0;   i<this.jsonData.oppoTeam.players.length;   i++)
+         {
+            if ((this.jsonData.oppoTeam.players[i].totali.min != "") && (this.jsonData.oppoTeam.players[i].totali.min != "n.e."))
+               totGioc++;
+         }
+         tlF = 0;
+         tlR = 0;
+         t2F = 0;
+         t2R = 0;
+         t3F = 0;
+         t3R = 0;
+         tcF = 0;
+         tcR = 0;
+         for (let i=0;   i<this.jsonData.oppoTeam.players.length;   i++)
+         {
+            if ((this.jsonData.oppoTeam.players[i].totali.min != "") && (this.jsonData.oppoTeam.players[i].totali.min != "n.e."))
+            {
+               this.jsonData.oppoTeam.totali.punti += this.jsonData.oppoTeam.players[i].totali.punti;
+               this.jsonData.oppoTeam.totali.tempoGioco += this.jsonData.oppoTeam.players[i].tempoGioco;
+               this.jsonData.oppoTeam.totali.fFatti += this.jsonData.oppoTeam.players[i].totali.fFatti;
+               this.jsonData.oppoTeam.totali.fSubiti += this.jsonData.oppoTeam.players[i].totali.fSubiti;
+               this.jsonData.oppoTeam.totali.rDif += this.jsonData.oppoTeam.players[i].totali.rDif;
+               this.jsonData.oppoTeam.totali.rAtt += this.jsonData.oppoTeam.players[i].totali.rAtt;
+               this.jsonData.oppoTeam.totali.rTot += this.jsonData.oppoTeam.players[i].totali.rTot;
+               this.jsonData.oppoTeam.totali.pPerse += this.jsonData.oppoTeam.players[i].totali.pPerse;
+               this.jsonData.oppoTeam.totali.pRecuperate += this.jsonData.oppoTeam.players[i].totali.pRecuperate;
+               this.jsonData.oppoTeam.totali.assist += this.jsonData.oppoTeam.players[i].totali.assist;
+               this.jsonData.oppoTeam.totali.stopFatte += this.jsonData.oppoTeam.players[i].totali.stopFatte;
+               this.jsonData.oppoTeam.totali.stopSubite += this.jsonData.oppoTeam.players[i].totali.stopSubite;
+               this.jsonData.oppoTeam.totali.pir += this.jsonData.oppoTeam.players[i].totali.pir;
+               this.jsonData.oppoTeam.totali.oer += this.jsonData.oppoTeam.players[i].totali.oer;
+               this.jsonData.oppoTeam.totali.eFGp += this.jsonData.oppoTeam.players[i].totali.eFGp;
+               this.jsonData.oppoTeam.totali.TSp += this.jsonData.oppoTeam.players[i].totali.TSp;
+               tlF += this.jsonData.oppoTeam.players[i].totali.tlF;
+               tlR += this.jsonData.oppoTeam.players[i].totali.tlR;
+               t2F += this.jsonData.oppoTeam.players[i].totali.t2F;
+               t2R += this.jsonData.oppoTeam.players[i].totali.t2R;
+               t3F += this.jsonData.oppoTeam.players[i].totali.t3F;
+               t3R += this.jsonData.oppoTeam.players[i].totali.t3R;
+               tcF += this.jsonData.oppoTeam.players[i].totali.tcF;
+               tcR += this.jsonData.oppoTeam.players[i].totali.tcR;
+               this.jsonData.oppoTeam.totali.q1.punti += this.jsonData.oppoTeam.players[i].totali.q1.punti;
+               this.jsonData.oppoTeam.totali.q1.min += this.jsonData.oppoTeam.players[i].totali.q1.min;
+               this.jsonData.oppoTeam.totali.q2.punti += this.jsonData.oppoTeam.players[i].totali.q2.punti;
+               this.jsonData.oppoTeam.totali.q2.min += this.jsonData.oppoTeam.players[i].totali.q2.min;
+               this.jsonData.oppoTeam.totali.q3.punti += this.jsonData.oppoTeam.players[i].totali.q3.punti;
+               this.jsonData.oppoTeam.totali.q3.min += this.jsonData.oppoTeam.players[i].totali.q3.min;
+               this.jsonData.oppoTeam.totali.q4.punti += this.jsonData.oppoTeam.players[i].totali.q4.punti;
+               this.jsonData.oppoTeam.totali.q4.min += this.jsonData.oppoTeam.players[i].totali.q4.min;
+               this.jsonData.oppoTeam.totali.et.punti += this.jsonData.oppoTeam.players[i].totali.et.punti;
+               this.jsonData.oppoTeam.totali.et.min += this.jsonData.oppoTeam.players[i].totali.et.min;
+            }
+         }
+         this.jsonData.oppoTeam.totali.oerStr = this.jsonData.oppoTeam.totali.oer/totGioc;
+         this.jsonData.oppoTeam.totali.eFGpStr = Math.round(this.jsonData.oppoTeam.totali.eFGp/totGioc).toString();
+         this.jsonData.oppoTeam.totali.TSpStr = Math.round(this.jsonData.oppoTeam.totali.TSp/totGioc).toString();
+         if (tlF > 0)
+            this.jsonData.oppoTeam.totali.tl = `<b>${tlR}/${tlF}</b><br><span style="font-size: 0.90rem;">(${Math.trunc(100*tlR/tlF)}%)</span>`;
+         if (t2F > 0)
+            this.jsonData.oppoTeam.totali.t2 = `<b>${t2R}/${t2F}</b><br><span style="font-size: 0.90rem;">(${Math.trunc(100*t2R/t2F)}%)</span>`;
+         if (t3F > 0)
+            this.jsonData.oppoTeam.totali.t3 = `<b>${t3R}/${t3F}</b><br><span style="font-size: 0.90rem;">(${Math.trunc(100*t3R/t3F)}%)</span>`;
+         if (tcF > 0)
+            this.jsonData.oppoTeam.totali.tc = `<b>${tcR}/${tcF}</b><br><span style="font-size: 0.90rem;">(${Math.trunc(100*tcR/tcF)}%)</span>`;
+         if (this.jsonData.oppoTeam.totali.q1.min > 0)
+            this.jsonData.oppoTeam.totali.q1.dato = `${this.jsonData.oppoTeam.totali.q1.punti}`;
+         if (this.jsonData.oppoTeam.totali.q2.min > 0)
+            this.jsonData.oppoTeam.totali.q2.dato = `${this.jsonData.oppoTeam.totali.q2.punti}`;
+         if (this.jsonData.oppoTeam.totali.q3.min > 0)
+            this.jsonData.oppoTeam.totali.q3.dato = `${this.jsonData.oppoTeam.totali.q3.punti}`;
+         if (this.jsonData.oppoTeam.totali.q4.min > 0)
+            this.jsonData.oppoTeam.totali.q4.dato = `${this.jsonData.oppoTeam.totali.q4.punti}`;
+         if (this.jsonData.oppoTeam.totali.et.min > 0)
+            this.jsonData.oppoTeam.totali.et.dato = `${this.jsonData.oppoTeam.totali.et.punti}`;
+         //
          //
          this.jsonDataStr = JSON.stringify(this.jsonData, null, 3);
          this.myPlayers = this.jsonData.myTeam.players;
@@ -353,7 +648,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
             tempoSec = (Number (arrSos[i].substring (3, 5)) * 60) + (Number (arrSos[i].substring (6, 8)));
             giocatori[outIdx].out = tempoSec;
             giocatori[outIdx].min += (giocatori[outIdx].in - giocatori[outIdx].out);
-            giocatori[outIdx].in = -1;
+            giocatori[outIdx].in = -1;0
             giocatori[outIdx].out = -1;
             giocatori[outIdx].isopen = false;
             //
@@ -515,9 +810,17 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
             punti: 0,
             min: "n.e.",
             tl: "",
+            tlF: 0,
+            tlR: 0,
             t2: "",
+            t2F: 0,
+            t2R: 0,
             t3: "",
+            t3F: 0,
+            t3R: 0,
             tdc: "",
+            tcF: 0,
+            tcR: 0,
             fFatti: 0,
             fSubiti: 0,
             rDif: 0,
@@ -610,12 +913,20 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
             if (result.realizzazioni[i].Quarto > 4)
                result.totali.et.punti += result.realizzazioni[i].Punti;
          }
+         result.totali.tlR = tlR;
+         result.totali.tlF = tlF;
          if (tlF > 0)
             result.totali.tl = `<b>${tlR}/${tlF}</b><br><span style="font-size: 0.75rem;">(${Math.trunc(100*tlR/tlF)}%)</span>`;
+         result.totali.t2R = t2R;
+         result.totali.t2F = t2F;
          if (t2F > 0)
             result.totali.t2 = `<b>${t2R}/${t2F}</b><br><span style="font-size: 0.75rem;">(${Math.trunc(100*t2R/t2F)}%)</span>`;
+         result.totali.t3R = t3R;
+         result.totali.t3F = t3F;
          if (t3F > 0)
             result.totali.t3 = `<b>${t3R}/${t3F}</b><br><span style="font-size: 0.75rem;">(${Math.trunc(100*t3R/t3F)}%)</span>`;
+         result.totali.tcR = tcR;
+         result.totali.tcF = tcF;
          if (tcF > 0)
             result.totali.tdc = `<b>${tcR}/${tcF}</b><br><span style="font-size: 0.75rem;">(${Math.trunc(100*tcR/tcF)}%)</span>`;
          result.totali.min = `${(Math.trunc (result.tempoGioco / 60)).toString ().padStart (2, "0")}:${(result.tempoGioco % 60).toString ().padStart (2, "0")}`;
@@ -639,7 +950,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
          if (den != 0)
          {
             const oer: number = (result.totali.punti) / (den);
-            result.totali.oer = oer.toFixed (1);
+            result.totali.oer = oer;//.toFixed (1);
          }
          // Effective Field Goal Percentage
          if (tcF != 0)
@@ -854,9 +1165,427 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
    }
 
 
-   GetPuntiTotaliTeam(): string
+   GetTotaliPunti(myTeam: boolean): string
    {
-      const tot = this.jsonData.myTeam.players.reduce((acc:number, el:any)=> { return acc + el.assist}, 0);
-      return tot.toString();
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.punti.toString();
+         else
+            return this.jsonData.oppoTeam.totali.punti.toString();
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliTempo(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return `${(Math.trunc (this.jsonData.myTeam.totali.tempoGioco / 60)).toString ().padStart (2, "0")}:${(this.jsonData.myTeam.totali.tempoGioco % 60).toString ().padStart (2, "0")}`;
+         else
+            return "";//this.jsonData.oppoTeam.totali.punti.toString();
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliFFatti(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.fFatti.toString();
+         else
+            return this.jsonData.oppoTeam.totali.fFatti.toString();
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliFSubiti(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.fSubiti.toString();
+         else
+            return this.jsonData.oppoTeam.totali.fSubiti.toString();
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliRimbDifesa(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.rDif.toString();
+         else
+            return this.jsonData.oppoTeam.totali.rDif.toString();
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliRimbAttacco(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.rAtt.toString();
+         else
+            return this.jsonData.oppoTeam.totali.rAtt.toString();
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliRimbTot(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.rTot.toString();
+         else
+            return this.jsonData.oppoTeam.totali.rTot.toString();
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliPPerse(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.pPerse.toString();
+         else
+            return this.jsonData.oppoTeam.totali.pPerse.toString();
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliPRecuperate(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.pRecuperate.toString();
+         else
+            return this.jsonData.oppoTeam.totali.pRecuperate.toString();
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliAssist(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.assist.toString();
+         else
+            return this.jsonData.oppoTeam.totali.assist.toString();
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliStopFatte(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.stopFatte.toString();
+         else
+            return this.jsonData.oppoTeam.totali.stopFattte.toString();
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliStopSubite(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.stopSubite.toString();
+         else
+            return this.jsonData.oppoTeam.totali.stopSubite.toString();
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliPir(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.pir.toString();
+         else
+            return this.jsonData.oppoTeam.totali.pir.toString();
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliOer(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.oerStr.toFixed(1);
+         else
+            return this.jsonData.oppoTeam.totali.oerStr.toFixed(1);
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotalieFGp(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.eFGpStr;
+         else
+            return this.jsonData.oppoTeam.totali.eFGpStr;
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliTSp(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.TSpStr;
+         else
+            return this.jsonData.oppoTeam.totali.TSpStr;
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliTL(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.tl;
+         else
+            return this.jsonData.oppoTeam.totali.tl;
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliT2(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.t2;
+         else
+            return this.jsonData.oppoTeam.totali.t2;
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliT3(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.t3;
+         else
+            return this.jsonData.oppoTeam.totali.t3;
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliTC(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.tc;
+         else
+            return this.jsonData.oppoTeam.totali.tc;
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliQ1(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.q1.dato;
+         else
+            return this.jsonData.oppoTeam.totali.q1.dato;
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliQ2(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.q2.dato;
+         else
+            return this.jsonData.oppoTeam.totali.q2.dato;
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliQ3(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.q3.dato;
+         else
+            return this.jsonData.oppoTeam.totali.q3.dato;
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliQ4(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.q4.dato;
+         else
+            return this.jsonData.oppoTeam.totali.q4.dato;
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
+   }
+
+
+   GetTotaliET(myTeam: boolean): string
+   {
+      try
+      {
+         if (myTeam)
+            return this.jsonData.myTeam.totali.et.dato;
+         else
+            return this.jsonData.oppoTeam.totali.et.dato;
+      }
+      catch (e)
+      {
+         console.error(`EXCEPTION: `+e);
+         return "!!";
+      }
    }
 }

@@ -37,12 +37,12 @@
    </p-table>
 </div>
 
-<div id="div-tbl-mytean">
+<div id="div-tbl-myteam">
    <p-table
-      class="custom-header-table"
-      styleClass="custom-table  p-datatable-striped p-datatable-gridlines"
+      class="custom-header-table custom-footer-table"
+      styleClass="custom-table p-datatable-gridlines"
       [scrollable]="true"
-      scrollHeight="600px"
+      scrollHeight="700px"
       [value]="myPlayers"
       dataKey="id"
       [tableStyle]="{ 'min-width': '0px', 'width': 'max-content','table-layout': 'fixed', 'padding': '0.2rem 0.2rem' }">
@@ -72,7 +72,7 @@
             <th style="width: 50px; text-align: center;">ET</th>
             <th style="width: 70px; text-align: center;" pTooltip="<span style='color: #ffff00'><b>{{ tooltip_Pir_Title }}</b></span><br><span style='font-size: 0.8rem;'>{{ tooltip_Pir_Desc }}</span>" [escape]="false" tooltipPosition="top">PIR <i class="pi pi-question-circle" style="font-size: 0.7rem; color: #77ff77"></i></th>
             <th style="width: 70px; text-align: center;" pTooltip="<span style='color: #ffff00'><b>{{ tooltip_Oer_Title }}</b></span><br><span style='font-size: 0.8rem;'>{{ tooltip_Oer_Desc }}</span>" [escape]="false" tooltipPosition="top">OER <i class="pi pi-question-circle" style="font-size: 0.7rem; color: #77ff77"></i></th>
-            <th style="width: 75px; text-align: center;" pTooltip="<span style='color: #ffff00'><b>{{ tooltip_Efgp_Title }}</b></span><br><span style='font-size: 0.8rem;'>{{ tooltip_Efgp_Desc }}</span>" [escape]="false" tooltipPosition="top">eFG% <i class="pi pi-question-circle" style="font-size: 0.7rem; color: #77ff77"></i></th>
+            <th style="width: 85px; text-align: center;" pTooltip="<span style='color: #ffff00'><b>{{ tooltip_Efgp_Title }}</b></span><br><span style='font-size: 0.8rem;'>{{ tooltip_Efgp_Desc }}</span>" [escape]="false" tooltipPosition="top">eFG% <i class="pi pi-question-circle" style="font-size: 0.7rem; color: #77ff77"></i></th>
             <th style="width: 70px; text-align: center;" pTooltip="<span style='color: #ffff00'><b>{{ tooltip_Tsp_Title }}</b></span><br><span style='font-size: 0.8rem;'>{{ tooltip_Tsp_Desc }}</span>" [escape]="false" tooltipPosition="top">TS% <i class="pi pi-question-circle" style="font-size: 0.7rem; color: #77ff77"></i></th>
          </tr>
       </ng-template>
@@ -103,76 +103,146 @@
             <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(elemento.totali.q4.dato)"></td>
             <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(elemento.totali.et.dato)"></td>
             <td style="text-align: center;" [innerHTML]="elemento.totali.pir"></td>
-            <td style="text-align: center;" [innerHTML]="elemento.totali.oer"></td>
+            <td style="text-align: center;" [innerHTML]="(elemento.totali.oer!='')?elemento.totali.oer.toFixed(1):''"></td>
             <td style="text-align: center;" [innerHTML]="elemento.totali.eFGp"></td>
             <td style="text-align: center;" [innerHTML]="elemento.totali.TSp"></td>
          </tr>
       </ng-template>
       <ng-template pTemplate="footer">
          <tr>
-            <td> </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td style="text-align: center;">{{GetPuntiTotaliTeam()}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Tot {{jsonData.myTeam!.name!}} </td>
+            <td style="text-align: center;">{{GetTotaliPunti(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliTempo(true)}}</td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(GetTotaliTL(true)) "></td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(GetTotaliT2(true)) "></td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(GetTotaliT3(true)) "></td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(GetTotaliTC(true)) "></td>
+            <td style="text-align: center;">{{GetTotaliFFatti(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliFSubiti(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliRimbDifesa(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliRimbAttacco(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliRimbTot(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliPPerse(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliPRecuperate(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliAssist(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliStopFatte(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliStopSubite(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliQ1(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliQ2(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliQ3(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliQ4(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliET(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliPir(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliOer(true)}}</td>
+            <td style="text-align: center;">{{GetTotalieFGp(true)}}</td>
+            <td style="text-align: center;">{{GetTotaliTSp(true)}}</td>
          </tr>
       </ng-template>
    </p-table>
+</div>
 
-   <!--
+<div id="div-tbl-oppoteam">
    <p-table
-      class="custom-header-table"
-      styleClass="p-datatable-gridlines"
+      class="custom-header-table custom-footer-table"
+      styleClass="custom-table p-datatable-gridlines"
       [scrollable]="true"
-      scrollHeight="600px"
+      scrollHeight="700px"
       [value]="oppoPlayers"
       dataKey="id"
-      [tableStyle]="{ 'min-width': '50rem' }">
+      [tableStyle]="{ 'min-width': '0px', 'width': 'max-content','table-layout': 'fixed', 'padding': '0.2rem 0.2rem' }">
       <ng-template pTemplate="header">
          <tr>
-            <th style="width: 120px;">Gioc.</th>
-            <th style="width: 50px;">Time</th>
-            <th style="max-width: 40px; width: 40px;">Punti</th>
-            <th style="width: 40px;">TL</th>
-            <th style="width: 40px;">T2</th>
-            <th style="width: 40px;">T3</th>
-            <th style="width: 40px;">TdC</th>
+            <th style="width: 180px;">{{jsonData.oppoTeam!.name!}}</th>
+            <th style="width: 40px; text-align: right;">Pti</th>
+            <th style="width: 60px; text-align: center;">Min.</th>
+            <th style="width: 85px; text-align: center;">TL</th>
+            <th style="width: 85px; text-align: center;">T2</th>
+            <th style="width: 85px; text-align: center;">T3</th>
+            <th style="width: 85px; text-align: center;">TdC</th>
+            <th style="width: 50px; text-align: center;">FF</th>
+            <th style="width: 50px; text-align: center;">FS</th>
+            <th style="width: 50px; text-align: center;">RD</th>
+            <th style="width: 50px; text-align: center;">RA</th>
+            <th style="width: 50px; text-align: center;">RTot</th>
+            <th style="width: 50px; text-align: center;">PP</th>
+            <th style="width: 50px; text-align: center;">PR</th>
+            <th style="width: 50px; text-align: center;">As</th>
+            <th style="width: 50px; text-align: center;">St.F</th>
+            <th style="width: 50px; text-align: center;">St.S</th>
+            <th style="width: 50px; text-align: center;">Q1</th>
+            <th style="width: 50px; text-align: center;">Q2</th>
+            <th style="width: 50px; text-align: center;">Q3</th>
+            <th style="width: 50px; text-align: center;">Q4</th>
+            <th style="width: 50px; text-align: center;">ET</th>
+            <th style="width: 70px; text-align: center;" pTooltip="<span style='color: #ffff00'><b>{{ tooltip_Pir_Title }}</b></span><br><span style='font-size: 0.8rem;'>{{ tooltip_Pir_Desc }}</span>" [escape]="false" tooltipPosition="top">PIR <i class="pi pi-question-circle" style="font-size: 0.7rem; color: #77ff77"></i></th>
+            <th style="width: 70px; text-align: center;" pTooltip="<span style='color: #ffff00'><b>{{ tooltip_Oer_Title }}</b></span><br><span style='font-size: 0.8rem;'>{{ tooltip_Oer_Desc }}</span>" [escape]="false" tooltipPosition="top">OER <i class="pi pi-question-circle" style="font-size: 0.7rem; color: #77ff77"></i></th>
+            <th style="width: 85px; text-align: center;" pTooltip="<span style='color: #ffff00'><b>{{ tooltip_Efgp_Title }}</b></span><br><span style='font-size: 0.8rem;'>{{ tooltip_Efgp_Desc }}</span>" [escape]="false" tooltipPosition="top">eFG% <i class="pi pi-question-circle" style="font-size: 0.7rem; color: #77ff77"></i></th>
+            <th style="width: 70px; text-align: center;" pTooltip="<span style='color: #ffff00'><b>{{ tooltip_Tsp_Title }}</b></span><br><span style='font-size: 0.8rem;'>{{ tooltip_Tsp_Desc }}</span>" [escape]="false" tooltipPosition="top">TS% <i class="pi pi-question-circle" style="font-size: 0.7rem; color: #77ff77"></i></th>
          </tr>
       </ng-template>
       <ng-template pTemplate="body"
                    let-elemento
                    let-rowIndex="rowIndex">
          <tr >
-            <td>{{ GetPlayerName(elemento) }}</td>
-            <td>{{ GetTempoGioco(elemento) }}</td>
-            <td>{{ GetPuntiTotali(elemento) }}</td>
-            <td>{{ GetTitiLiberi(elemento) }}</td>
-            <td>{{ GetTit2(elemento) }}</td>
-            <td>{{ GetTiti3(elemento) }}</td>
-            <td>{{ GetTitiDalCampo(elemento) }}</td>
+            <td [innerHTML]="sanitizer.bypassSecurityTrustHtml(GetPlayerName(elemento))"></td>
+            <td style="text-align: right;">{{ elemento.totali.punti }}</td>
+            <td style="text-align: center;">{{ elemento.totali.min }}</td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(elemento.totali.tl) "></td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(elemento.totali.t2)"></td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(elemento.totali.t3)"></td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(elemento.totali.tdc)"></td>
+            <td style="text-align: center;" [innerHTML]="elemento.totali.fFatti"></td>
+            <td style="text-align: center;" [innerHTML]="elemento.totali.fSubiti"></td>
+            <td style="text-align: center;" [innerHTML]="elemento.totali.rDif"></td>
+            <td style="text-align: center;" [innerHTML]="elemento.totali.rAtt"></td>
+            <td style="text-align: center;" [innerHTML]="elemento.totali.rTot"></td>
+            <td style="text-align: center;" [innerHTML]="elemento.totali.pPerse"></td>
+            <td style="text-align: center;" [innerHTML]="elemento.totali.pRecuperate"></td>
+            <td style="text-align: center;" [innerHTML]="elemento.totali.assist"></td>
+            <td style="text-align: center;" [innerHTML]="elemento.totali.stopFatte"></td>
+            <td style="text-align: center;" [innerHTML]="elemento.totali.stopSubite"></td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(elemento.totali.q1.dato)"></td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(elemento.totali.q2.dato)"></td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(elemento.totali.q3.dato)"></td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(elemento.totali.q4.dato)"></td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(elemento.totali.et.dato)"></td>
+            <td style="text-align: center;" [innerHTML]="elemento.totali.pir"></td>
+            <td style="text-align: center;" [innerHTML]="(elemento.totali.oer!='')?elemento.totali.oer.toFixed(1):''"></td>
+            <td style="text-align: center;" [innerHTML]="elemento.totali.eFGp"></td>
+            <td style="text-align: center;" [innerHTML]="elemento.totali.TSp"></td>
+         </tr>
+      </ng-template>
+      <ng-template pTemplate="footer">
+         <tr>
+            <td>Tot {{jsonData.oppoTeam!.name!}} </td>
+            <td style="text-align: center;">{{GetTotaliPunti(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliTempo(false)}}</td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(GetTotaliTL(false)) "></td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(GetTotaliT2(false)) "></td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(GetTotaliT3(false)) "></td>
+            <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(GetTotaliTC(false)) "></td>
+            <td style="text-align: center;">{{GetTotaliFFatti(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliFSubiti(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliRimbDifesa(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliRimbAttacco(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliRimbTot(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliPPerse(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliPRecuperate(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliAssist(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliStopFatte(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliStopSubite(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliQ1(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliQ2(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliQ3(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliQ4(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliET(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliPir(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliOer(false)}}</td>
+            <td style="text-align: center;">{{GetTotalieFGp(false)}}</td>
+            <td style="text-align: center;">{{GetTotaliTSp(false)}}</td>
+         </tr>
       </ng-template>
    </p-table>
-   -->
-
 </div>
 
 <div>
@@ -193,6 +263,13 @@
       cols="100"
       pInputTextarea
       [(ngModel)]="jsonDataStr">
-   </textarea>
+   </textarea>0
 </div>
 
+<div style="display: block; width: 400px; height: 600px;">
+   <canvas baseChart
+           [data]="lineChartData"
+           [options]="lineChartOptions"
+           [type]="'line'">
+   </canvas>
+</div>

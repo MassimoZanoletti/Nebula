@@ -7,8 +7,39 @@
    padding: 0.3rem 0.3rem !important;
 }
 
+::ng-deep .custom-header-table .p-datatable-thead > tr > th {
+   background-color: #422d6b !important; /* blu scuro */
+   color: #ffe378 !important; /* testo bianco */
+   font-weight: bold;
+   font-size: 1.2em;
+   border-bottom: 2px solid #3949ab; /* bordo inferiore */
+}
+
+::ng-deep .custom-footer-table .p-datatable-tfoot > tr > td {
+   color: #ffffff !important; /* blu scuro */
+   background-color: #52410d !important; /* testo bianco */
+   font-weight: bold;
+   font-size: 1.2em;
+}
+
+
+/* Colore Riga 1 (es. Bianco o default) */
+:host ::ng-deep .custom-table .p-datatable-tbody > tr:nth-child(3n+1) {
+   background-color: #1f2938 !important;
+}
+
+/* Colore Riga 2 (es. Grigio chiaro) */
+:host ::ng-deep .custom-table .p-datatable-tbody > tr:nth-child(3n+2) {
+   background-color: #273345 !important;
+}
+
+/* Colore Riga 3 (es. Un azzurro molto tenue o crema) */
+:host ::ng-deep .custom-table .p-datatable-tbody > tr:nth-child(3n) {
+   background-color: #2f3e53 !important;
+}
 
 .percentuale-piccola {
    font-size: 0.7rem !important;
    display: block; /* Opzionale: assicura che prenda bene lo stile */
 }
+

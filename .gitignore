@@ -2,12 +2,14 @@
 
 # Compiled output
 /dist
+/nebula-server/dist
 /tmp
 /out-tsc
 /bazel-out
 
 # Node
 /node_modules
+/nebula-server/node_modules
 npm-debug.log
 yarn-error.log
 
