@@ -492,6 +492,12 @@ export class AppComponent implements OnInit
             this.jsonData.myTeam.totali.q4.dato = `${this.jsonData.myTeam.totali.q4.punti}`;
          if (this.jsonData.myTeam.totali.et.min > 0)
             this.jsonData.myTeam.totali.et.dato = `${this.jsonData.myTeam.totali.et.punti}`;
+         // aggiungo i dati di squadra
+         this.jsonData.myTeam.totali.pPerse += this.jsonData.myTeam.dati.pPerse;
+         this.jsonData.myTeam.totali.pRecuperate += this.jsonData.myTeam.dati.pRecuperate;
+         this.jsonData.myTeam.totali.rDif += this.jsonData.myTeam.dati.rimbDifesa;
+         this.jsonData.myTeam.totali.rAtt += this.jsonData.myTeam.dati.rimbAttacco;
+         this.jsonData.myTeam.totali.rTot = this.jsonData.myTeam.totali.rDif + this.jsonData.myTeam.totali.rAtt;
          //
          // Totali OpponentTeam
          totGioc = 0;
@@ -510,6 +516,8 @@ export class AppComponent implements OnInit
          tcR = 0;
          for (let i=0;   i<this.jsonData.oppoTeam.players.length;   i++)
          {
+            if (this.jsonData.oppoTeam.players[i].totali.min == "n.e.")
+               this.jsonData.oppoTeam.players[i].totali.min = "00:00";
             if ((this.jsonData.oppoTeam.players[i].totali.min != "") && (this.jsonData.oppoTeam.players[i].totali.min != "n.e."))
             {
                this.jsonData.oppoTeam.totali.punti += this.jsonData.oppoTeam.players[i].totali.punti;
@@ -547,6 +555,16 @@ export class AppComponent implements OnInit
                this.jsonData.oppoTeam.totali.et.punti += this.jsonData.oppoTeam.players[i].totali.et.punti;
                this.jsonData.oppoTeam.totali.et.min += this.jsonData.oppoTeam.players[i].totali.et.min;
             }
+            if (this.quarti[0].Status > 1)
+               this.jsonData.oppoTeam.players[i].totali.q1.dato = `${this.jsonData.oppoTeam.players[i].totali.q1.punti}`;
+            if (this.quarti[1].Status > 1)
+               this.jsonData.oppoTeam.players[i].totali.q2.dato = `${this.jsonData.oppoTeam.players[i].totali.q2.punti}`;
+            if (this.quarti[2].Status > 1)
+               this.jsonData.oppoTeam.players[i].totali.q3.dato = `${this.jsonData.oppoTeam.players[i].totali.q3.punti}`;
+            if (this.quarti[3].Status > 1)
+               this.jsonData.oppoTeam.players[i].totali.q4.dato = `${this.jsonData.oppoTeam.players[i].totali.q4.punti}`;
+            if (this.quarti[4].Status > 1)
+               this.jsonData.oppoTeam.players[i].totali.et.dato = `${this.jsonData.oppoTeam.players[i].totali.et.punti}`;
          }
          this.jsonData.oppoTeam.totali.oerStr = this.jsonData.oppoTeam.totali.oer/totGioc;
          this.jsonData.oppoTeam.totali.eFGpStr = Math.round(this.jsonData.oppoTeam.totali.eFGp/totGioc).toString();
@@ -559,16 +577,22 @@ export class AppComponent implements OnInit
             this.jsonData.oppoTeam.totali.t3 = `<b>${t3R}/${t3F}</b><br><span style="font-size: 0.90rem;">(${Math.trunc(100*t3R/t3F)}%)</span>`;
          if (tcF > 0)
             this.jsonData.oppoTeam.totali.tc = `<b>${tcR}/${tcF}</b><br><span style="font-size: 0.90rem;">(${Math.trunc(100*tcR/tcF)}%)</span>`;
-         if (this.jsonData.oppoTeam.totali.q1.min > 0)
+         if (this.quarti[0].Status > 1)
             this.jsonData.oppoTeam.totali.q1.dato = `${this.jsonData.oppoTeam.totali.q1.punti}`;
-         if (this.jsonData.oppoTeam.totali.q2.min > 0)
+         if (this.quarti[1].Status > 1)
             this.jsonData.oppoTeam.totali.q2.dato = `${this.jsonData.oppoTeam.totali.q2.punti}`;
-         if (this.jsonData.oppoTeam.totali.q3.min > 0)
+         if (this.quarti[2].Status > 1)
             this.jsonData.oppoTeam.totali.q3.dato = `${this.jsonData.oppoTeam.totali.q3.punti}`;
-         if (this.jsonData.oppoTeam.totali.q4.min > 0)
+         if (this.quarti[3].Status > 1)
             this.jsonData.oppoTeam.totali.q4.dato = `${this.jsonData.oppoTeam.totali.q4.punti}`;
-         if (this.jsonData.oppoTeam.totali.et.min > 0)
+         if (this.quarti[4].Status > 1)
             this.jsonData.oppoTeam.totali.et.dato = `${this.jsonData.oppoTeam.totali.et.punti}`;
+         // aggiungo i dati di squadra
+         this.jsonData.oppoTeam.totali.pPerse += this.jsonData.oppoTeam.dati.pPerse;
+         this.jsonData.oppoTeam.totali.pRecuperate += this.jsonData.oppoTeam.dati.pRecuperate;
+         this.jsonData.oppoTeam.totali.rDif += this.jsonData.oppoTeam.dati.rimbDifesa;
+         this.jsonData.oppoTeam.totali.rAtt += this.jsonData.oppoTeam.dati.rimbAttacco;
+         this.jsonData.oppoTeam.totali.rTot = this.jsonData.oppoTeam.totali.rDif + this.jsonData.oppoTeam.totali.rAtt;
          //
          //
          this.jsonDataStr = JSON.stringify(this.jsonData, null, 3);
@@ -871,7 +895,12 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       const rrr = await this.NormalizeRealizzazione(srcPlr);
       result.realizzazioni = rrr.Realizzazioni;
       //
-      if (result.tempoGioco > 0)
+      let toProcess: boolean = false;
+      if (isMyTeam === false)
+         toProcess = true;
+      else
+         toProcess = (result.tempoGioco > 0);
+      if (toProcess)
       {
          for (let i=0;   i<result.realizzazioni.length;   i++)
          {
@@ -970,35 +999,35 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       }
       else
       {
-         result.totali.punti = "";
-         result.totali.fFatti = "";
-         result.totali.fSubiti = "";
-         result.totali.rDif = "";
-         result.totali.rAtt = "";
-         result.totali.rTot = "";
-         result.totali.pPerse = "";
-         result.totali.pRecuperate = "";
-         result.totali.assist = "";
-         result.totali.stopFatte = "";
-         result.totali.stopSubite = "";
-         result.totali.plusMinus = "";
-         result.totali.oer = "";
-         result.totali.pir = "";
-         result.totali.eFGp = "";
-         result.totali.TSp = "";
-         result.totali.q1.punti = "";
+         result.totali.punti = 0;
+         result.totali.fFatti = 0;
+         result.totali.fSubiti = 0;
+         result.totali.rDif = 0;
+         result.totali.rAtt = 0;
+         result.totali.rTot = 0;
+         result.totali.pPerse = 0;
+         result.totali.pRecuperate = 0;
+         result.totali.assist = 0;
+         result.totali.stopFatte = 0;
+         result.totali.stopSubite = 0;
+         result.totali.plusMinus = 0;
+         result.totali.oer = 0;
+         result.totali.pir = 0;
+         result.totali.eFGp = 0;
+         result.totali.TSp = 0;
+         result.totali.q1.punti = 0;
          result.totali.q1.min = "";
          result.totali.q1.dato = "";
-         result.totali.q2.punti = "";
+         result.totali.q2.punti = 0;
          result.totali.q2.min = "";
          result.totali.q2.dato = "";
-         result.totali.q3.punti = "";
+         result.totali.q3.punti = 0;
          result.totali.q3.min = "";
          result.totali.q3.dato = "";
-         result.totali.q4.punti = "";
+         result.totali.q4.punti = 0;
          result.totali.q4.min = "";
          result.totali.q4.dato = "";
-         result.totali.et.punti = "";
+         result.totali.et.punti = 0;
          result.totali.et.min = "";
          result.totali.et.dato = "";
       }
@@ -1342,7 +1371,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
          if (myTeam)
             return this.jsonData.myTeam.totali.stopFatte.toString();
          else
-            return this.jsonData.oppoTeam.totali.stopFattte.toString();
+            return this.jsonData.oppoTeam.totali.stopFatte.toString();
       }
       catch (e)
       {

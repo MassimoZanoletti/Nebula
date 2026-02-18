@@ -110,7 +110,11 @@
       </ng-template>
       <ng-template pTemplate="footer">
          <tr>
-            <td>Tot {{jsonData.myTeam!.name!}} </td>
+            <td>
+               <span style="font-size: 0.8rem !important;">Totali team</span>
+               <br>
+               <span style="font-size: 1.25rem !important; color: #ffaa00 !important;">{{ jsonData.myTeam?.name }}</span>
+            </td>
             <td style="text-align: center;">{{GetTotaliPunti(true)}}</td>
             <td style="text-align: center;">{{GetTotaliTempo(true)}}</td>
             <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(GetTotaliTL(true)) "></td>
@@ -152,7 +156,7 @@
       [tableStyle]="{ 'min-width': '0px', 'width': 'max-content','table-layout': 'fixed', 'padding': '0.2rem 0.2rem' }">
       <ng-template pTemplate="header">
          <tr>
-            <th style="width: 180px;">{{jsonData.oppoTeam!.name!}}</th>
+            <th style="width: 180px;"><span style="font-size: 1.3rem !important;">{{jsonData.oppoTeam!.name!}}</span></th>
             <th style="width: 40px; text-align: right;">Pti</th>
             <th style="width: 60px; text-align: center;">Min.</th>
             <th style="width: 85px; text-align: center;">TL</th>
@@ -214,7 +218,11 @@
       </ng-template>
       <ng-template pTemplate="footer">
          <tr>
-            <td>Tot {{jsonData.oppoTeam!.name!}} </td>
+            <td>
+               <span style="font-size: 0.8rem !important;">Totali team</span>
+               <br>
+               <span style="font-size: 1.25rem !important; color: #ffaa00 !important;">{{ jsonData.oppoTeam?.name }}</span>
+            </td>
             <td style="text-align: center;">{{GetTotaliPunti(false)}}</td>
             <td style="text-align: center;">{{GetTotaliTempo(false)}}</td>
             <td style="text-align: center;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(GetTotaliTL(false)) "></td>
