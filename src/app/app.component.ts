@@ -1,7 +1,9 @@
 import {
    ChangeDetectorRef,
    Component,
-   OnInit } from '@angular/core';
+   OnInit} from '@angular/core';
+import { NgIf,
+   NgFor} from "@angular/common";
 import { RouterOutlet } from '@angular/router';
 import { DbServService } from "./services/db-serv.service";
 import { HttpClient } from "@angular/common/http";
@@ -25,18 +27,44 @@ import { FormsModule } from '@angular/forms';
 import { XMLParser } from 'fast-xml-parser';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { globs } from "./common/globals";
-//
+import { DividerModule } from 'primeng/divider';
+import { Chart } from 'chart.js';
+import annotationPlugin from 'chartjs-plugin-annotation';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { ChartModule } from 'primeng/chart';
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import {TabViewChangeEvent, TabViewModule} from 'primeng/tabview';
+import {color} from "chart.js/helpers";
 //
 
 
+Chart.register(annotationPlugin);
+Chart.register(ChartDataLabels);
+
+
+export type TQuartoGiocato =
+{
+   titolo: string;
+   lineChartData: ChartConfiguration<'line'>['data'];
+   lineChartOptions: ChartOptions<'line'>;
+   isRegular: boolean;
+   numero: number;
+   status: number;
+   myTeamPunti1: number;
+   myTeamPunti2: number;
+   oppoTeamPunti1: number;
+   oppoTeamPunti2: number;
+   duration: number;
+}
 
 @Component({
   selector: 'app-root',
   standalone: true,
    imports: [
+      NgIf,
+      NgFor,
       RouterOutlet,
       Button,
       PrimeTemplate,
@@ -50,7 +78,9 @@ import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2
       InputTextareaModule,
       FormsModule,
       ChartModule,
-      BaseChartDirective
+      BaseChartDirective,
+      TabViewModule,
+      DividerModule,
    ],
   providers: [provideCharts(withDefaultRegisterables())],
   templateUrl: './app.component.html',
@@ -58,36 +88,170 @@ import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2
 })
 export class AppComponent implements OnInit
 {
+   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
    public lineChartData: ChartConfiguration<'line'>['data'] = {
-      labels: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio'],
       datasets: [
          {
-            data: [65, 59, 80, 81, 56],
-            label: 'Vendite Verticali',
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
-         }
+            label: 'myteam',
+            data: [
+               { x: 0, y: 0 },
+               { x: 2, y: 0.5, player: 'Corti' },
+               { x: 5, y: 1.0, player: 'Corti' },
+               { x: 7, y: 1.2, player: 'Zanoletti' },
+               { x: 9, y: 2.5 },
+               { x: 11, y: 3.5 },
+               { x: 13, y: 4.0 },
+               { x: 15, y: 4.5 },
+               { x: 16, y: 5.0 },
+               { x: 17, y: 5.0 },
+               { x: 20, y: 5.5 },
+               { x: 22, y: 6.0 },
+               { x: 25, y: 7.1 },
+               { x: 27, y: 7.5 },
+               { x: 29, y: 8.5 },
+               { x: 29, y: 10 }
+            ] as any,
+            borderColor: 'rgb(255, 0, 0)',
+            stepped: 'after',
+            pointRadius: 6,
+            pointBackgroundColor: '#ff7777',
+            pointBorderWidth: 2
+         },
+         {
+            label: 'oppoteam',
+            data: [
+               { x: 0, y: 0 },
+               { x: 2, y: 2 },
+               { x: 5, y: 5.3 },
+               { x: 6, y: 7.9 },
+               { x: 8, y: 9 },
+               { x: 8, y: 10 }
+            ],
+            borderColor: 'rgb(0, 127, 0)',
+            stepped: 'after',
+            pointRadius: 4
+         },
       ]
    };
 
    public lineChartOptions: ChartOptions<'line'> = {
       responsive: true,
-      indexAxis: 'y', // <--- Questo sposta l'asse delle categorie sulla verticale
+      indexAxis: 'y', // Mantiene la logica Y per il tempo
+      layout: {          // <-- stesso livello di scales e plugins
+         padding: {
+            left: 20
+         }
+      },
       scales: {
          x: {
+            type: 'linear',
+            position: 'top',
             beginAtZero: true,
-            title: { display: true, text: 'Valore' }
+            max: 100,
+            title: { display: true, text: 'Punti' },
+            ticks: {
+               stepSize: 1
+            }
          },
          y: {
-            title: { display: true, text: 'Mese' }
+            type: 'linear',
+            reverse: true,
+            min: 0,
+            max: 10,
+            title: { display: true, text: 'Minuti di gioco' },
+            ticks: {
+               stepSize: 1
+            }
+         }
+      },
+      plugins: {
+         // --- CONFIGURAZIONE DATALABELS ---
+         datalabels: {
+            backgroundColor: (context) => context.dataset.borderColor as string,
+            borderRadius: 4,
+            color: (context) => {
+               const value = context.dataset.data[context.dataIndex] as any;
+               let clr: string = 'white';
+               if (value.delta != undefined)
+               {
+                  if (value.delta == 0)
+                     clr = 'black';
+               }
+               return clr;
+            },
+            font: {
+               weight: 'bold',
+               size: 14
+            },
+            padding: 4,
+            // Poiché indexAxis è 'y', la label deve seguire la coordinata X (i punti)
+            anchor: 'center',
+            align: 'right',
+            offset: 8,
+            formatter: (value: any) => {
+               // Mostriamo il valore X (i punti realizzati)
+               let dlt:string = "";
+               if (value.delta)
+               {
+                  if (value.delta == 3)
+                     dlt = `{+3️⃣}  ->  `;
+                  else if (value.delta == 2)
+                     dlt = `{+2️⃣}  ->  `;
+                  else if (value.delta == 1)
+                     dlt = `{+1️⃣}  ->  `;
+               }
+               const pl: string = value.player ? `              ${value.player}` : '';
+               const tmp: string = value.tempo ? `[${value.tempo}]  ` : "";
+               return `${tmp}${dlt}${value.x}${pl}`;
+            },
+            // Nasconde la label se il valore è 0 (opzionale) o se sono troppo vicine
+            display: (context) => {
+               return context.active || (context.dataIndex % 1 === 0);
+            }
+         },
+         // --- CONFIGURAZIONE TOOLTIP ---
+         tooltip: {
+            callbacks: {
+               label: (context: any) => `Punti: ${context.raw.x} al minuto ${context.raw.y}`
+            }
+         },
+         // --- CONFIGURAZIONE ANNOTATION ---
+         annotation: {
+            annotations: {
+               fallo1: {
+                  type: 'line',
+                  yMin: 3.5,
+                  yMax: 3.5,
+                  borderColor: 'red',
+                  borderWidth: 2,
+                  borderDash: [5, 5],
+                  label: {
+                     display: true,
+                     content: 'Fallo: Belinelli',
+                     position: 'start',
+                     backgroundColor: 'orange',
+                     font: { size: 14 },
+                     xAdjust: 0
+                  }
+               },
+               cambio1: {
+                  type: 'label',
+                  xValue: 0,
+                  yValue: 7,
+                  position: { x: 'start', y: 'center' },
+                  backgroundColor: '#00ffff',
+                  content: '⇄ in Teodosic   ---   out Hackett',
+                  font: { size: 14 },
+               }
+            }
          }
       }
    };
 
-
    title = 'nebula';
+   tabActiveIndex: number =0;
+   partitaOk: boolean = false;
 
    tooltip_Pir_Title: string  = globs.tooltip_Pir_Title;
    tooltip_Pir_Desc: string   = globs.tooltip_Pir_Desc;
@@ -102,6 +266,7 @@ export class AppComponent implements OnInit
    eventsData: string = "";
    xmlData: string = "";
    quarti: Array<any> = [];
+   quartiGiocati: Array<TQuartoGiocato> = [];
    dbJson: any = {};
    jsonDataStr: string = "";
    jsonData: any = {};
@@ -129,58 +294,53 @@ export class AppComponent implements OnInit
    }
 
 
+   async HandleTabChange (event: TabViewChangeEvent)
+   {
+      this.tabActiveIndex = event.index;
+   }
+
+
    async BtnSelezionaMatch (item: any)
    {
       let response: any;
       let respQuarti: any;
 
+      this.partitaOk = false;
+      //
       respQuarti = await lastValueFrom(this.dbServ.GetMatchQuarters(item.ID));
       if (respQuarti)
       {
          this.quarti = respQuarti;
-/*
-[
-   {
-      "ID": 2097,
-      "LinkMatchHeader": 264,
-      "Num": 1,
-      "IsRegular": true,
-      "Status": 2,
-      "MyTeamStartPoint": null,
-      "OppTeamStartPoint": null,
-      "MyTeamCurrPoint": 15,
-      "OppTeamCurrPoint": 9,
-      "MyTeamFouls": 5,
-      "OppTeamFouls": 6,
-      "MyTeamBonus": true,
-      "OppTeamBonus": true
-   },
-   ...
-   {
-      "ID": 2101,
-      "LinkMatchHeader": 264,
-      "Num": 5,
-      "IsRegular": false,
-      "Status": 0,
-      "MyTeamStartPoint": null,
-      "OppTeamStartPoint": null,
-      "MyTeamCurrPoint": 0,
-      "OppTeamCurrPoint": 0,
-      "MyTeamFouls": 0,
-      "OppTeamFouls": 0,
-      "MyTeamBonus": false,
-      "OppTeamBonus": false
-   },
-]
-*/
       }
-      response = await lastValueFrom(this.dbServ.GetMatchHeader(item.ID));
+      //
+      try
+      {
+         response = await lastValueFrom(this.dbServ.GetMatchHeader(item.ID));
+      }
+      catch (e)
+      {
+         response = null;
+         console.error ("Exception getting data from server");
+         console.error (e);
+      }
       if (response)
       {
          this.eventsData = response.MatchEventsFile;
          this.xmlData = response.MatchDataFile;
          this.dbJson = await this.xmlToJsonStr(this.xmlData);
          this.jsonData = {
+            match: {
+               parziali: ["","","","","","","",""],
+               progressivi: ["","","","","","","",""],
+               title: response.Title,
+               number: response.Number,
+               playDate: response.PlayDate,
+               home: response.Home,
+               referee1: response.Referee1,
+               referee2: response.Referee2,
+               giornata: response.Day,
+               location: response.Location
+            },
             myTeam: {
                name:            this.dbJson.BasketScoutDreamEVODataFile.Match.MyTeam.Name,
                dati:            {
@@ -196,6 +356,8 @@ export class AppComponent implements OnInit
                },
                quintettoQuarto: [],
                players:         [],
+               coach1:          "",
+               coach2:          "",
                totali:          {
                   punti:       0,
                   tempoGioco:  0,
@@ -264,6 +426,8 @@ export class AppComponent implements OnInit
                },
                quintettoQuarto: [],
                players: [],
+               coach1:          "",
+               coach2:          "",
                totali: {
                   punti:       0,
                   tempoGioco:  0,
@@ -316,10 +480,12 @@ export class AppComponent implements OnInit
                      dato:  ""
                   }
                }
-            }
+            },
          }
          //
          // MyTeam
+         this.jsonData.myTeam.coach1 = response.MyCoach1;
+         this.jsonData.myTeam.coach2 = response.MyCoach2;
          this.jsonData.myTeam.timeouts.primoTempo.push(this.dbJson.BasketScoutDreamEVODataFile.Match.MyTeam.Timeouts.node_1Tempo.node_1);
          this.jsonData.myTeam.timeouts.primoTempo.push(this.dbJson.BasketScoutDreamEVODataFile.Match.MyTeam.Timeouts.node_1Tempo.node_2);
          this.jsonData.myTeam.timeouts.secondoTempo.push(this.dbJson.BasketScoutDreamEVODataFile.Match.MyTeam.Timeouts.node_2Tempo.node_1);
@@ -365,6 +531,8 @@ export class AppComponent implements OnInit
             this.jsonData.myTeam.players.push(await this.ExtractPlayer (this.dbJson.BasketScoutDreamEVODataFile.Match.MyTeam.Player12[0], true));
          //
          // OpponentTeam
+         this.jsonData.oppoTeam.coach1 = response.OppCoach1;
+         this.jsonData.oppoTeam.coach2 = response.OppCoach2;
          this.jsonData.oppoTeam.timeouts.primoTempo.push(this.dbJson.BasketScoutDreamEVODataFile.Match.OpponentTeam.Timeouts.node_1Tempo.node_1);
          this.jsonData.oppoTeam.timeouts.primoTempo.push(this.dbJson.BasketScoutDreamEVODataFile.Match.OpponentTeam.Timeouts.node_1Tempo.node_2);
          this.jsonData.oppoTeam.timeouts.secondoTempo.push(this.dbJson.BasketScoutDreamEVODataFile.Match.OpponentTeam.Timeouts.node_2Tempo.node_1);
@@ -593,13 +761,254 @@ export class AppComponent implements OnInit
          this.jsonData.oppoTeam.totali.rDif += this.jsonData.oppoTeam.dati.rimbDifesa;
          this.jsonData.oppoTeam.totali.rAtt += this.jsonData.oppoTeam.dati.rimbAttacco;
          this.jsonData.oppoTeam.totali.rTot = this.jsonData.oppoTeam.totali.rDif + this.jsonData.oppoTeam.totali.rAtt;
+         // Calcolo parziali e progressivi
+         let mtcp: number = 0;
+         let otcp: number = 0;
+         for (let i=0;   i<this.quarti.length;   i++)
+         {
+            if (this.quarti[i].Status > 0)
+            {
+               mtcp += this.quarti[i].MyTeamCurrPoint;
+               otcp += this.quarti[i].OppTeamCurrPoint;
+               this.jsonData.match.parziali[i] = `${this.quarti[i].MyTeamCurrPoint} - ${this.quarti[i].OppTeamCurrPoint}`;
+               this.jsonData.match.progressivi[i] = `${mtcp} - ${otcp}`;
+            }
+            else
+            {
+               this.jsonData.match.parziali[i] = ``;
+               this.jsonData.match.progressivi[i] = ``;
+            }
+         }
          //
          //
          this.jsonDataStr = JSON.stringify(this.jsonData, null, 3);
          this.myPlayers = this.jsonData.myTeam.players;
          this.oppoPlayers = this.jsonData.oppoTeam.players;
          this.cdr.detectChanges();
+         this.partitaOk = true;
+         this.tabActiveIndex = 1;
+         //
+         //
+         if (respQuarti)
+         {
+            let myTeamPti: number = 0;
+            let oppoTeamPti: number = 0;
+            this.quartiGiocati = [];
+            for (let i=0;   i<this.quarti.length;   i++)
+            {
+               if (this.quarti[i].Status > 0)
+               {
+                  this.quartiGiocati.push (
+                     {
+                        titolo: (i < 4) ? `Quarto ${i + 1}` : `Supplem. ${i - 3}`,
+                        isRegular: (i < 4),
+                        numero: i+1,
+                        status: this.quarti[i].Status,
+                        duration: (i < 4) ? 600 : 300,
+                        myTeamPunti1: myTeamPti,
+                        oppoTeamPunti1: oppoTeamPti,
+                        myTeamPunti2: this.quarti[i].MyTeamCurrPoint,
+                        oppoTeamPunti2: this.quarti[i].OppTeamCurrPoint,
+                        lineChartData: {
+                           datasets: [
+                              {
+                                 label: this.jsonData.myTeam.name,
+                                 data: [
+                                           { x: 0, y: 0 },
+                                           { x: 2, y: 0.5, player: 'Corti' },
+                                           { x: 5, y: 1.0, player: 'Corti' },
+                                           { x: 7, y: 1.2, player: 'Zanoletti' },
+                                           { x: 9, y: 2.5 },
+                                           { x: 11, y: 3.5 },
+                                           { x: 13, y: 4.0 },
+                                           { x: 15, y: 4.5 },
+                                           { x: 16, y: 5.0 },
+                                           { x: 17, y: 5.0 },
+                                           { x: 20, y: 5.5 },
+                                           { x: 22, y: 6.0 },
+                                           { x: 25, y: 7.1 },
+                                           { x: 27, y: 7.5 },
+                                           { x: 29, y: 8.5 },
+                                           { x: 29, y: 10 }
+                                        ] as any,
+                                 borderColor: 'rgb(255, 0, 0)',
+                                 stepped: 'after',
+                                 pointRadius: 6,
+                                 pointBackgroundColor: '#ff7777',
+                                 pointBorderWidth: 2
+                              },
+                              {
+                                 label: this.jsonData.oppoTeam.name,
+                                 data: [
+                                    { x: 0, y: 0 },
+                                    { x: 2, y: 2 },
+                                    { x: 5, y: 5.3 },
+                                    { x: 6, y: 7.9 },
+                                    { x: 8, y: 9 },
+                                    { x: 8, y: 10 }
+                                 ],
+                                 borderColor: 'rgb(0, 127, 0)',
+                                 stepped: 'after',
+                                 pointRadius: 4
+                              },
+                           ]
+                        },
+                        lineChartOptions: {
+                           responsive: true,
+                           indexAxis: 'y', // Mantiene la logica Y per il tempo
+                           layout: {          // <-- stesso livello di scales e plugins
+                              padding: {
+                                 left: 20
+                              }
+                           },
+                           scales: {
+                              x: {
+                                 type: 'linear',
+                                 position: 'top',
+                                 beginAtZero: true,
+                                 max: 100,
+                                 title: { display: true, text: 'Punti' },
+                                 ticks: {
+                                    stepSize: 1
+                                 }
+                              },
+                              y: {
+                                 type: 'linear',
+                                 reverse: true,
+                                 min: 0,
+                                 max: 10,
+                                 title: { display: true, text: 'Minuti di gioco' },
+                                 ticks: {
+                                    stepSize: 1
+                                 }
+                              }
+                           },
+                           plugins: {
+                              // --- CONFIGURAZIONE DATALABELS ---
+                              datalabels: {
+                                 backgroundColor: (context) => context.dataset.borderColor as string,
+                                 borderRadius: 4,
+                                 color: (context) => {
+                                    const value = context.dataset.data[context.dataIndex] as any;
+                                    let clr: string = 'white';
+                                    if (value.delta != undefined)
+                                    {
+                                       if (value.delta == 0)
+                                          clr = 'black';
+                                    }
+                                    return clr;
+                                 },
+                                 font: {
+                                    weight: 'bold',
+                                    size: 14
+                                 },
+                                 padding: 4,
+                                 // Poiché indexAxis è 'y', la label deve seguire la coordinata X (i punti)
+                                 anchor: 'center',
+                                 align: 'right',
+                                 offset: 8,
+                                 formatter: (value: any) => {
+                                    // Mostriamo il valore X (i punti realizzati)
+                                    let dlt:string = "";
+                                    if (value.delta)
+                                    {
+                                       if (value.delta == 3)
+                                          dlt = `{+3️⃣}  ->  `;
+                                       else if (value.delta == 2)
+                                          dlt = `{+2️⃣}  ->  `;
+                                       else if (value.delta == 1)
+                                          dlt = `{+1️⃣}  ->  `;
+                                    }
+                                    const pl: string = value.player ? `              ${value.player}` : '';
+                                    const tmp: string = value.tempo ? `[${value.tempo}]  ` : "";
+                                    return `${tmp}${dlt}${value.x}${pl}`;
+                                 },
+                                 // Nasconde la label se il valore è 0 (opzionale) o se sono troppo vicine
+                                 display: (context) => {
+                                    return context.active || (context.dataIndex % 1 === 0);
+                                 }
+                              },
+                              // --- CONFIGURAZIONE TOOLTIP ---
+                              tooltip: {
+                                 callbacks: {
+                                    label: (context: any) => `Punti: ${context.raw.x} al minuto ${context.raw.y}`
+                                 }
+                              },
+                              // --- CONFIGURAZIONE ANNOTATION ---
+                              annotation: {
+                                 annotations: {
+                                    fallo1: {
+                                       type: 'line',
+                                       yMin: 3.5,
+                                       yMax: 3.5,
+                                       borderColor: 'red',
+                                       borderWidth: 2,
+                                       borderDash: [5, 5],
+                                       label: {
+                                          display: true,
+                                          content: 'Fallo: Belinelli',
+                                          position: 'start',
+                                          backgroundColor: 'orange',
+                                          font: { size: 14 },
+                                          xAdjust: 0
+                                       }
+                                    },
+                                    cambio1: {
+                                       type: 'label',
+                                       xValue: 0,
+                                       yValue: 7,
+                                       position: { x: 'start', y: 'center' },
+                                       backgroundColor: '#00ffff',
+                                       content: '⇄ in Teodosic   ---   out Hackett',
+                                       font: { size: 14 },
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     });
+                  myTeamPti = this.quarti[i].MyTeamCurrPoint;
+                  oppoTeamPti = this.quarti[i].OppoTeamCurrPoint;
+               }
+            }
+            /*
+            [
+               {
+                  "ID": 2097,
+                  "LinkMatchHeader": 264,
+                  "Num": 1,
+                  "IsRegular": true,
+                  "Status": 2,
+                  "MyTeamStartPoint": null,
+                  "OppTeamStartPoint": null,
+                  "MyTeamCurrPoint": 15,
+                  "OppTeamCurrPoint": 9,
+                  "MyTeamFouls": 5,
+                  "OppTeamFouls": 6,
+                  "MyTeamBonus": true,
+                  "OppTeamBonus": true
+               },
+               ...
+               {
+                  "ID": 2101,
+                  "LinkMatchHeader": 264,
+                  "Num": 5,
+                  "IsRegular": false,
+                  "Status": 0,
+                  "MyTeamStartPoint": null,
+                  "OppTeamStartPoint": null,
+                  "MyTeamCurrPoint": 0,
+                  "OppTeamCurrPoint": 0,
+                  "MyTeamFouls": 0,
+                  "OppTeamFouls": 0,
+                  "MyTeamBonus": false,
+                  "OppTeamBonus": false
+               },
+            ]
+            */
+         }
       }
+      await this.PopulateChartData();
    }
 
 
@@ -756,6 +1165,357 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
             }
          }
       }
+   }
+
+
+   async PopulateChartData()
+   {
+/*
+      datasets: [
+         {
+            label: 'Sarezzo',
+            data: [
+               { x: 0, y: 0 },
+               { x: 2, y: 0.5, player: 'Corti' },
+               { x: 5, y: 1.0, player: 'Corti' },
+               { x: 7, y: 1.2, player: 'Zanoletti' },
+               { x: 9, y: 2.5 },
+               { x: 11, y: 3.5 },
+               { x: 13, y: 4.0 },
+               { x: 15, y: 4.5 },
+               { x: 16, y: 5.0 },
+               { x: 17, y: 5.0 },
+               { x: 20, y: 5.5 },
+               { x: 22, y: 6.0 },
+               { x: 25, y: 7.1 },
+               { x: 27, y: 7.5 },
+               { x: 29, y: 8.5 },
+               { x: 29, y: 10 }
+            ] as any,
+            borderColor: 'rgb(255, 0, 0)',
+            stepped: 'after',
+            pointRadius: 4 // Rende il punto leggermente più visibile per la label
+         },
+         {
+            label: 'Lussana',
+            data: [
+               { x: 0, y: 0 },
+               { x: 2, y: 2 },
+               { x: 5, y: 5.3 },
+               { x: 6, y: 7.9 },
+               { x: 8, y: 9 },
+               { x: 8, y: 10 }
+            ],
+            borderColor: 'rgb(0, 127, 0)',
+            stepped: 'after',
+            pointRadius: 4
+         },
+      ]
+
+*/
+      let qrtNum: number = 1;
+      let sss: string = "";
+      let sMin: string = "";
+      let sSec: string = "";
+      let sPlr: string = "";
+      let sPlr2: string = "";
+      let min: number = 0;
+      let elem: Array<string> = [];
+      let punti: number = 0;
+      let delta: number = 0;
+      let arrQ: string[] = [];
+      for (let i=0;   i<this.quartiGiocati.length;   i++)
+      {
+         if (this.quartiGiocati[i].status > 1)
+         {
+            qrtNum = i+1;
+            this.quartiGiocati[i].lineChartData.datasets[0].label = this.jsonData.myTeam.name;
+            this.quartiGiocati[i].lineChartData.datasets[1].label = this.jsonData.oppoTeam.name;
+            this.quartiGiocati[i].lineChartData.datasets[0].data = [] as any;
+            this.quartiGiocati[i].lineChartData.datasets[0].data.push ({ x: 0, y: 0 });
+            this.quartiGiocati[i].lineChartData.datasets[1].data = [] as any;
+            this.quartiGiocati[i].lineChartData.datasets[1].data.push ({ x: 0, y: 0 });
+            arrQ = this.eventsData.split (/\r?\n/).filter (sss => sss.startsWith ("Q"+qrtNum.toString()));
+            arrQ = arrQ.filter (sss => sss.includes ("|MyTeam  |", 0));
+            sss = "";
+            sMin = "";
+            sSec = "";
+            sPlr = "";
+            sPlr2 = "";
+            min = 0;
+            elem = [];
+            punti = 0;
+            delta = 0;
+            for (let i=0;   i<arrQ.length;   i++)
+            {
+               // 0  0     0          1        2  9
+               // 0  3     9          9        7  9
+               // Q1|09:40|T2 Ok     |MyTeam  |26|(Corti M.)|[]|SAR-LUS: 2-0|343;81
+               sss = arrQ[i].trim();
+               try
+               {
+                  if ((sss.includes("|TL Ok", 0)) ||
+                     (sss.includes("|T2 Ok", 0)) ||
+                     (sss.includes("|T3 Ok", 0)))
+                  {
+                     if (sss.includes("|TL Ok", 0))
+                        delta = 1;
+                     if (sss.includes("|T2 Ok", 0))
+                        delta = 2;
+                     if (sss.includes("|T3 Ok", 0))
+                        delta = 3;
+                     punti += delta;
+                     elem = sss.split("|");
+                     sMin = elem[1].substring(0, 2);
+                     sSec = elem[1].substring(3, 5);
+                     sPlr = elem[5];
+                     min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
+                     this.quartiGiocati[i].lineChartData.datasets[0].data.push (
+                        {
+                           x: punti,
+                           y: min,
+                           player: sPlr,
+                           delta: delta,
+                           punti: punti,
+                           tempo: elem[1]
+                        } as any);
+                  }
+                  if ((sss.includes("|T2 no", 0)) ||
+                     (sss.includes("|T3 no", 0)))
+                  {
+                     elem = sss.split("|");
+                     sMin = elem[1].substring(0, 2);
+                     sSec = elem[1].substring(3, 5);
+                     sPlr = elem[5];
+                     min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
+                     this.quartiGiocati[i].lineChartData.datasets[0].data.push (
+                        {
+                           x: punti,
+                           y: min,
+                           delta: 0,
+                           player: sPlr,
+                           tempo: elem[1]
+                        } as any);
+                  }
+               }
+               catch (e)
+               {
+                  console.error(e);
+               }
+            }
+            this.quartiGiocati[i].lineChartData.datasets[0].data.push ({ x: punti, y: 10 });
+            if (this.quartiGiocati[i].lineChartOptions.scales)
+               (this.quartiGiocati[i].lineChartOptions.scales!['x'] as any).max = punti+6;
+            //
+            (this.quartiGiocati[i].lineChartOptions.plugins as any).annotation.annotations = {};
+            for (let i=0;   i<arrQ.length;   i++)
+            {
+               sss = arrQ[i].trim();
+               try
+               {
+                  if (sss.includes("|Sostit ", 0))
+                  {
+                     // Q2|04:09|Sostit    |MyTeam  |Out 0|In 2
+                     elem = sss.split("|");
+                     sMin = elem[1].substring(0, 2);
+                     sSec = elem[1].substring(3, 5);
+                     sPlr = elem[4].substring(3, 5);
+                     sPlr2 = elem[5].substring(2,4);
+                     sPlr = await this.GetMyTeamPlayer (sPlr);
+                     sPlr2 = await this.GetMyTeamPlayer (sPlr2);
+                     min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
+                     const annotations = (this.quartiGiocati[i].lineChartOptions.plugins as any).annotation.annotations;
+                     const key = `Sostit_myteam_${i}_${sMin}_${sSec}`;
+                     annotations[key] = {
+                        type:            'label',
+                        xValue:          0,
+                        yValue:          min,
+                        position:        { x: 'start', y: 'center' },
+                        backgroundColor: '#00ffff',
+                        content:         `[${sMin}:${sSec}] in ${sPlr2} ⇄ out ${sPlr}`,
+                        font:            { size: 13, weight: 'bold' },
+                     };
+                  }
+                  if (sss.includes("|FFatto ", 0))
+                  {
+                     elem = sss.split("|");
+                     sMin = elem[1].substring(0, 2);
+                     sSec = elem[1].substring(3, 5);
+                     sPlr = elem[5];
+                     min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
+                     const annotations = (this.quartiGiocati[i].lineChartOptions.plugins as any).annotation.annotations;
+                     const key = `fallo_myteam_${i}_${sMin}_${sSec}`;
+                     annotations[key] = {
+                        type:            'label',
+                        xValue:          0,
+                        yValue:          min,
+                        position:        { x: 'start', y: 'center' },
+                        backgroundColor: '#ffaa00',
+                        content:         `[${sMin}:${sSec}] Fallo ${sPlr}`,
+                        font:            { size: 13, weight: 'bold' },
+                     };
+                  }
+               }
+               catch (e)
+               {
+
+               }
+            }
+            /*
+            Q1|08:30|FFatto    |MyTeam  |24|(Dema K.)|
+                     annotation: {
+                        annotations: {
+                           fallo1: {
+                              type: 'line',
+                              yMin: 3.5,
+                              yMax: 3.5,
+                              borderColor: 'red',
+                              borderWidth: 2,
+                              borderDash: [5, 5],
+                              label: {
+                                 display: true,
+                                 content: 'Fallo: Belinelli',
+                                 position: 'start',
+                                 backgroundColor: 'orange',
+                                 font: { size: 14 },
+                                 xAdjust: 0
+                              }
+                           },
+                           cambio1: {
+                              type: 'label',
+                              xValue: 0,
+                              yValue: 7,
+                              position: { x: 'start', y: 'center' },
+                              backgroundColor: '#00ffff',
+                              content: '⇄ in Teodosic   ---   out Hackett',
+                              font: { size: 14 },
+                           }
+                        }
+                     }
+
+            */
+            //
+            arrQ = this.eventsData.split (/\r?\n/).filter (sss => sss.startsWith ("Q"+qrtNum.toString()));
+            arrQ = arrQ.filter (sss => sss.includes ("|OppoTeam|", 0));
+            sss = "";
+            sMin = "";
+            sSec = "";
+            sPlr = "";
+            min = 0;
+            elem = [];
+            punti = 0;
+            delta = 0;
+            for (let i=0;   i<arrQ.length;   i++)
+            {
+               // 0  0     0          1        2  9
+               // 0  3     9          9        7  9
+               // Q1|09:40|T2 Ok     |MyTeam  |26|(Corti M.)|[]|SAR-LUS: 2-0|343;81
+               sss = arrQ[i].trim();
+               try
+               {
+                  if ((sss.includes("|TL Ok", 0)) ||
+                     (sss.includes("|T2 Ok", 0)) ||
+                     (sss.includes("|T3 Ok", 0)))
+                  {
+                     if (sss.includes("|TL Ok", 0))
+                        delta = 1;
+                     if (sss.includes("|T2 Ok", 0))
+                        delta = 2;
+                     if (sss.includes("|T3 Ok", 0))
+                        delta = 3;
+                     punti += delta;
+                     elem = sss.split("|");
+                     sMin = elem[1].substring(0, 2);
+                     sSec = elem[1].substring(3, 5);
+                     sPlr = elem[5];
+                     min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
+                     this.quartiGiocati[i].lineChartData.datasets[1].data.push ({
+                                                                        x: punti,
+                                                                        y: min,
+                                                                        player: sPlr,
+                                                                        punti: punti,
+                                                                        tempo: elem[1]
+                                                                     } as any);
+                  }
+               }
+               catch (e)
+               {
+
+               }
+            }
+            this.quartiGiocati[i].lineChartData.datasets[1].data.push ({ x: punti, y: 10 });
+            //
+            if (this.quartiGiocati[i].lineChartOptions.scales)
+            {
+               if ((this.quartiGiocati[i].lineChartOptions.scales!['x'] as any).max < punti)
+                  (this.quartiGiocati[i].lineChartOptions.scales!['x'] as any).max = punti+6;
+            }
+         }
+      }
+      //
+      //
+      this.chart?.render();
+      setTimeout (() => {this.chart?.update();}, 1000);
+      setTimeout (() => {this.chart?.update();}, 2500);
+      setTimeout (() => {this.chart?.update();}, 4000);
+   }
+
+
+   async GetMyTeamPlayer (sNum: string): Promise<string>
+   {
+      let result: string = sNum;
+      sNum = sNum.trim();
+      for (let i=0;   i<this.jsonData.myTeam.players.length;   i++)
+      {
+         if (sNum == this.jsonData.myTeam.players[i].playNumber)
+            result = this.jsonData.myTeam.players[i].name;
+      }
+      return result;
+   }
+
+
+   GetMatchTitle(): string
+   {
+      let result: string ="";
+      if (this.partitaOk)
+         if (this.jsonData.myTeam)
+            result = `<span style="color: red !important;">${this.jsonData.myTeam.name}</span> - <span style="color: green !important;">${this.jsonData.oppoTeam.name}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${this.jsonData.myTeam.totali.punti} - ${this.jsonData.oppoTeam.totali.punti}`;
+      return result;
+   }
+
+
+   GetParziali(): string
+   {
+      let result: string ="";
+      if (this.partitaOk)
+         if (this.jsonData.myTeam)
+         {
+            let q1: string = "";
+            let q2: string = "";
+            let q3: string = "";
+            let q4: string = "";
+            if (this.quarti[0].Status > 0)
+               q1 = `(${this.quarti[0].MyTeamCurrPoint} - ${this.quarti[0].OppTeamCurrPoint})`;
+            if (this.quarti[1].Status > 0)
+               q2 = `   (${this.quarti[1].MyTeamCurrPoint} - ${this.quarti[1].OppTeamCurrPoint})`;
+            if (this.quarti[2].Status > 0)
+               q3 = `   (${this.quarti[2].MyTeamCurrPoint} - ${this.quarti[2].OppTeamCurrPoint})`;
+            if (this.quarti[3].Status > 0)
+               q4 = `   (${this.quarti[3].MyTeamCurrPoint} - ${this.quarti[3].OppTeamCurrPoint})`;
+            result = `${q1}${q2}${q3}${q4}`;
+         }
+
+      return result;
+   }
+
+
+   GetProgressivi(): string
+   {
+      let result: string ="";
+      if (this.partitaOk)
+         if (this.jsonData.myTeam)
+            result = `${this.jsonData.myTeam.name} - ${this.jsonData.oppoTeam.name}   ${this.jsonData.myTeam.totali.punti} - ${this.jsonData.oppoTeam.totali.punti}`;
+      return result;
    }
 
 
@@ -999,22 +1759,22 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       }
       else
       {
-         result.totali.punti = 0;
-         result.totali.fFatti = 0;
-         result.totali.fSubiti = 0;
-         result.totali.rDif = 0;
-         result.totali.rAtt = 0;
-         result.totali.rTot = 0;
-         result.totali.pPerse = 0;
-         result.totali.pRecuperate = 0;
-         result.totali.assist = 0;
-         result.totali.stopFatte = 0;
-         result.totali.stopSubite = 0;
-         result.totali.plusMinus = 0;
-         result.totali.oer = 0;
-         result.totali.pir = 0;
-         result.totali.eFGp = 0;
-         result.totali.TSp = 0;
+         result.totali.punti = "";
+         result.totali.fFatti = "";
+         result.totali.fSubiti = "";
+         result.totali.rDif = "";
+         result.totali.rAtt = "";
+         result.totali.rTot = "";
+         result.totali.pPerse = "";
+         result.totali.pRecuperate = "";
+         result.totali.assist = "";
+         result.totali.stopFatte = "";
+         result.totali.stopSubite = "";
+         result.totali.plusMinus = "";
+         result.totali.oer = "";
+         result.totali.pir = "";
+         result.totali.eFGp = "";
+         result.totali.TSp = "";
          result.totali.q1.punti = 0;
          result.totali.q1.min = "";
          result.totali.q1.dato = "";
@@ -1617,4 +2377,107 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
          return "!!";
       }
    }
+
+
+   GetMatchDate(): string
+   {
+      let result: string = "";
+
+      try
+      {
+         result = this.jsonData.match.playDate.substring(0,10);
+      }
+      catch (e)
+      {
+         result = "";
+      }
+      return result;
+   }
+
+
+   GetMatchNumber(): string
+   {
+      let result: string = "";
+
+      try
+      {
+         result = this.jsonData.match.number;
+      }
+      catch (e)
+      {
+         result = "";
+      }
+      return result;
+   }
+
+
+   GetMatchHome(): string
+   {
+      let result: string = "";
+
+      try
+      {
+         if (this.jsonData.match.home)
+            result = "in casa";
+         else
+            result = "in trasferta";
+      }
+      catch (e)
+      {
+         result = "";
+      }
+      return result;
+   }
+
+
+   GetMatchGiornata(): string
+   {
+      let result: string = "";
+
+      try
+      {
+         result = this.jsonData.match.giornata;
+      }
+      catch (e)
+      {
+         result = "";
+      }
+      return result;
+   }
+
+
+   GetMatchLocation(): string
+   {
+      let result: string = "";
+
+      try
+      {
+         result = this.jsonData.match.location;
+      }
+      catch (e)
+      {
+         result = "";
+      }
+      return result;
+   }
+
+
+   GetMatchArbitri(): string
+   {
+      let result: string = "";
+
+      try
+      {
+         result = this.jsonData.match.referee1;
+         if (this.jsonData.match.referee2 != "")
+            result += ` - ${this.jsonData.match.referee2}`;
+      }
+      catch (e)
+      {
+         result = "";
+      }
+      return result;
+   }
+
+
 }

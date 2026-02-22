@@ -43,3 +43,58 @@
    display: block; /* Opzionale: assicura che prenda bene lo stile */
 }
 
+
+
+.punteggi-grid {
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+
+   .row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+   }
+
+   .row-label {
+      width: 6rem;          /* larghezza fissa per le label, così le colonne sono allineate  */
+      font-weight: bold;
+      flex-shrink: 0;
+   }
+
+   .values-grid {
+      display: grid;
+      grid-template-columns: repeat(8, 6rem); /* 8 colonne da 6rem (>= 7 char in monospace) */
+      gap: 0.5rem;
+
+      .value {
+         text-align: center; /* o left, a scelta */
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+      }
+   }
+}
+
+.match-title {
+   font-size: 3rem !important;
+   font-weight: bold;
+   margin-top: 5px;
+   margin-bottom: 5px;
+   padding-top: 0px;
+}
+
+
+.match-header-data-grid {
+   display: grid;
+   grid-template-columns: max-content 1fr;
+   gap: 4px 12px;
+}
+
+.match-header-label {
+   font-style: italic;
+}
+
+.match-header-value {
+   font-weight: bold;
+}

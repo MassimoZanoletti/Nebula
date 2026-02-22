@@ -32,7 +32,8 @@ export class DbServService
 
    public GetMatchHeader(mhId: number): Observable<any>
    {
-      return this.http.get<any>(this.Endpoint()+`/api/data/MatchHeader/${mhId}`);
+      const url: string = this.Endpoint()+`/api/data/MatchHeader/${mhId}`;
+      return this.http.get<any>(url);
    }
 
 

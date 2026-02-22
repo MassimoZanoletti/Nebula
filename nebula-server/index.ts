@@ -28,11 +28,15 @@ app.get('/api/data/:tableName', async (req: Request, res: Response) => {
   // Rimuove eventuali caratteri strani che non dovrebbero stare in un nome tabella
   const tableName = req.params.tableName.replace(/[^a-zA-Z0-9_]/g, '');
 
-  try {
+  try
+  {
     const query = `SELECT * FROM [${tableName}]`; // Le parentesi quadre aiutano con nomi tabella con spazi
     const data = await db.query(query);
     res.json(data);
-  } catch (error) {
+  }
+  catch (error)
+  {
+     console.error(error);
     // ... gestione errore
   }
 });
