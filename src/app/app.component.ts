@@ -38,7 +38,7 @@ import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2
 import {TabViewChangeEvent, TabViewModule} from 'primeng/tabview';
 import {color} from "chart.js/helpers";
 import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import autoTable from 'jspdf-autotable';
 //
 
 
@@ -1056,7 +1056,7 @@ export class AppComponent implements OnInit
          }
       }
       await this.PopulateChartData();
-      setTimeout(async() => { await this.exportToPDF(); }, 5000);
+      setTimeout(() => { this.exportToPDF(); }, 5000);
    }
 
 
@@ -2578,85 +2578,213 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
    }
 
 
-   async exportToPDF()
+   exportToPDF()
    {
-      const data = document.getElementById('div-tab-tabelle');
-      if (!data)
-         return;
-
-      // Il pannello del tab potrebbe essere nascosto (display:none).
-      // Rendiamo visibile temporaneamente il contenitore del tab per html2canvas.
-      const tabPanel = data.closest('.p-tabview-panel');
-      const wasHidden = tabPanel && getComputedStyle(tabPanel).display === 'none';
-      if (wasHidden && tabPanel)
-      {
-         (tabPanel as HTMLElement).style.display = 'block';
-         (tabPanel as HTMLElement).style.position = 'absolute';
-         (tabPanel as HTMLElement).style.left = '-9999px';
-      }
-
-      // Rimuovi temporaneamente overflow/altezza fissa dalle tabelle scrollabili
-      // perché html2canvas non renderizza il contenuto dentro overflow:hidden
-      const scrollWrappers = data.querySelectorAll('.p-datatable-wrapper');
-      const savedStyles: { el: HTMLElement; overflow: string; maxHeight: string; height: string }[] = [];
-      scrollWrappers.forEach(el =>
-      {
-         const htmlEl = el as HTMLElement;
-         savedStyles.push({
-            el: htmlEl,
-            overflow: htmlEl.style.overflow,
-            maxHeight: htmlEl.style.maxHeight,
-            height: htmlEl.style.height
-         });
-         htmlEl.style.overflow = 'visible';
-         htmlEl.style.maxHeight = 'none';
-         htmlEl.style.height = 'auto';
-      });
-
-      // 1. Trasforma l'HTML in un canvas unico
-      const canvas = await html2canvas(data, {
-         scale: 2, // Aumenta la qualità per il PDF
-         useCORS: true,
-         logging: false,
-         backgroundColor: '#1e1e2e'  // Sfondo scuro come il tema, così il testo bianco è visibile
-      });
-
-      // Ripristina gli stili delle tabelle scrollabili
-      savedStyles.forEach(s =>
-      {
-         s.el.style.overflow = s.overflow;
-         s.el.style.maxHeight = s.maxHeight;
-         s.el.style.height = s.height;
-      });
-
-      // Ripristina la visibilità originale
-      if (wasHidden && tabPanel)
-      {
-         (tabPanel as HTMLElement).style.display = '';
-         (tabPanel as HTMLElement).style.position = '';
-         (tabPanel as HTMLElement).style.left = '';
-      }
-
-      const imgWidth = 297; // Larghezza A4 landscape in mm
-      const pageHeight = 210; // Altezza A4 landscape in mm
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
       const pdf = new jsPDF('l', 'mm', 'a4');
-      let position = 0;
+      const pageWidth = 297;
+      let y = 5;
 
-      // 2. Gestione multipagina (se il grafico è molto lungo)
-      let heightLeft = imgHeight;
-      const imgData = canvas.toDataURL('image/png');
-
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-
-      while (heightLeft >= 0)
+      // --- Helper per strip HTML, preservando i <br> come newline ---
+      const stripHtml = (html: string): string =>
       {
-         position = heightLeft - imgHeight;
+         const withNewlines = html.replace(/<br\s*\/?>/gi, '\n');
+         const tmp = document.createElement('div');
+         tmp.innerHTML = withNewlines;
+         return tmp.textContent || tmp.innerText || '';
+      };
+
+      // --- HEADER (compatto) ---
+      const titleText = `${this.jsonData.myTeam?.name ?? ''} - ${this.jsonData.oppoTeam?.name ?? ''}      ${this.jsonData.myTeam?.totali?.punti ?? 0} - ${this.jsonData.oppoTeam?.totali?.punti ?? 0}`;
+      pdf.setFontSize(14);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text(titleText, pageWidth / 2, y, { align: 'center' });
+      y += 6;
+
+      pdf.setFontSize(7);
+      pdf.setFont('helvetica', 'normal');
+      const headerLines = [
+         `Data: ${this.GetMatchDate()}`,
+         `Casa/Trasferta: ${this.GetMatchHome()} (${this.GetMatchLocation()})`,
+         `Giornata: ${this.GetMatchGiornata()} (${this.GetMatchNumber()})`,
+         `Arbitri: ${this.GetMatchArbitri()}`
+      ];
+      for (const line of headerLines)
+      {
+         pdf.text(line, 5, y);
+         y += 3.5;
+      }
+
+      if (this.jsonData?.match?.parziali)
+      {
+         const giocati = this.jsonData.match.parziali
+            .map((v: any, i: number) => ({ v: v.toString(), i }))
+            .filter((x: any) => x.v !== '');
+         const parzHead = ['', ...giocati.map((x: any) => `Q${x.i + 1}`)];
+         const parzRow = ['Parziali', ...giocati.map((x: any) => x.v)];
+         const progRow = this.jsonData?.match?.progressivi
+            ? ['Progressivi', ...giocati.map((x: any) => this.jsonData.match.progressivi[x.i].toString())]
+            : null;
+         const parzBody = progRow ? [parzRow, progRow] : [parzRow];
+         autoTable(pdf, {
+            startY: y,
+            head: [parzHead],
+            body: parzBody,
+            headStyles: { fillColor: [66, 45, 107], textColor: [255, 227, 120], fontStyle: 'bold', fontSize: 6, cellPadding: 1, halign: 'center' },
+            bodyStyles: { fontSize: 6, cellPadding: 1, halign: 'center' },
+            columnStyles: { 0: { halign: 'left', fontStyle: 'bold' } },
+            tableWidth: 100,
+            margin: { left: 5 },
+            theme: 'grid'
+         });
+         y = (pdf as any).lastAutoTable.finalY + 2;
+      }
+
+      // --- Colonne tabella ---
+      const columns = [
+         'Giocatore', 'Pti', 'Min.', 'TL', 'T2', 'T3', 'TdC',
+         'FF', 'FS', 'RD', 'RA', 'RTot', 'PP', 'PR', 'As', 'St.F', 'St.S',
+         'Q1', 'Q2', 'Q3', 'Q4', 'ET', 'PIR', 'OER', 'eFG%', 'TS%'
+      ];
+
+      // --- Helper per estrarre riga dati da un player ---
+      const playerRow = (p: any): string[] =>
+      {
+         const qStr = p.inQuintetto ? '* ' : '  ';
+         const cap = p.captain ? ' (C)' : '';
+         const name = `${qStr}${p.playNumber}) ${stripHtml(p.name)}${cap}`;
+         return [
+            name,
+            p.totali.punti?.toString() ?? '',
+            p.totali.min ?? '',
+            stripHtml(p.totali.tl),
+            stripHtml(p.totali.t2),
+            stripHtml(p.totali.t3),
+            stripHtml(p.totali.tdc),
+            p.totali.fFatti?.toString() ?? '',
+            p.totali.fSubiti?.toString() ?? '',
+            p.totali.rDif?.toString() ?? '',
+            p.totali.rAtt?.toString() ?? '',
+            p.totali.rTot?.toString() ?? '',
+            p.totali.pPerse?.toString() ?? '',
+            p.totali.pRecuperate?.toString() ?? '',
+            p.totali.assist?.toString() ?? '',
+            p.totali.stopFatte?.toString() ?? '',
+            p.totali.stopSubite?.toString() ?? '',
+            stripHtml(p.totali.q1?.dato ?? ''),
+            stripHtml(p.totali.q2?.dato ?? ''),
+            stripHtml(p.totali.q3?.dato ?? ''),
+            stripHtml(p.totali.q4?.dato ?? ''),
+            stripHtml(p.totali.et?.dato ?? ''),
+            p.totali.pir?.toString() ?? '',
+            p.totali.oer !== '' ? Number(p.totali.oer).toFixed(1) : '',
+            stripHtml(p.totali.eFGp?.toString() ?? ''),
+            stripHtml(p.totali.TSp?.toString() ?? '')
+         ];
+      };
+
+      // --- Helper per riga totali ---
+      const totalsRow = (myTeam: boolean): string[] =>
+      {
+         return [
+            myTeam ? `TOTALI ${this.jsonData.myTeam?.name ?? ''}` : `TOTALI ${this.jsonData.oppoTeam?.name ?? ''}`,
+            this.GetTotaliPunti(myTeam),
+            this.GetTotaliTempo(myTeam),
+            stripHtml(this.GetTotaliTL(myTeam)),
+            stripHtml(this.GetTotaliT2(myTeam)),
+            stripHtml(this.GetTotaliT3(myTeam)),
+            stripHtml(this.GetTotaliTC(myTeam)),
+            this.GetTotaliFFatti(myTeam),
+            this.GetTotaliFSubiti(myTeam),
+            this.GetTotaliRimbDifesa(myTeam),
+            this.GetTotaliRimbAttacco(myTeam),
+            this.GetTotaliRimbTot(myTeam),
+            this.GetTotaliPPerse(myTeam),
+            this.GetTotaliPRecuperate(myTeam),
+            this.GetTotaliAssist(myTeam),
+            this.GetTotaliStopFatte(myTeam),
+            this.GetTotaliStopSubite(myTeam),
+            this.GetTotaliQ1(myTeam),
+            this.GetTotaliQ2(myTeam),
+            this.GetTotaliQ3(myTeam),
+            this.GetTotaliQ4(myTeam),
+            this.GetTotaliET(myTeam),
+            this.GetTotaliPir(myTeam),
+            this.GetTotaliOer(myTeam),
+            this.GetTotalieFGp(myTeam),
+            this.GetTotaliTSp(myTeam)
+         ];
+      };
+
+      // Stili comuni compatti
+      const columnStyles: any = { 0: { cellWidth: 32, halign: 'left' } };
+      for (let c = 1; c < columns.length; c++)
+         columnStyles[c] = { cellWidth: 'auto', halign: 'center' };
+
+      const tableTheme: any = {
+         headStyles:   { fillColor: [66, 45, 107], textColor: [255, 227, 120], fontStyle: 'bold', fontSize: 7, cellPadding: 1.5, halign: 'center' },
+         bodyStyles:   { fontSize: 7, cellPadding: 1.5 },
+         footStyles:   { fillColor: [82, 65, 13], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 7, cellPadding: 1.5, halign: 'center' },
+         columnStyles: columnStyles,
+         alternateRowStyles: { fillColor: [240, 240, 250] },
+         margin: { left: 3, right: 3 }
+      };
+
+      // --- TABELLA MY TEAM ---
+      const myRows = this.myPlayers.map((p: any) => playerRow(p));
+      autoTable(pdf, {
+         startY: y,
+         head: [columns],
+         body: myRows,
+         foot: [totalsRow(true)],
+         ...tableTheme
+      });
+
+      y = (pdf as any).lastAutoTable.finalY + 1.5;
+
+      // Coach myTeam
+      pdf.setFontSize(6);
+      pdf.setFont('helvetica', 'normal');
+      if (this.jsonData.myTeam?.coach1)
+      {
+         pdf.text(`Head coach: ${this.jsonData.myTeam.coach1}`, 5, y);
+         y += 3;
+      }
+      if (this.jsonData.myTeam?.coach2)
+      {
+         pdf.text(`1° Assistente: ${this.jsonData.myTeam.coach2}`, 5, y);
+         y += 3;
+      }
+      y += 2;
+
+      // --- TABELLA OPPO TEAM ---
+      // Se non c'è abbastanza spazio, nuova pagina
+      if (y > 120)
+      {
          pdf.addPage();
-         pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-         heightLeft -= pageHeight;
+         y = 5;
+      }
+      const oppoRows = this.oppoPlayers.map((p: any) => playerRow(p));
+      autoTable(pdf, {
+         startY: y,
+         head: [columns],
+         body: oppoRows,
+         foot: [totalsRow(false)],
+         ...tableTheme
+      });
+
+      y = (pdf as any).lastAutoTable.finalY + 1.5;
+
+      // Coach oppoTeam
+      pdf.setFontSize(6);
+      pdf.setFont('helvetica', 'normal');
+      if (this.jsonData.oppoTeam?.coach1)
+      {
+         pdf.text(`Head coach: ${this.jsonData.oppoTeam.coach1}`, 5, y);
+         y += 3;
+      }
+      if (this.jsonData.oppoTeam?.coach2)
+      {
+         pdf.text(`1° Assistente: ${this.jsonData.oppoTeam.coach2}`, 5, y);
       }
 
       pdf.save('match-tabelle.pdf');
