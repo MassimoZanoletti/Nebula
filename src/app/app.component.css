@@ -98,3 +98,8 @@
 .match-header-value {
    font-weight: bold;
 }
+
+.chart-container {
+   position: relative;
+   height: calc(100vh - 420px);
+}

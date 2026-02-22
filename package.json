@@ -28,6 +28,8 @@
     "chartjs-plugin-annotation": "^3.1.0",
     "chartjs-plugin-datalabels": "^2.2.0",
     "fast-xml-parser": "^5.3.5",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.2.0",
     "ng2-charts": "^8.0.0",
     "primeflex": "^4.0.0",
     "primeicons": "^7.0.0",

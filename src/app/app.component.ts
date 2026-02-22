@@ -37,6 +37,8 @@ import { ChartModule } from 'primeng/chart';
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import {TabViewChangeEvent, TabViewModule} from 'primeng/tabview';
 import {color} from "chart.js/helpers";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 //
 
 
@@ -99,6 +101,7 @@ export class AppComponent implements OnInit
                { x: 2, y: 0.5, player: 'Corti' },
                { x: 5, y: 1.0, player: 'Corti' },
                { x: 7, y: 1.2, player: 'Zanoletti' },
+               { x: 7, y: 2.0, player: 'Mosca', errore: 2 },
                { x: 9, y: 2.5 },
                { x: 11, y: 3.5 },
                { x: 13, y: 4.0 },
@@ -116,7 +119,11 @@ export class AppComponent implements OnInit
             stepped: 'after',
             pointRadius: 6,
             pointBackgroundColor: '#ff7777',
-            pointBorderWidth: 2
+            pointBorderWidth: 2,
+            pointStyle: (context: any) => {
+               const value = context.dataset.data[context.dataIndex] as any;
+               return (value?.delta != undefined && value.delta > 0) ? 'circle' : 'cross';
+            }
          },
          {
             label: 'oppoteam',
@@ -130,7 +137,11 @@ export class AppComponent implements OnInit
             ],
             borderColor: 'rgb(0, 127, 0)',
             stepped: 'after',
-            pointRadius: 4
+            pointRadius: 6,
+            pointStyle: (context: any) => {
+               const value = context.dataset.data[context.dataIndex] as any;
+               return (value?.delta != undefined && value.delta > 0) ? 'circle' : 'cross';
+            }
          },
       ]
    };
@@ -148,6 +159,7 @@ export class AppComponent implements OnInit
             type: 'linear',
             position: 'top',
             beginAtZero: true,
+            min: 0,
             max: 100,
             title: { display: true, text: 'Punti' },
             ticks: {
@@ -807,8 +819,8 @@ export class AppComponent implements OnInit
                         duration: (i < 4) ? 600 : 300,
                         myTeamPunti1: myTeamPti,
                         oppoTeamPunti1: oppoTeamPti,
-                        myTeamPunti2: this.quarti[i].MyTeamCurrPoint,
-                        oppoTeamPunti2: this.quarti[i].OppTeamCurrPoint,
+                        myTeamPunti2: myTeamPti+this.quarti[i].MyTeamCurrPoint,
+                        oppoTeamPunti2: oppoTeamPti+this.quarti[i].OppTeamCurrPoint,
                         lineChartData: {
                            datasets: [
                               {
@@ -835,7 +847,19 @@ export class AppComponent implements OnInit
                                  stepped: 'after',
                                  pointRadius: 6,
                                  pointBackgroundColor: '#ff7777',
-                                 pointBorderWidth: 2
+                                 pointBorderWidth: 2,
+                                 pointStyle: (context: any) => {
+                                    const value = context.dataset.data[context.dataIndex] as any;
+                                    if (value?.delta != undefined)
+                                    {
+                                       if (value.delta > 0)
+                                          return 'circle';
+                                       else
+                                          return 'cross';
+                                    }
+                                    else
+                                       return 'circle';
+                                 }
                               },
                               {
                                  label: this.jsonData.oppoTeam.name,
@@ -849,12 +873,27 @@ export class AppComponent implements OnInit
                                  ],
                                  borderColor: 'rgb(0, 127, 0)',
                                  stepped: 'after',
-                                 pointRadius: 4
+                                 pointRadius: 6,
+                                 pointBackgroundColor: '#77ff77',
+                                 pointBorderWidth: 2,
+                                 pointStyle: (context: any) => {
+                                    const value = context.dataset.data[context.dataIndex] as any;
+                                    if (value?.delta != undefined)
+                                    {
+                                       if (value.delta > 0)
+                                          return 'circle';
+                                       else
+                                          return 'cross';
+                                    }
+                                    else
+                                       return 'circle';
+                                 }
                               },
                            ]
                         },
                         lineChartOptions: {
                            responsive: true,
+                           maintainAspectRatio: false,
                            indexAxis: 'y', // Mantiene la logica Y per il tempo
                            layout: {          // <-- stesso livello di scales e plugins
                               padding: {
@@ -865,7 +904,8 @@ export class AppComponent implements OnInit
                               x: {
                                  type: 'linear',
                                  position: 'top',
-                                 beginAtZero: true,
+                                 beginAtZero: (i == 0) ? true : false,
+                                 min: 0,
                                  max: 100,
                                  title: { display: true, text: 'Punti' },
                                  ticks: {
@@ -906,7 +946,14 @@ export class AppComponent implements OnInit
                                  // Poiché indexAxis è 'y', la label deve seguire la coordinata X (i punti)
                                  anchor: 'center',
                                  align: 'right',
-                                 offset: 8,
+                                 offset: (context) => {
+                                    const value = context.dataset.data[context.dataIndex] as any;
+                                    let ffst: number = 8;
+                                    if (value.sameTime != undefined)
+                                       if (value.sameTime === true)
+                                          ffst = 250;
+                                    return ffst;
+                                 },
                                  formatter: (value: any) => {
                                     // Mostriamo il valore X (i punti realizzati)
                                     let dlt:string = "";
@@ -919,7 +966,7 @@ export class AppComponent implements OnInit
                                        else if (value.delta == 1)
                                           dlt = `{+1️⃣}  ->  `;
                                     }
-                                    const pl: string = value.player ? `              ${value.player}` : '';
+                                    const pl: string = value.player ? `          ${value.player}` : '';
                                     const tmp: string = value.tempo ? `[${value.tempo}]  ` : "";
                                     return `${tmp}${dlt}${value.x}${pl}`;
                                  },
@@ -967,8 +1014,8 @@ export class AppComponent implements OnInit
                            }
                         }
                      });
-                  myTeamPti = this.quarti[i].MyTeamCurrPoint;
-                  oppoTeamPti = this.quarti[i].OppoTeamCurrPoint;
+                  myTeamPti += this.quarti[i].MyTeamCurrPoint;
+                  oppoTeamPti += this.quarti[i].OppTeamCurrPoint;
                }
             }
             /*
@@ -1009,6 +1056,7 @@ export class AppComponent implements OnInit
          }
       }
       await this.PopulateChartData();
+      setTimeout(async() => { await this.exportToPDF(); }, 5000);
    }
 
 
@@ -1220,21 +1268,29 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       let sPlr: string = "";
       let sPlr2: string = "";
       let min: number = 0;
+      let prevMin: number = -1;
       let elem: Array<string> = [];
       let punti: number = 0;
       let delta: number = 0;
       let arrQ: string[] = [];
+      let valoreMinimo: number = 0;
+      let sposta: boolean = false;
       for (let i=0;   i<this.quartiGiocati.length;   i++)
       {
          if (this.quartiGiocati[i].status > 1)
          {
             qrtNum = i+1;
+            valoreMinimo = this.quartiGiocati[i].myTeamPunti1;
+            if (this.quartiGiocati[i].oppoTeamPunti1 < valoreMinimo)
+               valoreMinimo = this.quartiGiocati[i].oppoTeamPunti1;
+            if (i > 0)
+               valoreMinimo -= 4;
             this.quartiGiocati[i].lineChartData.datasets[0].label = this.jsonData.myTeam.name;
             this.quartiGiocati[i].lineChartData.datasets[1].label = this.jsonData.oppoTeam.name;
             this.quartiGiocati[i].lineChartData.datasets[0].data = [] as any;
-            this.quartiGiocati[i].lineChartData.datasets[0].data.push ({ x: 0, y: 0 });
+            this.quartiGiocati[i].lineChartData.datasets[0].data.push ({ x: this.quartiGiocati[i].myTeamPunti1, y: 0 });
             this.quartiGiocati[i].lineChartData.datasets[1].data = [] as any;
-            this.quartiGiocati[i].lineChartData.datasets[1].data.push ({ x: 0, y: 0 });
+            this.quartiGiocati[i].lineChartData.datasets[1].data.push ({ x: this.quartiGiocati[i].oppoTeamPunti1, y: 0 });
             arrQ = this.eventsData.split (/\r?\n/).filter (sss => sss.startsWith ("Q"+qrtNum.toString()));
             arrQ = arrQ.filter (sss => sss.includes ("|MyTeam  |", 0));
             sss = "";
@@ -1243,17 +1299,19 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
             sPlr = "";
             sPlr2 = "";
             min = 0;
+            prevMin = -1;
             elem = [];
-            punti = 0;
+            punti = this.quartiGiocati[i].myTeamPunti1;
             delta = 0;
-            for (let i=0;   i<arrQ.length;   i++)
+            for (let j=0;   j<arrQ.length;   j++)
             {
                // 0  0     0          1        2  9
                // 0  3     9          9        7  9
                // Q1|09:40|T2 Ok     |MyTeam  |26|(Corti M.)|[]|SAR-LUS: 2-0|343;81
-               sss = arrQ[i].trim();
+               sss = arrQ[j].trim();
                try
                {
+                  sposta = false;
                   if ((sss.includes("|TL Ok", 0)) ||
                      (sss.includes("|T2 Ok", 0)) ||
                      (sss.includes("|T3 Ok", 0)))
@@ -1270,6 +1328,11 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                      sSec = elem[1].substring(3, 5);
                      sPlr = elem[5];
                      min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
+                     if (min == prevMin)
+                     {
+                        min = 10 - ((60 * (Number (sMin)) + (-2 + Number (sSec))) / 60);
+                        sposta = true;
+                     }
                      this.quartiGiocati[i].lineChartData.datasets[0].data.push (
                         {
                            x: punti,
@@ -1277,8 +1340,11 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                            player: sPlr,
                            delta: delta,
                            punti: punti,
-                           tempo: elem[1]
+                           tempo: elem[1],
+                           sameTime: sposta
                         } as any);
+                     prevMin = min;
+                     sposta = false;
                   }
                   if ((sss.includes("|T2 no", 0)) ||
                      (sss.includes("|T3 no", 0)))
@@ -1288,14 +1354,22 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                      sSec = elem[1].substring(3, 5);
                      sPlr = elem[5];
                      min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
+                     if (min == prevMin)
+                     {
+                        min = 10 - ((60 * (Number (sMin)) + (-2 + Number (sSec))) / 60);
+                        sposta = true;
+                     }
                      this.quartiGiocati[i].lineChartData.datasets[0].data.push (
                         {
                            x: punti,
                            y: min,
                            delta: 0,
                            player: sPlr,
-                           tempo: elem[1]
+                           tempo: elem[1],
+                           sameTime: sposta
                         } as any);
+                     prevMin = min;
+                     sposta = false;
                   }
                }
                catch (e)
@@ -1305,12 +1379,15 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
             }
             this.quartiGiocati[i].lineChartData.datasets[0].data.push ({ x: punti, y: 10 });
             if (this.quartiGiocati[i].lineChartOptions.scales)
-               (this.quartiGiocati[i].lineChartOptions.scales!['x'] as any).max = punti+6;
+            {
+               (this.quartiGiocati[i].lineChartOptions.scales!['x'] as any).min = valoreMinimo;
+               (this.quartiGiocati[i].lineChartOptions.scales!['x'] as any).max = punti + 6;
+            }
             //
             (this.quartiGiocati[i].lineChartOptions.plugins as any).annotation.annotations = {};
-            for (let i=0;   i<arrQ.length;   i++)
+            for (let j=0;   j<arrQ.length;   j++)
             {
-               sss = arrQ[i].trim();
+               sss = arrQ[j].trim();
                try
                {
                   if (sss.includes("|Sostit ", 0))
@@ -1324,17 +1401,24 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                      sPlr = await this.GetMyTeamPlayer (sPlr);
                      sPlr2 = await this.GetMyTeamPlayer (sPlr2);
                      min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
+                     if (min == prevMin)
+                     {
+                        min = 10 - ((60 * (Number (sMin)) + (-10 + Number (sSec))) / 60);
+                        sposta = true;
+                     }
                      const annotations = (this.quartiGiocati[i].lineChartOptions.plugins as any).annotation.annotations;
-                     const key = `Sostit_myteam_${i}_${sMin}_${sSec}`;
+                     const key = `Sostit_myteam_${j}_${sMin}_${sSec}`;
                      annotations[key] = {
                         type:            'label',
-                        xValue:          0,
+                        xValue:          (sposta) ? (valoreMinimo+3) : valoreMinimo,
                         yValue:          min,
                         position:        { x: 'start', y: 'center' },
                         backgroundColor: '#00ffff',
                         content:         `[${sMin}:${sSec}] in ${sPlr2} ⇄ out ${sPlr}`,
                         font:            { size: 13, weight: 'bold' },
                      };
+                     prevMin = min;
+                     sposta = false;
                   }
                   if (sss.includes("|FFatto ", 0))
                   {
@@ -1343,17 +1427,20 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                      sSec = elem[1].substring(3, 5);
                      sPlr = elem[5];
                      min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
+                     if (min == prevMin)
+                        min = 10-((60*(Number(sMin))+(-2+Number(sSec)))/60);
                      const annotations = (this.quartiGiocati[i].lineChartOptions.plugins as any).annotation.annotations;
-                     const key = `fallo_myteam_${i}_${sMin}_${sSec}`;
+                     const key = `fallo_myteam_${j}_${sMin}_${sSec}`;
                      annotations[key] = {
                         type:            'label',
-                        xValue:          0,
+                        xValue:          valoreMinimo,
                         yValue:          min,
                         position:        { x: 'start', y: 'center' },
                         backgroundColor: '#ffaa00',
                         content:         `[${sMin}:${sSec}] Fallo ${sPlr}`,
                         font:            { size: 13, weight: 'bold' },
                      };
+                     prevMin = min;
                   }
                }
                catch (e)
@@ -1402,15 +1489,17 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
             sSec = "";
             sPlr = "";
             min = 0;
+            prevMin = -1;
             elem = [];
-            punti = 0;
+            punti = this.quartiGiocati[i].oppoTeamPunti1;;
             delta = 0;
-            for (let i=0;   i<arrQ.length;   i++)
+            for (let j=0;   j<arrQ.length;   j++)
             {
                // 0  0     0          1        2  9
                // 0  3     9          9        7  9
                // Q1|09:40|T2 Ok     |MyTeam  |26|(Corti M.)|[]|SAR-LUS: 2-0|343;81
-               sss = arrQ[i].trim();
+               sss = arrQ[j].trim();
+               sposta = false;
                try
                {
                   if ((sss.includes("|TL Ok", 0)) ||
@@ -1429,13 +1518,21 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                      sSec = elem[1].substring(3, 5);
                      sPlr = elem[5];
                      min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
+                     if (min == prevMin)
+                     {
+                        min = 10 - ((60 * (Number (sMin)) + (-2 + Number (sSec))) / 60);
+                        sposta = true;
+                     }
+                     prevMin = min;
                      this.quartiGiocati[i].lineChartData.datasets[1].data.push ({
                                                                         x: punti,
                                                                         y: min,
                                                                         player: sPlr,
                                                                         punti: punti,
-                                                                        tempo: elem[1]
+                                                                        tempo: elem[1],
+                                                                        sameTime: sposta
                                                                      } as any);
+                     sposta = false;
                   }
                }
                catch (e)
@@ -1447,7 +1544,8 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
             //
             if (this.quartiGiocati[i].lineChartOptions.scales)
             {
-               if ((this.quartiGiocati[i].lineChartOptions.scales!['x'] as any).max < punti)
+               (this.quartiGiocati[i].lineChartOptions.scales!['x'] as any).min = valoreMinimo;
+               if ((this.quartiGiocati[i].lineChartOptions.scales!['x'] as any).max < (punti+6))
                   (this.quartiGiocati[i].lineChartOptions.scales!['x'] as any).max = punti+6;
             }
          }
@@ -2479,5 +2577,89 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       return result;
    }
 
+
+   async exportToPDF()
+   {
+      const data = document.getElementById('div-tab-tabelle');
+      if (!data)
+         return;
+
+      // Il pannello del tab potrebbe essere nascosto (display:none).
+      // Rendiamo visibile temporaneamente il contenitore del tab per html2canvas.
+      const tabPanel = data.closest('.p-tabview-panel');
+      const wasHidden = tabPanel && getComputedStyle(tabPanel).display === 'none';
+      if (wasHidden && tabPanel)
+      {
+         (tabPanel as HTMLElement).style.display = 'block';
+         (tabPanel as HTMLElement).style.position = 'absolute';
+         (tabPanel as HTMLElement).style.left = '-9999px';
+      }
+
+      // Rimuovi temporaneamente overflow/altezza fissa dalle tabelle scrollabili
+      // perché html2canvas non renderizza il contenuto dentro overflow:hidden
+      const scrollWrappers = data.querySelectorAll('.p-datatable-wrapper');
+      const savedStyles: { el: HTMLElement; overflow: string; maxHeight: string; height: string }[] = [];
+      scrollWrappers.forEach(el =>
+      {
+         const htmlEl = el as HTMLElement;
+         savedStyles.push({
+            el: htmlEl,
+            overflow: htmlEl.style.overflow,
+            maxHeight: htmlEl.style.maxHeight,
+            height: htmlEl.style.height
+         });
+         htmlEl.style.overflow = 'visible';
+         htmlEl.style.maxHeight = 'none';
+         htmlEl.style.height = 'auto';
+      });
+
+      // 1. Trasforma l'HTML in un canvas unico
+      const canvas = await html2canvas(data, {
+         scale: 2, // Aumenta la qualità per il PDF
+         useCORS: true,
+         logging: false,
+         backgroundColor: '#1e1e2e'  // Sfondo scuro come il tema, così il testo bianco è visibile
+      });
+
+      // Ripristina gli stili delle tabelle scrollabili
+      savedStyles.forEach(s =>
+      {
+         s.el.style.overflow = s.overflow;
+         s.el.style.maxHeight = s.maxHeight;
+         s.el.style.height = s.height;
+      });
+
+      // Ripristina la visibilità originale
+      if (wasHidden && tabPanel)
+      {
+         (tabPanel as HTMLElement).style.display = '';
+         (tabPanel as HTMLElement).style.position = '';
+         (tabPanel as HTMLElement).style.left = '';
+      }
+
+      const imgWidth = 297; // Larghezza A4 landscape in mm
+      const pageHeight = 210; // Altezza A4 landscape in mm
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      const pdf = new jsPDF('l', 'mm', 'a4');
+      let position = 0;
+
+      // 2. Gestione multipagina (se il grafico è molto lungo)
+      let heightLeft = imgHeight;
+      const imgData = canvas.toDataURL('image/png');
+
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0)
+      {
+         position = heightLeft - imgHeight;
+         pdf.addPage();
+         pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+         heightLeft -= pageHeight;
+      }
+
+      pdf.save('match-tabelle.pdf');
+   }
 
 }

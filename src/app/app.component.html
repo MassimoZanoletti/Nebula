@@ -104,8 +104,6 @@
                </div>
             </div>
          </div>
-      </div>
-
       <p-divider />
 
       <div id="div-tbl-myteam"
@@ -343,6 +341,7 @@
          <span class="match-header-label">1° Assistente:</span>
          <span class="match-header-value">{{jsonData.oppoTeam?.coach2}}</span>
       </div>
+      </div><!-- chiusura div-tab-tabelle -->
    </p-tabPanel>
 
    <p-tabPanel id="tab-grafici"
@@ -375,20 +374,29 @@
             <p-tabPanel *ngFor="let quarto of quartiGiocati"
                         [header]="quarto.titolo">
 
+               <div id="div-match-quarter"
+                    class="match-header-data-grid">
+                  <span class="match-header-label">Punteggio:</span>
+                  <span class="match-header-value">({{quarto.myTeamPunti1}}-{{quarto.oppoTeamPunti1}})  ==>>  ({{quarto.myTeamPunti2}}-{{quarto.oppoTeamPunti2}})</span>
+
+                  <span class="match-header-label">Parziale:</span>
+                  <span class="match-header-value">({{quarto.myTeamPunti2-quarto.myTeamPunti1}}-{{quarto.oppoTeamPunti2-quarto.oppoTeamPunti1}})</span>
+
+               </div>
+
                <p-divider />
 
+               <div class="chart-container">
                <canvas baseChart
                        [data]="quarto.lineChartData"
                        [options]="quarto.lineChartOptions"
                        [type]="'line'">
                </canvas>
+               </div>
 
             </p-tabPanel>
          </p-tabView>
       </div>
    </p-tabPanel>
 </p-tabView>
-
-
-
 
