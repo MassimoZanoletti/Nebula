@@ -67,6 +67,11 @@
 
    <p-tabPanel id="tab-tabelle"
                header="Tabelle">
+      <div id="div-tab-tabelle-comandi"
+            style="margin-top: 5px; margin-bottom: 5px;">
+         <p-button id="btn-tabelle-pdf-export"
+            (onClick)="BtnPdfExportTabelle()">Esporta in PDF</p-button>
+      </div>
       <div id="div-tab-tabelle">
          <div id="div-match-header"
               class="match-header-data-grid">
@@ -101,6 +106,38 @@
                <span class="row-label">Progressivi:</span>
                <div class="values-grid" [style.--cols]="8">
                   <span class="value" *ngFor="let v of jsonData?.match?.progressivi!">{{ v }}</span>
+               </div>
+            </div>
+
+            <!-- Header + dati riga Vantaggio -->
+            <div class="row">
+               <span class="row-label">Max vantaggio:</span>
+               <div class="values-grid" [style.--cols]="8">
+                  <span class="value" *ngFor="let v of quartiGiocati!">{{ v.maxVantaggio }}</span>
+               </div>
+            </div>
+
+            <!-- Header + dati riga Svantaggio -->
+            <div class="row">
+               <span class="row-label">Max svantaggio:</span>
+               <div class="values-grid" [style.--cols]="8">
+                  <span class="value" *ngFor="let v of quartiGiocati!">{{ v.maxPerdita }}</span>
+               </div>
+            </div>
+
+            <!-- Header + dati riga Svantaggio -->
+            <div class="row">
+               <span class="row-label">Max senza segnare:</span>
+               <div class="values-grid" [style.--cols]="8">
+                  <span class="value" *ngFor="let v of quartiGiocati!">{{ v.maxSenzaSegnareStr }}</span>
+               </div>
+            </div>
+
+            <!-- Header + dati riga Svantaggio -->
+            <div class="row">
+               <span class="row-label">Max senza subire:</span>
+               <div class="values-grid" [style.--cols]="8">
+                  <span class="value" *ngFor="let v of quartiGiocati!">{{ v.maxSenzaSubireStr }}</span>
                </div>
             </div>
          </div>
@@ -346,6 +383,11 @@
 
    <p-tabPanel id="tab-grafici"
                header="Grafici">
+      <div id="div-tab-grafici-comandi"
+           style="margin-top: 5px; margin-bottom: 5px;">
+         <p-button id="btn-grafici-pdf-export"
+                   (onClick)="BtnPdfExportGrafici()">Esporta grafici in PDF</p-button>
+      </div>
       <div id="div-grafici"
            *ngIf="partitaOk">
 

@@ -57,7 +57,7 @@
    }
 
    .row-label {
-      width: 6rem;          /* larghezza fissa per le label, così le colonne sono allineate  */
+      width: 10rem;          /* larghezza fissa per le label, così le colonne sono allineate  */
       font-weight: bold;
       flex-shrink: 0;
    }

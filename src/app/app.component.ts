@@ -59,6 +59,12 @@ export type TQuartoGiocato =
    oppoTeamPunti1: number;
    oppoTeamPunti2: number;
    duration: number;
+   maxVantaggio: number;
+   maxPerdita: number;
+   maxSenzaSegnare: number;
+   maxSenzaSegnareStr: string;
+   maxSenzaSubire: number;
+   maxSenzaSubireStr: string;
 }
 
 @Component({
@@ -821,6 +827,12 @@ export class AppComponent implements OnInit
                         oppoTeamPunti1: oppoTeamPti,
                         myTeamPunti2: myTeamPti+this.quarti[i].MyTeamCurrPoint,
                         oppoTeamPunti2: oppoTeamPti+this.quarti[i].OppTeamCurrPoint,
+                        maxVantaggio: 0,
+                        maxPerdita: 0,
+                        maxSenzaSegnare: 0,
+                        maxSenzaSegnareStr: "",
+                        maxSenzaSubire: 0,
+                        maxSenzaSubireStr: "",
                         lineChartData: {
                            datasets: [
                               {
@@ -1056,7 +1068,6 @@ export class AppComponent implements OnInit
          }
       }
       await this.PopulateChartData();
-      setTimeout(() => { this.exportToPDF(); }, 5000);
    }
 
 
@@ -1275,6 +1286,17 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       let arrQ: string[] = [];
       let valoreMinimo: number = 0;
       let sposta: boolean = false;
+      let vantaggio: number = 0;
+      let perdita: number = 0;
+      let currMy: number = 0;
+      let currOppo: number = 0;
+      let diff: number = 0;
+      let lastMinFatto: number = 0;
+      let minFatto: number = 0;
+      let diffFatto: number = 0;
+      let lastMinSubito: number = 0;
+      let minSubito: number = 0;
+      let diffSubito: number = 0;
       for (let i=0;   i<this.quartiGiocati.length;   i++)
       {
          if (this.quartiGiocati[i].status > 1)
@@ -1541,6 +1563,73 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                }
             }
             this.quartiGiocati[i].lineChartData.datasets[1].data.push ({ x: punti, y: 10 });
+            //
+            arrQ = this.eventsData.split(/\r?\n/).filter(sss =>
+                                                            sss.startsWith("Q" + qrtNum.toString()) &&
+                                                            (sss.includes("|TL Ok") || sss.includes("|T2 Ok") || sss.includes("|T3 Ok")));
+            vantaggio = 0;
+            perdita = 0;
+            lastMinFatto = 600;
+            minFatto = 600;
+            lastMinSubito = 600;
+            minSubito = 600;
+            if (this.quartiGiocati[i].myTeamPunti1 >= this.quartiGiocati[i].oppoTeamPunti1)
+               vantaggio = this.quartiGiocati[i].myTeamPunti1 - this.quartiGiocati[i].oppoTeamPunti1;
+            else
+               perdita = this.quartiGiocati[i].myTeamPunti1 - this.quartiGiocati[i].oppoTeamPunti1;
+            currMy = this.quartiGiocati[i].myTeamPunti1;
+            currOppo = this.quartiGiocati[i].oppoTeamPunti1;
+            for (let j=0;   j<arrQ.length;   j++)
+            {
+               sss = arrQ[j].trim();
+               if (sss.includes("|MyTeam"))
+               {
+                  if (sss.includes("|TL"))
+                     currMy++;
+                  if (sss.includes("|T2"))
+                     currMy += 2;
+                  if (sss.includes("|T3"))
+                     currMy += 3;
+                  sMin = sss.substring(3, 5);
+                  sSec = sss.substring(6, 8);
+                  minFatto = 60*(Number(sMin)) + (Number(sSec));
+                  diffFatto = lastMinFatto - minFatto;
+                  lastMinFatto = minFatto;
+               }
+               else
+               {
+                  if (sss.includes("|TL"))
+                     currOppo++;
+                  if (sss.includes("|T2"))
+                     currOppo += 2;
+                  if (sss.includes("|T3"))
+                     currOppo += 3;
+                  sMin = sss.substring(3, 5);
+                  sSec = sss.substring(6, 8);
+                  minSubito = 60*(Number(sMin)) + (Number(sSec));
+                  diffSubito = lastMinSubito - minSubito;
+                  lastMinSubito = minSubito;
+               }
+               diff = currMy - currOppo;
+               if (diff > 0)
+               {
+                  if (diff > vantaggio)
+                     vantaggio = diff;
+               }
+               else if (diff < 0)
+               {
+                  if (diff < perdita)
+                     perdita = diff;
+               }
+               if (diffFatto > this.quartiGiocati[i].maxSenzaSegnare)
+                  this.quartiGiocati[i].maxSenzaSegnare = diffFatto;
+               if (diffSubito > this.quartiGiocati[i].maxSenzaSubire)
+                  this.quartiGiocati[i].maxSenzaSubire = diffSubito;
+            }
+            this.quartiGiocati[i].maxVantaggio = vantaggio;
+            this.quartiGiocati[i].maxPerdita = perdita;
+            this.quartiGiocati[i].maxSenzaSegnareStr = `${Math.floor(this.quartiGiocati[i].maxSenzaSegnare / 60).toString().padStart(2, '0')}:${(this.quartiGiocati[i].maxSenzaSegnare % 60).toString().padStart(2, '0')}`;
+            this.quartiGiocati[i].maxSenzaSubireStr = `${Math.floor(this.quartiGiocati[i].maxSenzaSubire / 60).toString().padStart(2, '0')}:${(this.quartiGiocati[i].maxSenzaSubire % 60).toString().padStart(2, '0')}`;
             //
             if (this.quartiGiocati[i].lineChartOptions.scales)
             {
@@ -2578,7 +2667,18 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
    }
 
 
-   exportToPDF()
+   BtnPdfExportTabelle()
+   {
+      this.PDFExport_Tabelle();
+   }
+
+
+   BtnPdfExportGrafici()
+   {
+   }
+
+
+   PDFExport_Tabelle()
    {
       const pdf = new jsPDF('l', 'mm', 'a4');
       const pageWidth = 297;
@@ -2624,7 +2724,11 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
          const progRow = this.jsonData?.match?.progressivi
             ? ['Progressivi', ...giocati.map((x: any) => this.jsonData.match.progressivi[x.i].toString())]
             : null;
-         const parzBody = progRow ? [parzRow, progRow] : [parzRow];
+         const maxVantRow = ['Max vantaggio', ...giocati.map((x: any) => this.quartiGiocati[x.i]?.maxVantaggio?.toString() ?? '')];
+         const maxSvantRow = ['Max svantaggio', ...giocati.map((x: any) => this.quartiGiocati[x.i]?.maxPerdita?.toString() ?? '')];
+         const maxSenzaSegnare = ['Max senza segnare', ...giocati.map((x: any) => this.quartiGiocati[x.i]?.maxSenzaSegnareStr?.toString() ?? '')];
+         const maxSenzaSubire = ['Max senza subire', ...giocati.map((x: any) => this.quartiGiocati[x.i]?.maxSenzaSubireStr?.toString() ?? '')];
+         const parzBody = [...(progRow ? [parzRow, progRow] : [parzRow]), maxVantRow, maxSvantRow, maxSenzaSegnare, maxSenzaSubire];
          autoTable(pdf, {
             startY: y,
             head: [parzHead],
@@ -2739,7 +2843,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
          ...tableTheme
       });
 
-      y = (pdf as any).lastAutoTable.finalY + 1.5;
+      y = (pdf as any).lastAutoTable.finalY + 5;
 
       // Coach myTeam
       pdf.setFontSize(6);
@@ -2772,7 +2876,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
          ...tableTheme
       });
 
-      y = (pdf as any).lastAutoTable.finalY + 1.5;
+      y = (pdf as any).lastAutoTable.finalY + 5;
 
       // Coach oppoTeam
       pdf.setFontSize(6);
@@ -2787,7 +2891,8 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
          pdf.text(`1° Assistente: ${this.jsonData.oppoTeam.coach2}`, 5, y);
       }
 
-      pdf.save('match-tabelle.pdf');
+      const pdfName: string = `${this.jsonData.match.title}-tabelle`;
+      pdf.save(pdfName);
    }
 
 }
