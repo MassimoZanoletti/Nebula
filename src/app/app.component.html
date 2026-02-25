@@ -412,7 +412,7 @@
             </p>
          </div>
 
-         <p-tabView id="tab-grafici">
+         <p-tabView id="tab-grafici" [(activeIndex)]="activeGraficiTabIndex">
             <p-tabPanel *ngFor="let quarto of quartiGiocati"
                         [header]="quarto.titolo">
 
@@ -429,11 +429,11 @@
                <p-divider />
 
                <div class="chart-container">
-               <canvas baseChart
-                       [data]="quarto.lineChartData"
-                       [options]="quarto.lineChartOptions"
-                       [type]="'line'">
-               </canvas>
+                  <canvas baseChart
+                          [data]="quarto.lineChartData"
+                          [options]="quarto.lineChartOptions"
+                          [type]="'line'">
+                  </canvas>
                </div>
 
             </p-tabPanel>

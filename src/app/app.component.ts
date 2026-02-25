@@ -268,7 +268,8 @@ export class AppComponent implements OnInit
    };
 
    title = 'nebula';
-   tabActiveIndex: number =0;
+   tabActiveIndex: number = 0;
+   activeGraficiTabIndex: number = 0;
    partitaOk: boolean = false;
 
    tooltip_Pir_Title: string  = globs.tooltip_Pir_Title;
@@ -2673,8 +2674,83 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
    }
 
 
-   BtnPdfExportGrafici()
+   async BtnPdfExportGrafici()
    {
+      const pdf = new jsPDF('l', 'mm', 'a4');
+      const pageWidth = 297;
+      const pageHeight = 210;
+      const margin = 10;
+
+      const titleText = `${this.jsonData.myTeam?.name ?? ''} - ${this.jsonData.oppoTeam?.name ?? ''}      ${this.jsonData.myTeam?.totali?.punti ?? 0} - ${this.jsonData.oppoTeam?.totali?.punti ?? 0}`;
+
+      const originalTab = this.activeGraficiTabIndex;
+
+      for (let i = 0; i < this.quartiGiocati.length; i++)
+      {
+         // Attiva il tab e aspetta che Chart.js renda il canvas visibile
+         this.activeGraficiTabIndex = i;
+         this.cdr.detectChanges();
+         await new Promise(resolve => setTimeout(resolve, 200));
+
+         const tabViewEl = document.getElementById('tab-grafici');
+         if (!tabViewEl) continue;
+
+         // Prendi tutti i canvas dopo lo switch (lazy rendering potrebbe aggiungerne)
+         const canvases = tabViewEl.querySelectorAll('canvas');
+         const canvas = canvases[i] as HTMLCanvasElement | undefined;
+         const chart = canvas ? Chart.getChart(canvas) : null;
+
+         // Forza resize per ri-renderizzare correttamente dopo visibilità
+         if (chart)
+         {
+            chart.resize();
+            await new Promise(resolve => setTimeout(resolve, 100));
+         }
+
+         const quarto = this.quartiGiocati[i];
+
+         if (i > 0) pdf.addPage();
+
+         // Intestazione partita
+         let y = 10;
+         pdf.setFontSize(13);
+         pdf.setFont('helvetica', 'bold');
+         pdf.text(titleText, pageWidth / 2, y, { align: 'center' });
+         y += 7;
+
+         // Titolo quarto
+         pdf.setFontSize(11);
+         pdf.text(quarto?.titolo ?? `Quarto ${i + 1}`, pageWidth / 2, y, { align: 'center' });
+         y += 6;
+
+         // Sotto-intestazione: Punteggio e Parziale
+         pdf.setFontSize(9);
+         pdf.setFont('helvetica', 'normal');
+         const punteggio = `Punteggio: (${quarto.myTeamPunti1}-${quarto.oppoTeamPunti1})  ==>>  (${quarto.myTeamPunti2}-${quarto.oppoTeamPunti2})`;
+         const parziale  = `Parziale: (${quarto.myTeamPunti2 - quarto.myTeamPunti1}-${quarto.oppoTeamPunti2 - quarto.oppoTeamPunti1})`;
+         pdf.text(punteggio, pageWidth / 2, y, { align: 'center' });
+         y += 5;
+         pdf.text(parziale, pageWidth / 2, y, { align: 'center' });
+         y += 5;
+
+         // Grafico
+         if (chart)
+         {
+            const imgData = chart.toBase64Image('image/png', 1);
+            if (imgData && imgData.startsWith('data:image/png'))
+            {
+               const imgH = pageHeight - y - margin;
+               pdf.addImage(imgData, 'PNG', margin, y, pageWidth - 2 * margin, imgH);
+            }
+         }
+      }
+
+      // Ripristina il tab originale
+      this.activeGraficiTabIndex = originalTab;
+      this.cdr.detectChanges();
+
+      const fileName = `grafici_${this.jsonData.myTeam?.name ?? 'squadra'}.pdf`;
+      pdf.save(fileName);
    }
 
 
