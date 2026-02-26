@@ -7,11 +7,11 @@
    <p-tabPanel id="tab-partite"
                header="Partite">
       <div class="card">
-         <p-table
+         <p-table id="tbl-matches"
             class="custom-header-table"
             styleClass="p-datatable-gridlines"
             [scrollable]="true"
-            scrollHeight="600px"
+            scrollHeight="calc(100vh - 150px)"
             [value]="matchList"
             dataKey="id"
             [tableStyle]="{ 'min-width': '50rem' }">
@@ -43,6 +43,7 @@
          </p-table>
       </div>
 
+      <!--
       <div>
          <textarea
             rows="20"
@@ -63,6 +64,7 @@
                   [(ngModel)]="jsonDataStr">
          </textarea>0
       </div>
+      -->
    </p-tabPanel>
 
    <p-tabPanel id="tab-tabelle"

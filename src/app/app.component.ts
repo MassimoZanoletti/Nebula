@@ -219,7 +219,7 @@ export class AppComponent implements OnInit
                   else if (value.delta == 1)
                      dlt = `{+1️⃣}  ->  `;
                }
-               const pl: string = value.player ? `              ${value.player}` : '';
+               const pl: string = value.player ? `           ${value.player}` : '';
                const tmp: string = value.tempo ? `[${value.tempo}]  ` : "";
                return `${tmp}${dlt}${value.x}${pl}`;
             },
@@ -326,6 +326,7 @@ export class AppComponent implements OnInit
 
    async BtnSelezionaMatch (item: any)
    {
+      const labelOffset: number = 220;
       let response: any;
       let respQuarti: any;
 
@@ -945,6 +946,17 @@ export class AppComponent implements OnInit
                               // --- CONFIGURAZIONE DATALABELS ---
                               datalabels: {
                                  backgroundColor: (context) => context.dataset.borderColor as string,
+                                 borderColor: (context) => {
+                                    const value = context.dataset.data[context.dataIndex] as any;
+                                    let clr: string = '#aaaaaa';
+                                    if (value.delta != undefined)
+                                    {
+                                       if (value.delta == 0)
+                                          clr = 'black';
+                                    }
+                                    return clr;
+                                 },
+                                 borderWidth: 2,
                                  borderRadius: 4,
                                  color: (context) => {
                                     const value = context.dataset.data[context.dataIndex] as any;
@@ -960,18 +972,56 @@ export class AppComponent implements OnInit
                                     weight: 'bold',
                                     size: 14
                                  },
-                                 padding: 4,
+                                 /*
+                                 padding: (context: any) => {
+                                    const value = context.dataset.data[context.dataIndex] as any;
+                                    if (value.sameTime != undefined)
+                                    {
+                                       // Extra padding in alto sposta il testo verso il basso
+                                       // mantenendo il left-edge allineato (align rimane 'right')
+                                       const dy = Math.trunc(value.sameTime / 2) * 10;
+                                       if (dy > 0)
+                                          return { top: 4 + 2 * dy, bottom: 4, left: 4, right: 4 };
+                                    }
+                                    return 4;
+                                 },
+                                 */
                                  // Poiché indexAxis è 'y', la label deve seguire la coordinata X (i punti)
-                                 anchor: 'center',
-                                 align: 'right',
-                                 offset: (context) => {
+                                 anchor: 'start',
+                                 offset: (context: any) => {
+                                    const value = context.dataset.data[context.dataIndex] as any;
+                                    if (value.sameTime != undefined)
+                                    {
+                                       const dx = 8+(((Number(value.sameTime)) % 2) * labelOffset);
+                                       const dy = Math.trunc(value.sameTime / 2) * 10;
+                                       return Math.sqrt(dx * dx + dy * dy);
+                                    }
+                                    return 8;
+                                    /*
                                     const value = context.dataset.data[context.dataIndex] as any;
                                     let ffst: number = 8;
                                     if (value.sameTime != undefined)
-                                       if (value.sameTime === true)
-                                          ffst = 250;
+                                    {
+                                       ffst = ((Number(value.sameTime)) % 2) * labelOffset;
+                                    }
                                     return ffst;
+                                    */
                                  },
+                                 align: (context: any) =>
+                                              {
+                                                 const value = context.dataset.data[context.dataIndex] as any;
+                                                 if (value.sameTime != undefined)
+                                                 {
+                                                    const dx = 8+(((Number (value.sameTime)) % 2) * labelOffset);
+                                                    const dy = Math.trunc (value.sameTime / 2) * 10;
+                                                    let rrr: number = Math.atan2(dy,dx);
+                                                    rrr = rrr*180;
+                                                    let theta: number = rrr/3.1415;
+                                                    theta = 1*theta;
+                                                    return theta;
+                                                 }
+                                                 return 0;
+                                              },
                                  formatter: (value: any) => {
                                     // Mostriamo il valore X (i punti realizzati)
                                     let dlt:string = "";
@@ -983,8 +1033,32 @@ export class AppComponent implements OnInit
                                           dlt = `{+2️⃣}  ->  `;
                                        else if (value.delta == 1)
                                           dlt = `{+1️⃣}  ->  `;
+                                       else if (value.delta <= 0)
+                                       {
+                                          if (value.tipo)
+                                          {
+                                             if (value.tipo == "TL")
+                                                dlt = `xTL  `;
+                                             if (value.tipo == "T2")
+                                                dlt = `xT2  `;
+                                             if (value.tipo == "T3")
+                                                dlt = `xT3  `;
+                                          }
+                                       }
                                     }
-                                    const pl: string = value.player ? `          ${value.player}` : '';
+                                    else
+                                    {
+                                       if (value.tipo)
+                                       {
+                                          if (value.tipo == "TL")
+                                             dlt = `xTL  `;
+                                          if (value.tipo == "T2")
+                                             dlt = `xT2  `;
+                                          if (value.tipo == "T3")
+                                             dlt = `xT3  `;
+                                       }
+                                    }
+                                    const pl: string = value.player ? `       ${value.player}` : '';
                                     const tmp: string = value.tempo ? `[${value.tempo}]  ` : "";
                                     return `${tmp}${dlt}${value.x}${pl}`;
                                  },
@@ -1291,7 +1365,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       let delta: number = 0;
       let arrQ: string[] = [];
       let valoreMinimo: number = 0;
-      let sposta: boolean = false;
+      let sposta: number = 0;
       let vantaggio: number = 0;
       let perdita: number = 0;
       let currMy: number = 0;
@@ -1303,6 +1377,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       let lastMinSubito: number = 0;
       let minSubito: number = 0;
       let diffSubito: number = 0;
+      let tipo: string = "";
       for (let i=0;   i<this.quartiGiocati.length;   i++)
       {
          if (this.quartiGiocati[i].status > 1)
@@ -1339,7 +1414,6 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                sss = arrQ[j].trim();
                try
                {
-                  sposta = false;
                   if ((sss.includes("|TL Ok", 0)) ||
                      (sss.includes("|T2 Ok", 0)) ||
                      (sss.includes("|T3 Ok", 0)))
@@ -1357,10 +1431,9 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                      sPlr = elem[5];
                      min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
                      if (min == prevMin)
-                     {
-                        min = 10 - ((60 * (Number (sMin)) + (-2 + Number (sSec))) / 60);
-                        sposta = true;
-                     }
+                        sposta++;
+                     else
+                        sposta = 0;
                      this.quartiGiocati[i].lineChartData.datasets[0].data.push (
                         {
                            x: punti,
@@ -1372,21 +1445,26 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                            sameTime: sposta
                         } as any);
                      prevMin = min;
-                     sposta = false;
                   }
-                  if ((sss.includes("|T2 no", 0)) ||
-                     (sss.includes("|T3 no", 0)))
+                  if ((sss.includes("|TL no", 0)) ||
+                      (sss.includes("|T2 no", 0)) ||
+                      (sss.includes("|T3 no", 0)))
                   {
+                     if (sss.includes("|TL no", 0))
+                        tipo = "TL";
+                     if (sss.includes("|T2 no", 0))
+                        tipo = "T2";
+                     if (sss.includes("|T3 no", 0))
+                        tipo = "T3";
                      elem = sss.split("|");
                      sMin = elem[1].substring(0, 2);
                      sSec = elem[1].substring(3, 5);
                      sPlr = elem[5];
                      min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
                      if (min == prevMin)
-                     {
-                        min = 10 - ((60 * (Number (sMin)) + (-2 + Number (sSec))) / 60);
-                        sposta = true;
-                     }
+                        sposta++;
+                     else
+                        sposta = 0;
                      this.quartiGiocati[i].lineChartData.datasets[0].data.push (
                         {
                            x: punti,
@@ -1394,10 +1472,10 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                            delta: 0,
                            player: sPlr,
                            tempo: elem[1],
-                           sameTime: sposta
+                           sameTime: sposta,
+                           tipo: tipo
                         } as any);
                      prevMin = min;
-                     sposta = false;
                   }
                }
                catch (e)
@@ -1430,23 +1508,21 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                      sPlr2 = await this.GetMyTeamPlayer (sPlr2);
                      min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
                      if (min == prevMin)
-                     {
-                        min = 10 - ((60 * (Number (sMin)) + (-10 + Number (sSec))) / 60);
-                        sposta = true;
-                     }
+                        sposta++;
+                     else
+                        sposta = 0;
                      const annotations = (this.quartiGiocati[i].lineChartOptions.plugins as any).annotation.annotations;
                      const key = `Sostit_myteam_${j}_${sMin}_${sSec}`;
                      annotations[key] = {
                         type:            'label',
-                        xValue:          (sposta) ? (valoreMinimo+3) : valoreMinimo,
-                        yValue:          min,
+                        xValue:          await this.CalcHorizPosition(valoreMinimo, sposta),
+                        yValue:          await this.CalcVertPosition(min, sposta),
                         position:        { x: 'start', y: 'center' },
                         backgroundColor: '#00ffff',
                         content:         `[${sMin}:${sSec}] in ${sPlr2} ⇄ out ${sPlr}`,
                         font:            { size: 13, weight: 'bold' },
                      };
                      prevMin = min;
-                     sposta = false;
                   }
                   if (sss.includes("|FFatto ", 0))
                   {
@@ -1456,13 +1532,15 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                      sPlr = elem[5];
                      min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
                      if (min == prevMin)
-                        min = 10-((60*(Number(sMin))+(-2+Number(sSec)))/60);
+                        sposta++;
+                     else
+                        sposta = 0;
                      const annotations = (this.quartiGiocati[i].lineChartOptions.plugins as any).annotation.annotations;
                      const key = `fallo_myteam_${j}_${sMin}_${sSec}`;
                      annotations[key] = {
                         type:            'label',
-                        xValue:          valoreMinimo,
-                        yValue:          min,
+                        xValue:          await this.CalcHorizPosition(valoreMinimo, sposta),
+                        yValue:          await this.CalcVertPosition(min, sposta),
                         position:        { x: 'start', y: 'center' },
                         backgroundColor: '#ffaa00',
                         content:         `[${sMin}:${sSec}] Fallo ${sPlr}`,
@@ -1521,13 +1599,13 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
             elem = [];
             punti = this.quartiGiocati[i].oppoTeamPunti1;;
             delta = 0;
+            sposta = 0;
             for (let j=0;   j<arrQ.length;   j++)
             {
                // 0  0     0          1        2  9
                // 0  3     9          9        7  9
                // Q1|09:40|T2 Ok     |MyTeam  |26|(Corti M.)|[]|SAR-LUS: 2-0|343;81
                sss = arrQ[j].trim();
-               sposta = false;
                try
                {
                   if ((sss.includes("|TL Ok", 0)) ||
@@ -1547,10 +1625,9 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                      sPlr = elem[5];
                      min = 10-((60*(Number(sMin))+(Number(sSec)))/60);
                      if (min == prevMin)
-                     {
-                        min = 10 - ((60 * (Number (sMin)) + (-2 + Number (sSec))) / 60);
-                        sposta = true;
-                     }
+                        sposta++;
+                     else
+                        sposta = 0;
                      prevMin = min;
                      this.quartiGiocati[i].lineChartData.datasets[1].data.push ({
                                                                         x: punti,
@@ -1560,7 +1637,6 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                                                                         tempo: elem[1],
                                                                         sameTime: sposta
                                                                      } as any);
-                     sposta = false;
                   }
                }
                catch (e)
@@ -1651,6 +1727,28 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       setTimeout (() => {this.chart?.update();}, 1000);
       setTimeout (() => {this.chart?.update();}, 2500);
       setTimeout (() => {this.chart?.update();}, 4000);
+   }
+
+
+   async CalcVertPosition (min: number,
+                           sposta: number): Promise<number>
+   {
+      let result: number = min;
+      let step: number = Math.trunc(sposta/2);
+
+      result = min-(step*2);
+      return result;
+   }
+
+
+   async CalcHorizPosition (pos: number,
+                            sposta: number): Promise<number>
+   {
+      let result: number = pos;
+      let step: number = sposta % 2;
+
+      result = pos+(step*3);
+      return result;
    }
 
 
