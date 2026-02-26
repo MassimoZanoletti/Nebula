@@ -12,6 +12,9 @@ export namespace globs
    export const tooltip_Efgp_Desc: string    = 'Indice di efficienza nel tiro dal campo (senza liberi), con peso maggiore per tiri da 3.';
    export const tooltip_Tsp_Title: string    = 'True Shooting perc.';
    export const tooltip_Tsp_Desc: string     = 'Indice di efficienza realizzativa considerando anche i liberi.';
+
+   //
+   export let startingPath: string = "/";
 }
 
 
