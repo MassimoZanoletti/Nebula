@@ -292,6 +292,9 @@ export class AppComponent implements OnInit
    myPlayers: any = [];
    oppoPlayers: any = [];
 
+   private robotoRegularB64: string = '';
+   private robotoBoldB64: string = '';
+
 
    constructor (private dbServ: DbServService,
                 private cdr: ChangeDetectorRef,
@@ -302,6 +305,8 @@ export class AppComponent implements OnInit
    async ngOnInit()
    {
       let response: any;
+
+      await this.loadRobotoFonts();
 
       response = await lastValueFrom(this.dbServ.GetMatchHeaderList());
       if (response)
@@ -2749,16 +2754,60 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       this.activeGraficiTabIndex = originalTab;
       this.cdr.detectChanges();
 
-      const fileName = `grafici_${this.jsonData.myTeam?.name ?? 'squadra'}.pdf`;
-      pdf.save(fileName);
+      const pdfName: string = `${this.jsonData.match.title}-grafici`;
+      pdf.save(pdfName);
    }
 
+
+   private async loadRobotoFonts(): Promise<void>
+   {
+      const toBase64 = (buffer: ArrayBuffer): string =>
+      {
+         const bytes = new Uint8Array(buffer);
+         let binary = '';
+         bytes.forEach(b => binary += String.fromCharCode(b));
+         return btoa(binary);
+      };
+      try
+      {
+         const [regular, bold] = await Promise.all([
+            fetch('assets/fonts/Roboto-Regular.ttf').then(r => r.arrayBuffer()),
+            fetch('assets/fonts/Roboto-Bold.ttf').then(r => r.arrayBuffer()),
+         ]);
+         this.robotoRegularB64 = toBase64(regular);
+         this.robotoBoldB64 = toBase64(bold);
+      }
+      catch (e)
+      {
+         console.warn('Font Roboto non trovati in assets/fonts/, uso helvetica come fallback');
+      }
+   }
+
+   private registerRobotoFont(pdf: jsPDF): void
+   {
+      if (this.robotoRegularB64)
+      {
+         pdf.addFileToVFS('Roboto-Regular.ttf', this.robotoRegularB64);
+         pdf.addFont('Roboto-Regular.ttf', 'Roboto', 'normal');
+      }
+      if (this.robotoBoldB64)
+      {
+         pdf.addFileToVFS('Roboto-Bold.ttf', this.robotoBoldB64);
+         pdf.addFont('Roboto-Bold.ttf', 'Roboto', 'bold');
+      }
+   }
 
    PDFExport_Tabelle()
    {
       const pdf = new jsPDF('l', 'mm', 'a4');
       const pageWidth = 297;
       let y = 5;
+
+      /*
+      this.registerRobotoFont(pdf);
+      const pdfFont = this.robotoRegularB64 ? 'Roboto' : 'helvetica';
+      */
+      const pdfFont = 'helvetica';
 
       // --- Helper per strip HTML, preservando i <br> come newline ---
       const stripHtml = (html: string): string =>
@@ -2772,12 +2821,12 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       // --- HEADER (compatto) ---
       const titleText = `${this.jsonData.myTeam?.name ?? ''} - ${this.jsonData.oppoTeam?.name ?? ''}      ${this.jsonData.myTeam?.totali?.punti ?? 0} - ${this.jsonData.oppoTeam?.totali?.punti ?? 0}`;
       pdf.setFontSize(14);
-      pdf.setFont('helvetica', 'bold');
+      pdf.setFont(pdfFont, 'bold');
       pdf.text(titleText, pageWidth / 2, y, { align: 'center' });
       y += 6;
 
-      pdf.setFontSize(7);
-      pdf.setFont('helvetica', 'normal');
+      pdf.setFontSize(8);
+      pdf.setFont(pdfFont, 'normal');
       const headerLines = [
          `Data: ${this.GetMatchDate()}`,
          `Casa/Trasferta: ${this.GetMatchHome()} (${this.GetMatchLocation()})`,
@@ -2809,8 +2858,9 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
             startY: y,
             head: [parzHead],
             body: parzBody,
+            styles: { font: pdfFont },
             headStyles: { fillColor: [66, 45, 107], textColor: [255, 227, 120], fontStyle: 'bold', fontSize: 6, cellPadding: 1, halign: 'center' },
-            bodyStyles: { fontSize: 6, cellPadding: 1, halign: 'center' },
+            bodyStyles: { fontSize: 8, cellPadding: 1, halign: 'center' },
             columnStyles: { 0: { halign: 'left', fontStyle: 'bold' } },
             tableWidth: 100,
             margin: { left: 5 },
@@ -2900,13 +2950,40 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       for (let c = 1; c < columns.length; c++)
          columnStyles[c] = { cellWidth: 'auto', halign: 'center' };
 
-      const tableTheme: any = {
+      // Linee verticali di separazione (bordo destro della colonna indicata):
+      // Giocatore|Pti=0, Pti|Min.=1, Min.|TL=2, TdC|FF=6, FS|RD=8,
+      // RTot|PP=11, PR|As=13, As|St.F=14, St.S|Q1=16, ET|PIR=21
+      const separatorCols = new Set([0, 1, 2, 6, 8, 11, 13, 14, 16, 21]);
+      const didDrawCellSeparator = (data: any) =>
+      {
+         if (separatorCols.has(data.column.index))
+         {
+            const { x, y, width, height } = data.cell;
+            pdf.setDrawColor(60, 60, 60);
+            pdf.setLineWidth(0.4);
+            pdf.line(x + width, y, x + width, y + height);
+         }
+      };
+
+      const tableMyTheme: any = {
+         styles:       { font: pdfFont },
          headStyles:   { fillColor: [66, 45, 107], textColor: [255, 227, 120], fontStyle: 'bold', fontSize: 7, cellPadding: 1.5, halign: 'center' },
-         bodyStyles:   { fontSize: 7, cellPadding: 1.5 },
+         bodyStyles:   { fontSize: 8, cellPadding: 1.0, fontStyle: 'bold' },
          footStyles:   { fillColor: [82, 65, 13], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 7, cellPadding: 1.5, halign: 'center' },
          columnStyles: columnStyles,
          alternateRowStyles: { fillColor: [240, 240, 250] },
-         margin: { left: 3, right: 3 }
+         margin: { left: 3, right: 3 },
+         didDrawCell: didDrawCellSeparator
+      };
+      const tableOppoTheme: any = {
+         styles:       { font: pdfFont },
+         headStyles:   { fillColor: [66, 45, 107], textColor: [255, 227, 120], fontStyle: 'bold', fontSize: 7, cellPadding: 1.5, halign: 'center' },
+         bodyStyles:   { fontSize: 8, cellPadding: 1.0, fontStyle: 'bold' },
+         footStyles:   { fillColor: [82, 65, 13], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 7, cellPadding: 1.5, halign: 'center' },
+         columnStyles: columnStyles,
+         alternateRowStyles: { fillColor: [240, 240, 250] },
+         margin: { left: 3, right: 3 },
+         didDrawCell: didDrawCellSeparator
       };
 
       // --- TABELLA MY TEAM ---
@@ -2916,14 +2993,14 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
          head: [columns],
          body: myRows,
          foot: [totalsRow(true)],
-         ...tableTheme
+         ...tableMyTheme
       });
 
       y = (pdf as any).lastAutoTable.finalY + 5;
 
       // Coach myTeam
-      pdf.setFontSize(6);
-      pdf.setFont('helvetica', 'normal');
+      pdf.setFontSize(8);
+      pdf.setFont(pdfFont, 'normal');
       if (this.jsonData.myTeam?.coach1)
       {
          pdf.text(`Head coach: ${this.jsonData.myTeam.coach1}`, 5, y);
@@ -2949,14 +3026,14 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
          head: [columns],
          body: oppoRows,
          foot: [totalsRow(false)],
-         ...tableTheme
+         ...tableOppoTheme
       });
 
       y = (pdf as any).lastAutoTable.finalY + 5;
 
       // Coach oppoTeam
-      pdf.setFontSize(6);
-      pdf.setFont('helvetica', 'normal');
+      pdf.setFontSize(8);
+      pdf.setFont(pdfFont, 'normal');
       if (this.jsonData.oppoTeam?.coach1)
       {
          pdf.text(`Head coach: ${this.jsonData.oppoTeam.coach1}`, 5, y);
