@@ -11,7 +11,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class DbServService
 {
 
-   public wsIp: string = "localhost";
+   public wsIp: string = "127.0.0.1";
    public wsPort: number = 3210;
 
    constructor(private http: HttpClient)
