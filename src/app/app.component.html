@@ -1,4 +1,7 @@
-
+<div id="dev-titolo" style="display: flex; align-items: center;">
+   <img src="assets/Nebula%20logo.png" style="max-height: 80px;" alt="Nebula logo">
+   <span style="margin-left: 20px;">versione: {{ appVersion }} by Massimo Zanoletti</span>
+</div>
 
 <p-tabView id="tab-main"
            [(activeIndex)]="tabActiveIndex"
@@ -386,9 +389,25 @@
    <p-tabPanel id="tab-grafici"
                header="Grafici">
       <div id="div-tab-grafici-comandi"
-           style="margin-top: 5px; margin-bottom: 5px;">
+           style="margin-top: 5px; margin-bottom: 5px; display: flex; align-items: center; gap: 20px;">
          <p-button id="btn-grafici-pdf-export"
                    (onClick)="BtnPdfExportGrafici()">Esporta grafici in PDF</p-button>
+         <div style="display: flex; align-items: center; gap: 8px;">
+            <p-inputSwitch [(ngModel)]="showFalli" (onChange)="OnToggleFalli()"></p-inputSwitch>
+            <label>Falli</label>
+         </div>
+         <div style="display: flex; align-items: center; gap: 8px;">
+            <p-inputSwitch [(ngModel)]="showSostit" (onChange)="OnToggleSostit()"></p-inputSwitch>
+            <label>Sostituzioni</label>
+         </div>
+         <div style="display: flex; align-items: center; gap: 8px;">
+            <p-inputSwitch [(ngModel)]="showMyTeam" (onChange)="OnToggleMyTeam()"></p-inputSwitch>
+            <label>My Team</label>
+         </div>
+         <div style="display: flex; align-items: center; gap: 8px;">
+            <p-inputSwitch [(ngModel)]="showOppoTeam" (onChange)="OnToggleOppoTeam()"></p-inputSwitch>
+            <label>Opponent Team</label>
+         </div>
       </div>
       <div id="div-grafici"
            *ngIf="partitaOk">

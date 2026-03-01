@@ -101,5 +101,6 @@
 
 .chart-container {
    position: relative;
-   height: calc(100vh - 490px);
+   height: max(2000px, calc(100vh - 490px));
 }
+

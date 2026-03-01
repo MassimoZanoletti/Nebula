@@ -1,7 +1,9 @@
 import {
    ChangeDetectorRef,
    Component,
-   OnInit} from '@angular/core';
+   OnInit,
+   QueryList,
+   ViewChildren} from '@angular/core';
 import { NgIf,
    NgFor} from "@angular/common";
 import { RouterOutlet } from '@angular/router';
@@ -32,6 +34,7 @@ import { Chart } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { ViewChild } from '@angular/core';
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { ChartModule } from 'primeng/chart';
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
@@ -39,6 +42,7 @@ import {TabViewChangeEvent, TabViewModule} from 'primeng/tabview';
 import {color} from "chart.js/helpers";
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import packageJson from '../../package.json';
 //
 
 
@@ -89,6 +93,7 @@ export type TQuartoGiocato =
       BaseChartDirective,
       TabViewModule,
       DividerModule,
+      InputSwitchModule,
    ],
   providers: [provideCharts(withDefaultRegisterables())],
   templateUrl: './app.component.html',
@@ -97,6 +102,9 @@ export type TQuartoGiocato =
 export class AppComponent implements OnInit
 {
    @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+   @ViewChildren(BaseChartDirective) charts?: QueryList<BaseChartDirective>;
+
+   appVersion = packageJson.version;
 
    public lineChartData: ChartConfiguration<'line'>['data'] = {
       datasets: [
@@ -271,6 +279,10 @@ export class AppComponent implements OnInit
    tabActiveIndex: number = 0;
    activeGraficiTabIndex: number = 0;
    partitaOk: boolean = false;
+   showFalli: boolean = true;
+   showSostit: boolean = true;
+   showMyTeam: boolean = true;
+   showOppoTeam: boolean = true;
 
    tooltip_Pir_Title: string  = globs.tooltip_Pir_Title;
    tooltip_Pir_Desc: string   = globs.tooltip_Pir_Desc;
@@ -321,6 +333,34 @@ export class AppComponent implements OnInit
    async HandleTabChange (event: TabViewChangeEvent)
    {
       this.tabActiveIndex = event.index;
+   }
+
+
+   OnToggleFalli(): void
+   {
+      this.charts?.forEach(c => c.chart?.update());
+   }
+
+
+   OnToggleSostit(): void
+   {
+      this.charts?.forEach(c => c.chart?.update());
+   }
+
+
+   OnToggleMyTeam(): void
+   {
+      for (const q of this.quartiGiocati)
+         (q.lineChartData.datasets[0] as any).hidden = !this.showMyTeam;
+      this.charts?.forEach(c => c.chart?.update());
+   }
+
+
+   OnToggleOppoTeam(): void
+   {
+      for (const q of this.quartiGiocati)
+         (q.lineChartData.datasets[1] as any).hidden = !this.showOppoTeam;
+      this.charts?.forEach(c => c.chart?.update());
    }
 
 
@@ -1521,6 +1561,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                         backgroundColor: '#00ffff',
                         content:         `[${sMin}:${sSec}] in ${sPlr2} ⇄ out ${sPlr}`,
                         font:            { size: 13, weight: 'bold' },
+                        display:         () => this.showSostit,
                      };
                      prevMin = min;
                   }
@@ -1545,6 +1586,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                         backgroundColor: '#ffaa00',
                         content:         `[${sMin}:${sSec}] Fallo ${sPlr}`,
                         font:            { size: 13, weight: 'bold' },
+                        display:         () => this.showFalli,
                      };
                      prevMin = min;
                   }
@@ -2779,9 +2821,9 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
 
    async BtnPdfExportGrafici()
    {
-      const pdf = new jsPDF('l', 'mm', 'a4');
+      const pdf = new jsPDF('p', 'mm', 'a3');
       const pageWidth = 297;
-      const pageHeight = 210;
+      const pageHeight = 420;
       const margin = 10;
 
       const titleText = `${this.jsonData.myTeam?.name ?? ''} - ${this.jsonData.oppoTeam?.name ?? ''}      ${this.jsonData.myTeam?.totali?.punti ?? 0} - ${this.jsonData.oppoTeam?.totali?.punti ?? 0}`;
@@ -2958,7 +3000,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
             body: parzBody,
             styles: { font: pdfFont },
             headStyles: { fillColor: [66, 45, 107], textColor: [255, 227, 120], fontStyle: 'bold', fontSize: 6, cellPadding: 1, halign: 'center' },
-            bodyStyles: { fontSize: 8, cellPadding: 1, halign: 'center' },
+            bodyStyles: { fontSize: 9, fontStyle: 'bold', cellPadding: 1, halign: 'center' },
             columnStyles: { 0: { halign: 'left', fontStyle: 'bold' } },
             tableWidth: 100,
             margin: { left: 5 },
