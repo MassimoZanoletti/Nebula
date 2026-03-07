@@ -1010,7 +1010,7 @@ export class AppComponent implements OnInit
                                  },
                                  font: {
                                     weight: 'bold',
-                                    size: 14
+                                    size: 16
                                  },
                                  /*
                                  padding: (context: any) => {
@@ -1558,9 +1558,12 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                         xValue:          await this.CalcHorizPosition(valoreMinimo, sposta),
                         yValue:          await this.CalcVertPosition(min, sposta),
                         position:        { x: 'start', y: 'center' },
-                        backgroundColor: '#00ffff',
+                        backgroundColor: '#86ffff',
+                        borderColor:     '#005959',
+                        borderWidth:      2,
+                        borderRadius:     4,
                         content:         `[${sMin}:${sSec}] in ${sPlr2} ⇄ out ${sPlr}`,
-                        font:            { size: 13, weight: 'bold' },
+                        font:            { size: 14, weight: 'bold' },
                         display:         () => this.showSostit,
                      };
                      prevMin = min;
@@ -1583,9 +1586,12 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                         xValue:          await this.CalcHorizPosition(valoreMinimo, sposta),
                         yValue:          await this.CalcVertPosition(min, sposta),
                         position:        { x: 'start', y: 'center' },
-                        backgroundColor: '#ffaa00',
+                        backgroundColor: '#ffd075',
+                        borderColor:     '#593d00',
+                        borderWidth:      2,
+                        borderRadius:     4,
                         content:         `[${sMin}:${sSec}] Fallo ${sPlr}`,
-                        font:            { size: 13, weight: 'bold' },
+                        font:            { size: 14, weight: 'bold' },
                         display:         () => this.showFalli,
                      };
                      prevMin = min;
@@ -1750,6 +1756,10 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
                if (diffSubito > this.quartiGiocati[i].maxSenzaSubire)
                   this.quartiGiocati[i].maxSenzaSubire = diffSubito;
             }
+            if (minFatto > this.quartiGiocati[i].maxSenzaSegnare)
+               this.quartiGiocati[i].maxSenzaSegnare = minFatto;
+            if (minSubito > this.quartiGiocati[i].maxSenzaSubire)
+               this.quartiGiocati[i].maxSenzaSubire = minSubito;
             this.quartiGiocati[i].maxVantaggio = vantaggio;
             this.quartiGiocati[i].maxPerdita = perdita;
             this.quartiGiocati[i].maxSenzaSegnareStr = `${Math.floor(this.quartiGiocati[i].maxSenzaSegnare / 60).toString().padStart(2, '0')}:${(this.quartiGiocati[i].maxSenzaSegnare % 60).toString().padStart(2, '0')}`;
@@ -2858,20 +2868,20 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
 
          // Intestazione partita
          let y = 10;
-         pdf.setFontSize(13);
+         pdf.setFontSize(16);
          pdf.setFont('helvetica', 'bold');
          pdf.text(titleText, pageWidth / 2, y, { align: 'center' });
          y += 7;
 
          // Titolo quarto
-         pdf.setFontSize(11);
+         pdf.setFontSize(12);
          pdf.text(quarto?.titolo ?? `Quarto ${i + 1}`, pageWidth / 2, y, { align: 'center' });
          y += 6;
 
          // Sotto-intestazione: Punteggio e Parziale
-         pdf.setFontSize(9);
-         pdf.setFont('helvetica', 'normal');
-         const punteggio = `Punteggio: (${quarto.myTeamPunti1}-${quarto.oppoTeamPunti1})  ==>>  (${quarto.myTeamPunti2}-${quarto.oppoTeamPunti2})`;
+         pdf.setFontSize(10);
+         pdf.setFont('helvetica', 'bold');
+         const punteggio = `Punteggio: (${quarto.myTeamPunti1}-${quarto.oppoTeamPunti1})    ======>>    (${quarto.myTeamPunti2}-${quarto.oppoTeamPunti2})`;
          const parziale  = `Parziale: (${quarto.myTeamPunti2 - quarto.myTeamPunti1}-${quarto.oppoTeamPunti2 - quarto.oppoTeamPunti1})`;
          pdf.text(punteggio, pageWidth / 2, y, { align: 'center' });
          y += 5;
@@ -2960,12 +2970,12 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
 
       // --- HEADER (compatto) ---
       const titleText = `${this.jsonData.myTeam?.name ?? ''} - ${this.jsonData.oppoTeam?.name ?? ''}      ${this.jsonData.myTeam?.totali?.punti ?? 0} - ${this.jsonData.oppoTeam?.totali?.punti ?? 0}`;
-      pdf.setFontSize(14);
+      pdf.setFontSize(20);
       pdf.setFont(pdfFont, 'bold');
       pdf.text(titleText, pageWidth / 2, y, { align: 'center' });
       y += 6;
 
-      pdf.setFontSize(8);
+      pdf.setFontSize(10);
       pdf.setFont(pdfFont, 'normal');
       const headerLines = [
          `Data: ${this.GetMatchDate()}`,
@@ -2999,7 +3009,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
             head: [parzHead],
             body: parzBody,
             styles: { font: pdfFont },
-            headStyles: { fillColor: [66, 45, 107], textColor: [255, 227, 120], fontStyle: 'bold', fontSize: 6, cellPadding: 1, halign: 'center' },
+            headStyles: { fillColor: [66, 45, 107], textColor: [255, 227, 120], fontStyle: 'bold', fontSize: 10, cellPadding: 0.5, halign: 'center' },
             bodyStyles: { fontSize: 9, fontStyle: 'bold', cellPadding: 1, halign: 'center' },
             columnStyles: { 0: { halign: 'left', fontStyle: 'bold' } },
             tableWidth: 100,
@@ -3105,11 +3115,13 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
          }
       };
 
+      const fntSize: number = 10;
+      const celPad: number = 0.4;
       const tableMyTheme: any = {
          styles:       { font: pdfFont },
-         headStyles:   { fillColor: [66, 45, 107], textColor: [255, 227, 120], fontStyle: 'bold', fontSize: 7, cellPadding: 1.5, halign: 'center' },
-         bodyStyles:   { fontSize: 8, cellPadding: 1.0, fontStyle: 'bold' },
-         footStyles:   { fillColor: [82, 65, 13], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 7, cellPadding: 1.5, halign: 'center' },
+         headStyles:   { fillColor: [255, 190, 0], textColor: [0, 0, 0], fontStyle: 'bold', fontSize: fntSize, cellPadding: celPad, halign: 'center' },
+         bodyStyles:   { fontSize: fntSize, cellPadding: celPad, fontStyle: 'bold' },
+         footStyles:   { fillColor: [186, 102, 255], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: fntSize, cellPadding: celPad, halign: 'center' },
          columnStyles: columnStyles,
          alternateRowStyles: { fillColor: [240, 240, 250] },
          margin: { left: 3, right: 3 },
@@ -3117,9 +3129,9 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       };
       const tableOppoTheme: any = {
          styles:       { font: pdfFont },
-         headStyles:   { fillColor: [66, 45, 107], textColor: [255, 227, 120], fontStyle: 'bold', fontSize: 7, cellPadding: 1.5, halign: 'center' },
-         bodyStyles:   { fontSize: 8, cellPadding: 1.0, fontStyle: 'bold' },
-         footStyles:   { fillColor: [82, 65, 13], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 7, cellPadding: 1.5, halign: 'center' },
+         headStyles:   { fillColor: [255, 190, 0], textColor: [0, 0, 0], fontStyle: 'bold', fontSize: fntSize, cellPadding: celPad, halign: 'center' },
+         bodyStyles:   { fontSize: fntSize, cellPadding: celPad, fontStyle: 'bold' },
+         footStyles:   { fillColor: [186, 102, 255], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: fntSize, cellPadding: celPad, halign: 'center' },
          columnStyles: columnStyles,
          alternateRowStyles: { fillColor: [240, 240, 250] },
          margin: { left: 3, right: 3 },
@@ -3139,7 +3151,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       y = (pdf as any).lastAutoTable.finalY + 5;
 
       // Coach myTeam
-      pdf.setFontSize(8);
+      pdf.setFontSize(9);
       pdf.setFont(pdfFont, 'normal');
       if (this.jsonData.myTeam?.coach1)
       {
@@ -3172,7 +3184,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       y = (pdf as any).lastAutoTable.finalY + 5;
 
       // Coach oppoTeam
-      pdf.setFontSize(8);
+      pdf.setFontSize(9);
       pdf.setFont(pdfFont, 'normal');
       if (this.jsonData.oppoTeam?.coach1)
       {

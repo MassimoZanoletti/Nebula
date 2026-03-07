@@ -1,6 +1,6 @@
 {
   "name": "nebula",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "scripts": {
     "app-clean": ".bin\\app-clean.bat",
     "app-clean-all": ".bin\\app-clean-all.bat",

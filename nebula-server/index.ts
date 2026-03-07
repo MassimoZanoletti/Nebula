@@ -4,6 +4,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import ADODB from 'node-adodb';
 import * as dotenv from 'dotenv';
+import packageJson from "./package.json";
 
 // 1. Caricamento configurazione
 dotenv.config();
@@ -22,6 +23,13 @@ const db = ADODB.open(connectionString);
 app.use(cors());
 app.use(express.json());
 
+
+console.log("");
+let srvVersion: string = packageJson.version;
+let srvName: string = packageJson.name;
+console.log(` ${srvName} versione ${srvVersion}`);
+console.log("");
+
 // --- ENDPOINT (rimangono invariati rispetto ai precedenti) ---
 
 app.get('/api/data/:tableName', async (req: Request, res: Response) => {
@@ -31,8 +39,10 @@ app.get('/api/data/:tableName', async (req: Request, res: Response) => {
   try
   {
     const query = `SELECT * FROM [${tableName}]`; // Le parentesi quadre aiutano con nomi tabella con spazi
+     console.log(`Query: '${query}'`);
     const data = await db.query(query);
-    res.json(data);
+     //console.log(`${JSON.stringify(data,null,-1)}\n`);
+     res.json(data);
   }
   catch (error)
   {
@@ -47,7 +57,9 @@ app.get('/api/matchlist/:tableName', async (req: Request, res: Response) => {
 
   try {
     const query = `SELECT ID, Title, PlayDate FROM [${tableName}]`; // Le parentesi quadre aiutano con nomi tabella con spazi
+     console.log(`Query: '${query}'`);
     const data = await db.query(query);
+     //console.log(`${JSON.stringify(data,null,-1)}\n`);
     res.json(data);
   } catch (error) {
     // ... gestione errore
@@ -65,7 +77,9 @@ app.get('/api/data/:tableName/:id', async (req: Request, res: Response) => {
   try {
     // Esecuzione query
     const query = `SELECT * FROM [${tableName}] WHERE id = ${id}`;
+     console.log(`Query: '${query}'`);
     const data: any[] = await db.query(query);
+     //console.log(`${JSON.stringify(data,null,-1)}\n`);
 
     if (data && data.length > 0) {
       const record = data[0];
@@ -144,7 +158,9 @@ app.get('/api/quarters/:matchid', async (req: Request, res: Response) =>
    try
    {
       const query = `SELECT * FROM [${tableName}] WHERE LinkMatchHeader = ${mId}`; // Le parentesi quadre aiutano con nomi tabella con spazi
+      console.log(`Query: '${query}'`);
       const data = await db.query(query);
+      //console.log(`${JSON.stringify(data,null,-1)}\n`);
       res.json(data);
    }
    catch (error)
