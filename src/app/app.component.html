@@ -440,10 +440,10 @@
                <div id="div-match-quarter"
                     class="match-header-data-grid">
                   <span class="match-header-label">Punteggio:</span>
-                  <span class="match-header-value">({{quarto.myTeamPunti1}}-{{quarto.oppoTeamPunti1}})    ======>>    ({{quarto.myTeamPunti2}}-{{quarto.oppoTeamPunti2}})</span>
+                  <span class="match-header-value">{{GetQuartoPunteggio(quarto)}}</span>
 
                   <span class="match-header-label">Parziale:</span>
-                  <span class="match-header-value">({{quarto.myTeamPunti2-quarto.myTeamPunti1}}-{{quarto.oppoTeamPunti2-quarto.oppoTeamPunti1}})</span>
+                  <span class="match-header-value">{{GetQuartoParziale(quarto)}}</span>
 
                </div>
 

@@ -835,8 +835,16 @@ export class AppComponent implements OnInit
             {
                mtcp += this.quarti[i].MyTeamCurrPoint;
                otcp += this.quarti[i].OppTeamCurrPoint;
-               this.jsonData.match.parziali[i] = `${this.quarti[i].MyTeamCurrPoint} - ${this.quarti[i].OppTeamCurrPoint}`;
-               this.jsonData.match.progressivi[i] = `${mtcp} - ${otcp}`;
+               if (this.jsonData.match.home)
+               {
+                  this.jsonData.match.parziali[i] = `${this.quarti[i].MyTeamCurrPoint} - ${this.quarti[i].OppTeamCurrPoint}`;
+                  this.jsonData.match.progressivi[i] = `${mtcp} - ${otcp}`;
+               }
+               else
+               {
+                  this.jsonData.match.parziali[i] = `${this.quarti[i].OppTeamCurrPoint} - ${this.quarti[i].MyTeamCurrPoint}`;
+                  this.jsonData.match.progressivi[i] = `${otcp} - ${mtcp}`;
+               }
             }
             else
             {
@@ -1817,12 +1825,35 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
    }
 
 
+   GetQuartoPunteggio(quarto: any): string
+   {
+      if (this.jsonData.match?.home)
+         return `(${quarto.myTeamPunti1}-${quarto.oppoTeamPunti1})    ======>>    (${quarto.myTeamPunti2}-${quarto.oppoTeamPunti2})`;
+      return `(${quarto.oppoTeamPunti1}-${quarto.myTeamPunti1})    ======>>    (${quarto.oppoTeamPunti2}-${quarto.myTeamPunti2})`;
+   }
+
+
+   GetQuartoParziale(quarto: any): string
+   {
+      if (this.jsonData.match?.home)
+         return `(${quarto.myTeamPunti2 - quarto.myTeamPunti1}-${quarto.oppoTeamPunti2 - quarto.oppoTeamPunti1})`;
+      return `(${quarto.oppoTeamPunti2 - quarto.oppoTeamPunti1}-${quarto.myTeamPunti2 - quarto.myTeamPunti1})`;
+   }
+
+
    GetMatchTitle(): string
    {
       let result: string ="";
       if (this.partitaOk)
          if (this.jsonData.myTeam)
-            result = `<span style="color: red !important;">${this.jsonData.myTeam.name}</span> - <span style="color: green !important;">${this.jsonData.oppoTeam.name}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${this.jsonData.myTeam.totali.punti} - ${this.jsonData.oppoTeam.totali.punti}`;
+         {
+            const myTeamSpan: string = `<span style="color: red !important;">${this.jsonData.myTeam.name}</span>`;
+            const oppoTeamSpan: string = `<span style="color: green !important;">${this.jsonData.oppoTeam.name}</span>`;
+            if (this.jsonData.match.home)
+               result = `${myTeamSpan} - ${oppoTeamSpan}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${this.jsonData.myTeam.totali.punti} - ${this.jsonData.oppoTeam.totali.punti}`;
+            else
+               result = `${oppoTeamSpan} - ${myTeamSpan}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${this.jsonData.oppoTeam.totali.punti} - ${this.jsonData.myTeam.totali.punti}`;
+         }
       return result;
    }
 
@@ -1870,7 +1901,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
          const options = {
             ignoreAttributes: false, // Se vuoi mantenere gli attributi (es. id="1")
             // Funzione magica: restituisce true solo per i tag che DEVONO essere array
-            isArray: (name: string, jpath: string, isLeafNode: boolean, isAttribute: boolean) => {
+            isArray: (name: string, jpath: any, isLeafNode: boolean, isAttribute: boolean) => {
                const tagsToForceAsArray = ["Fallo", "Realizzazione", "Player"];
                // Se il nome del tag contiene una di queste parole, lo rende un array
                return tagsToForceAsArray.some(forcedTag => name.includes(forcedTag));
@@ -2836,7 +2867,9 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       const pageHeight = 420;
       const margin = 10;
 
-      const titleText = `${this.jsonData.myTeam?.name ?? ''} - ${this.jsonData.oppoTeam?.name ?? ''}      ${this.jsonData.myTeam?.totali?.punti ?? 0} - ${this.jsonData.oppoTeam?.totali?.punti ?? 0}`;
+      const titleText = this.jsonData.match?.home
+         ? `${this.jsonData.myTeam?.name ?? ''} - ${this.jsonData.oppoTeam?.name ?? ''}      ${this.jsonData.myTeam?.totali?.punti ?? 0} - ${this.jsonData.oppoTeam?.totali?.punti ?? 0}`
+         : `${this.jsonData.oppoTeam?.name ?? ''} - ${this.jsonData.myTeam?.name ?? ''}      ${this.jsonData.oppoTeam?.totali?.punti ?? 0} - ${this.jsonData.myTeam?.totali?.punti ?? 0}`;
 
       const originalTab = this.activeGraficiTabIndex;
 
@@ -2881,8 +2914,12 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
          // Sotto-intestazione: Punteggio e Parziale
          pdf.setFontSize(10);
          pdf.setFont('helvetica', 'bold');
-         const punteggio = `Punteggio: (${quarto.myTeamPunti1}-${quarto.oppoTeamPunti1})    ======>>    (${quarto.myTeamPunti2}-${quarto.oppoTeamPunti2})`;
-         const parziale  = `Parziale: (${quarto.myTeamPunti2 - quarto.myTeamPunti1}-${quarto.oppoTeamPunti2 - quarto.oppoTeamPunti1})`;
+         const punteggio = this.jsonData.match?.home
+            ? `Punteggio: (${quarto.myTeamPunti1}-${quarto.oppoTeamPunti1})    ======>>    (${quarto.myTeamPunti2}-${quarto.oppoTeamPunti2})`
+            : `Punteggio: (${quarto.oppoTeamPunti1}-${quarto.myTeamPunti1})    ======>>    (${quarto.oppoTeamPunti2}-${quarto.myTeamPunti2})`;
+         const parziale  = this.jsonData.match?.home
+            ? `Parziale: (${quarto.myTeamPunti2 - quarto.myTeamPunti1}-${quarto.oppoTeamPunti2 - quarto.oppoTeamPunti1})`
+            : `Parziale: (${quarto.oppoTeamPunti2 - quarto.oppoTeamPunti1}-${quarto.myTeamPunti2 - quarto.myTeamPunti1})`;
          pdf.text(punteggio, pageWidth / 2, y, { align: 'center' });
          y += 5;
          pdf.text(parziale, pageWidth / 2, y, { align: 'center' });
@@ -2904,7 +2941,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       this.activeGraficiTabIndex = originalTab;
       this.cdr.detectChanges();
 
-      const pdfName: string = `${this.jsonData.match.title}-grafici`;
+      const pdfName: string = `G_${this.jsonData.match.title}-grafici`;
       pdf.save(pdfName);
    }
 
@@ -2969,7 +3006,9 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       };
 
       // --- HEADER (compatto) ---
-      const titleText = `${this.jsonData.myTeam?.name ?? ''} - ${this.jsonData.oppoTeam?.name ?? ''}      ${this.jsonData.myTeam?.totali?.punti ?? 0} - ${this.jsonData.oppoTeam?.totali?.punti ?? 0}`;
+      const titleText = this.jsonData.match?.home
+         ? `${this.jsonData.myTeam?.name ?? ''} - ${this.jsonData.oppoTeam?.name ?? ''}      ${this.jsonData.myTeam?.totali?.punti ?? 0} - ${this.jsonData.oppoTeam?.totali?.punti ?? 0}`
+         : `${this.jsonData.oppoTeam?.name ?? ''} - ${this.jsonData.myTeam?.name ?? ''}      ${this.jsonData.oppoTeam?.totali?.punti ?? 0} - ${this.jsonData.myTeam?.totali?.punti ?? 0}`;
       pdf.setFontSize(20);
       pdf.setFont(pdfFont, 'bold');
       pdf.text(titleText, pageWidth / 2, y, { align: 'center' });
@@ -3196,7 +3235,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
          pdf.text(`1° Assistente: ${this.jsonData.oppoTeam.coach2}`, 5, y);
       }
 
-      const pdfName: string = `${this.jsonData.match.title}-tabelle`;
+      const pdfName: string = `T_${this.jsonData.match.title}-tabelle`;
       pdf.save(pdfName);
    }
 
