@@ -645,7 +645,7 @@ export class AppComponent implements OnInit
          // Tempi di gioco nei quarti
          for (let i=0;   i<this.quarti.length;   i++)
          {
-            if (this.quarti[i].Status > 1)
+            if (this.quarti[i].Status > 0)
                await this.aaaa (true, i+1);
          }
          //
@@ -788,15 +788,15 @@ export class AppComponent implements OnInit
                this.jsonData.oppoTeam.totali.et.punti += this.jsonData.oppoTeam.players[i].totali.et.punti;
                this.jsonData.oppoTeam.totali.et.min += this.jsonData.oppoTeam.players[i].totali.et.min;
             }
-            if (this.quarti[0].Status > 1)
+            if (this.quarti[0].Status > 0)
                this.jsonData.oppoTeam.players[i].totali.q1.dato = `${this.jsonData.oppoTeam.players[i].totali.q1.punti}`;
-            if (this.quarti[1].Status > 1)
+            if (this.quarti[1].Status > 0)
                this.jsonData.oppoTeam.players[i].totali.q2.dato = `${this.jsonData.oppoTeam.players[i].totali.q2.punti}`;
-            if (this.quarti[2].Status > 1)
+            if (this.quarti[2].Status > 0)
                this.jsonData.oppoTeam.players[i].totali.q3.dato = `${this.jsonData.oppoTeam.players[i].totali.q3.punti}`;
-            if (this.quarti[3].Status > 1)
+            if (this.quarti[3].Status > 0)
                this.jsonData.oppoTeam.players[i].totali.q4.dato = `${this.jsonData.oppoTeam.players[i].totali.q4.punti}`;
-            if (this.quarti[4].Status > 1)
+            if (this.quarti[4].Status > 0)
                this.jsonData.oppoTeam.players[i].totali.et.dato = `${this.jsonData.oppoTeam.players[i].totali.et.punti}`;
          }
          this.jsonData.oppoTeam.totali.oerStr = this.jsonData.oppoTeam.totali.oer/totGioc;
@@ -810,15 +810,15 @@ export class AppComponent implements OnInit
             this.jsonData.oppoTeam.totali.t3 = `<b>${t3R}/${t3F}</b><br><span style="font-size: 0.90rem;">(${Math.trunc(100*t3R/t3F)}%)</span>`;
          if (tcF > 0)
             this.jsonData.oppoTeam.totali.tc = `<b>${tcR}/${tcF}</b><br><span style="font-size: 0.90rem;">(${Math.trunc(100*tcR/tcF)}%)</span>`;
-         if (this.quarti[0].Status > 1)
+         if (this.quarti[0].Status > 0)
             this.jsonData.oppoTeam.totali.q1.dato = `${this.jsonData.oppoTeam.totali.q1.punti}`;
-         if (this.quarti[1].Status > 1)
+         if (this.quarti[1].Status > 0)
             this.jsonData.oppoTeam.totali.q2.dato = `${this.jsonData.oppoTeam.totali.q2.punti}`;
-         if (this.quarti[2].Status > 1)
+         if (this.quarti[2].Status > 0)
             this.jsonData.oppoTeam.totali.q3.dato = `${this.jsonData.oppoTeam.totali.q3.punti}`;
-         if (this.quarti[3].Status > 1)
+         if (this.quarti[3].Status > 0)
             this.jsonData.oppoTeam.totali.q4.dato = `${this.jsonData.oppoTeam.totali.q4.punti}`;
-         if (this.quarti[4].Status > 1)
+         if (this.quarti[4].Status > 0)
             this.jsonData.oppoTeam.totali.et.dato = `${this.jsonData.oppoTeam.totali.et.punti}`;
          // aggiungo i dati di squadra
          this.jsonData.oppoTeam.totali.pPerse += this.jsonData.oppoTeam.dati.pPerse;
@@ -892,24 +892,7 @@ export class AppComponent implements OnInit
                            datasets: [
                               {
                                  label: this.jsonData.myTeam.name,
-                                 data: [
-                                           { x: 0, y: 0 },
-                                           { x: 2, y: 0.5, player: 'Corti' },
-                                           { x: 5, y: 1.0, player: 'Corti' },
-                                           { x: 7, y: 1.2, player: 'Zanoletti' },
-                                           { x: 9, y: 2.5 },
-                                           { x: 11, y: 3.5 },
-                                           { x: 13, y: 4.0 },
-                                           { x: 15, y: 4.5 },
-                                           { x: 16, y: 5.0 },
-                                           { x: 17, y: 5.0 },
-                                           { x: 20, y: 5.5 },
-                                           { x: 22, y: 6.0 },
-                                           { x: 25, y: 7.1 },
-                                           { x: 27, y: 7.5 },
-                                           { x: 29, y: 8.5 },
-                                           { x: 29, y: 10 }
-                                        ] as any,
+                                 data: [] as any,
                                  borderColor: 'rgb(255, 0, 0)',
                                  stepped: 'after',
                                  pointRadius: 6,
@@ -930,14 +913,7 @@ export class AppComponent implements OnInit
                               },
                               {
                                  label: this.jsonData.oppoTeam.name,
-                                 data: [
-                                    { x: 0, y: 0 },
-                                    { x: 2, y: 2 },
-                                    { x: 5, y: 5.3 },
-                                    { x: 6, y: 7.9 },
-                                    { x: 8, y: 9 },
-                                    { x: 8, y: 10 }
-                                 ],
+                                 data: [] as any,
                                  borderColor: 'rgb(0, 127, 0)',
                                  stepped: 'after',
                                  pointRadius: 6,
@@ -1428,7 +1404,7 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       let tipo: string = "";
       for (let i=0;   i<this.quartiGiocati.length;   i++)
       {
-         if (this.quartiGiocati[i].status > 1)
+         if (this.quartiGiocati[i].status > 0)
          {
             qrtNum = i+1;
             valoreMinimo = this.quartiGiocati[i].myTeamPunti1;
@@ -2928,12 +2904,37 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
          // Grafico
          if (chart)
          {
-            const imgData = chart.toBase64Image('image/png', 1);
-            if (imgData && imgData.startsWith('data:image/png'))
+            const imgW = pageWidth - 2 * margin;
+            const imgH = pageHeight - y - margin;
+
+            // Ridimensiono alla risoluzione effettivamente utile in stampa (~150dpi):
+            // il canvas di Chart.js viene renderizzato al devicePixelRatio dello schermo,
+            // spesso 2x/3x più grande del necessario per la pagina PDF.
+            const targetDpi = 200;
+            const pxPerMm = targetDpi / 25.4;
+            const targetW = Math.round(imgW * pxPerMm);
+            const targetH = Math.round(imgH * pxPerMm);
+
+            const offCanvas = document.createElement('canvas');
+            offCanvas.width = targetW;
+            offCanvas.height = targetH;
+            const offCtx = offCanvas.getContext('2d');
+            let imgData: string;
+            if (offCtx)
             {
-               const imgH = pageHeight - y - margin;
-               pdf.addImage(imgData, 'PNG', margin, y, pageWidth - 2 * margin, imgH);
+               // Sfondo bianco: rimuove il canale alpha, evitando la maschera di
+               // trasparenza (SMask) che jsPDF incorpora separatamente nei PNG trasparenti
+               offCtx.fillStyle = '#ffffff';
+               offCtx.fillRect(0, 0, targetW, targetH);
+               offCtx.drawImage(chart.canvas, 0, 0, targetW, targetH);
+               imgData = offCanvas.toDataURL('image/png');
             }
+            else
+            {
+               imgData = chart.toBase64Image('image/png', 1);
+            }
+            if (imgData && imgData.startsWith('data:image/png'))
+               pdf.addImage(imgData, 'PNG', margin, y, imgW, imgH, undefined, 'FAST');
          }
       }
 
@@ -3159,20 +3160,20 @@ Q1|04:40|Sostit    |OppoTeam|Out23|In82
       const tableMyTheme: any = {
          styles:       { font: pdfFont },
          headStyles:   { fillColor: [255, 190, 0], textColor: [0, 0, 0], fontStyle: 'bold', fontSize: fntSize, cellPadding: celPad, halign: 'center' },
-         bodyStyles:   { fontSize: fntSize, cellPadding: celPad, fontStyle: 'bold' },
+         bodyStyles:   { fontSize: fntSize, cellPadding: celPad, fontStyle: 'bold', fillColor: [255, 255, 255] },
          footStyles:   { fillColor: [186, 102, 255], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: fntSize, cellPadding: celPad, halign: 'center' },
          columnStyles: columnStyles,
-         alternateRowStyles: { fillColor: [240, 240, 250] },
+         alternateRowStyles: { fillColor: [221, 221, 221] },
          margin: { left: 3, right: 3 },
          didDrawCell: didDrawCellSeparator
       };
       const tableOppoTheme: any = {
          styles:       { font: pdfFont },
          headStyles:   { fillColor: [255, 190, 0], textColor: [0, 0, 0], fontStyle: 'bold', fontSize: fntSize, cellPadding: celPad, halign: 'center' },
-         bodyStyles:   { fontSize: fntSize, cellPadding: celPad, fontStyle: 'bold' },
+         bodyStyles:   { fontSize: fntSize, cellPadding: celPad, fontStyle: 'bold', fillColor: [255, 255, 255] },
          footStyles:   { fillColor: [186, 102, 255], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: fntSize, cellPadding: celPad, halign: 'center' },
          columnStyles: columnStyles,
-         alternateRowStyles: { fillColor: [240, 240, 250] },
+         alternateRowStyles: { fillColor: [221, 221, 221] },
          margin: { left: 3, right: 3 },
          didDrawCell: didDrawCellSeparator
       };
